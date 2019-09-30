@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="reviewer" name="项目信息表-交期评审" isExecutable="true">
+    <startEvent id="startevent1" name="Start" activiti:initiator="loginName"></startEvent>
+    <userTask id="startAudit" name="发起审核" activiti:assignee="${loginName}"></userTask>
+    <userTask id="saleReviewer" name="销售审核" activiti:candidateUsers="sal01,sal02,sal05,sal06,sal(bj)02,sal(cd)02,sal(sy)02,sal(nj)02"></userTask>
+    <userTask id="engDistribution" name="工程分配任务" activiti:candidateUsers="eng01,eng02"></userTask>
+    <userTask id="engWrite" name="工程填写" activiti:candidateUsers="eng10,eng16,eng27,eng04,eng05"></userTask>
+    <userTask id="engReviewer" name="工程审核" activiti:candidateUsers="eng01,eng02"></userTask>
+    <userTask id="proReviewer" name="生产审核" activiti:candidateUsers="pro01,pro02,pmc01"></userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="startAudit"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="startAudit" targetRef="saleReviewer"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="saleReviewer" targetRef="engDistribution"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="engDistribution" targetRef="engWrite"></sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="engWrite" targetRef="engReviewer"></sequenceFlow>
+    <sequenceFlow id="flow7" sourceRef="proReviewer" targetRef="endevent1"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow8" sourceRef="engReviewer" targetRef="exclusivegateway1"></sequenceFlow>
+    <userTask id="purReviewer" name="采购审核" activiti:candidateUsers="pur01"></userTask>
+    <sequenceFlow id="flow11" sourceRef="purReviewer" targetRef="proReviewer"></sequenceFlow>
+    <sequenceFlow id="flow12" sourceRef="exclusivegateway1" targetRef="purReviewer">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${specialMaterial!=""&&specialMaterial!=null}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow13" sourceRef="exclusivegateway1" targetRef="proReviewer">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${specialMaterial==""||specialMaterial==null}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_reviewer">
+    <bpmndi:BPMNPlane bpmnElement="reviewer" id="BPMNPlane_reviewer">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="530.0" y="30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startAudit" id="BPMNShape_startAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="90.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="saleReviewer" id="BPMNShape_saleReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="engDistribution" id="BPMNShape_engDistribution">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="270.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="engWrite" id="BPMNShape_engWrite">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="360.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="engReviewer" id="BPMNShape_engReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="450.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="proReviewer" id="BPMNShape_proReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="650.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="530.0" y="730.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="527.0" y="550.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="purReviewer" id="BPMNShape_purReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="660.0" y="543.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="547.0" y="65.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="90.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="547.0" y="145.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="180.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="547.0" y="235.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="270.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="547.0" y="325.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="360.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="547.0" y="415.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="450.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="547.0" y="705.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="730.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="547.0" y="505.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="550.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="712.0" y="598.0"></omgdi:waypoint>
+        <omgdi:waypoint x="712.0" y="677.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="677.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="567.0" y="570.0"></omgdi:waypoint>
+        <omgdi:waypoint x="660.0" y="570.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="547.0" y="590.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="650.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

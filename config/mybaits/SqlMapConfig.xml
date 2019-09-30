@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 全局配置参数 -->
+	<!-- <settings>
+		开启延迟加载 
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
+		
+		打开二级缓存,需要在mapper.xml中开启二级缓存
+		<setting name="cacheEnabled" value="true"/>
+	</settings> -->
+    <!--驼峰命名-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+	
+	<!-- 单个别名定义 type：pojo的路径 alias：别名的名称 -->
+	<!-- <typeAlias type="cn.itcast.mybatis.po.User" alias="user"/> -->
+	<!-- 批量别名定义 name：指定包名，将包下边的所有pojo定义别名 ，别名为类名（首字母大写或小写都行） -->
+	<typeAliases>
+		<package name="cn.chiucheung.po"/>
+	</typeAliases>
+	
+	
+	
+	<!-- 配置mapper的映射文件 -->
+	<mappers>
+		<!-- resource方式 在UserMapper.xml，定义namespace为mapper接口的地址，映射文件通过namespace找到对应的mapper接口文件 -->
+		<!-- <mapper resource="sqlmap/UserMapper.xml" /> -->
+		<!-- class方式 class：指定 mapper接口的地址 遵循规则：将mapper.xml和mapper.java文件放在一个目录
+			且文件名相同 -->
+		<!-- <mapper class="cn.chiucheung.dao.UserDao"/> -->
+		<!-- 批量mapper的扫描，遵循规则：将mapper.java和mapper.xml文件放在同一目录中（及下面的包中），且文件名相同 -->
+		<package name="cn.chiucheung.dao.mapper"/><!-- spring已经配置了 -->
+	</mappers>
+	
+</configuration>

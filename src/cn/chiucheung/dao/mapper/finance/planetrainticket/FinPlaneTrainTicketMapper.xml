@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.finance.planetrainticket.FinPlaneTrainTicketMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="traffic_type" property="trafficType" jdbcType="VARCHAR" />
+    <result column="work_card_no" property="workCardNo" jdbcType="VARCHAR" />
+    <result column="order_tickets_date" property="orderTicketsDate" jdbcType="DATE" />
+    <result column="departure_time" property="departureTime" jdbcType="TIMESTAMP" />
+    <result column="travel_personnel" property="travelPersonnel" jdbcType="VARCHAR" />
+    <result column="start_point" property="startPoint" jdbcType="VARCHAR" />
+    <result column="end_point" property="endPoint" jdbcType="VARCHAR" />
+    <result column="plane_train_number" property="planeTrainNumber" jdbcType="VARCHAR" />
+    <result column="seat" property="seat" jdbcType="VARCHAR" />
+    <result column="berth" property="berth" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="is_lock" property="isLock" jdbcType="BIT" />
+    <result column="is_receive_receipt" property="isReceiveReceipt" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, traffic_type, work_card_no, order_tickets_date, departure_time, travel_personnel, 
+    start_point, end_point, plane_train_number, seat, berth, price, order_number, remark, 
+    is_lock, is_receive_receipt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicketExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_plane_train_ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fin_plane_train_ticket
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fin_plane_train_ticket
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicketExample" >
+    delete from fin_plane_train_ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket" >
+    insert into fin_plane_train_ticket (id, traffic_type, work_card_no, 
+      order_tickets_date, departure_time, travel_personnel, 
+      start_point, end_point, plane_train_number, 
+      seat, berth, price, order_number, 
+      remark, is_lock, is_receive_receipt
+      )
+    values (#{id,jdbcType=VARCHAR}, #{trafficType,jdbcType=VARCHAR}, #{workCardNo,jdbcType=VARCHAR}, 
+      #{orderTicketsDate,jdbcType=DATE}, #{departureTime,jdbcType=TIMESTAMP}, #{travelPersonnel,jdbcType=VARCHAR}, 
+      #{startPoint,jdbcType=VARCHAR}, #{endPoint,jdbcType=VARCHAR}, #{planeTrainNumber,jdbcType=VARCHAR}, 
+      #{seat,jdbcType=VARCHAR}, #{berth,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{orderNumber,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, #{isReceiveReceipt,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket" >
+    insert into fin_plane_train_ticket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="trafficType != null" >
+        traffic_type,
+      </if>
+      <if test="workCardNo != null" >
+        work_card_no,
+      </if>
+      <if test="orderTicketsDate != null" >
+        order_tickets_date,
+      </if>
+      <if test="departureTime != null" >
+        departure_time,
+      </if>
+      <if test="travelPersonnel != null" >
+        travel_personnel,
+      </if>
+      <if test="startPoint != null" >
+        start_point,
+      </if>
+      <if test="endPoint != null" >
+        end_point,
+      </if>
+      <if test="planeTrainNumber != null" >
+        plane_train_number,
+      </if>
+      <if test="seat != null" >
+        seat,
+      </if>
+      <if test="berth != null" >
+        berth,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="isLock != null" >
+        is_lock,
+      </if>
+      <if test="isReceiveReceipt != null" >
+        is_receive_receipt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficType != null" >
+        #{trafficType,jdbcType=VARCHAR},
+      </if>
+      <if test="workCardNo != null" >
+        #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTicketsDate != null" >
+        #{orderTicketsDate,jdbcType=DATE},
+      </if>
+      <if test="departureTime != null" >
+        #{departureTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="travelPersonnel != null" >
+        #{travelPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="startPoint != null" >
+        #{startPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="endPoint != null" >
+        #{endPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="planeTrainNumber != null" >
+        #{planeTrainNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null" >
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="berth != null" >
+        #{berth,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        #{isLock,jdbcType=BIT},
+      </if>
+      <if test="isReceiveReceipt != null" >
+        #{isReceiveReceipt,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicketExample" resultType="java.lang.Integer" >
+    select count(*) from fin_plane_train_ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fin_plane_train_ticket
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trafficType != null" >
+        traffic_type = #{record.trafficType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCardNo != null" >
+        work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTicketsDate != null" >
+        order_tickets_date = #{record.orderTicketsDate,jdbcType=DATE},
+      </if>
+      <if test="record.departureTime != null" >
+        departure_time = #{record.departureTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.travelPersonnel != null" >
+        travel_personnel = #{record.travelPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startPoint != null" >
+        start_point = #{record.startPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endPoint != null" >
+        end_point = #{record.endPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planeTrainNumber != null" >
+        plane_train_number = #{record.planeTrainNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seat != null" >
+        seat = #{record.seat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.berth != null" >
+        berth = #{record.berth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.orderNumber != null" >
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLock != null" >
+        is_lock = #{record.isLock,jdbcType=BIT},
+      </if>
+      <if test="record.isReceiveReceipt != null" >
+        is_receive_receipt = #{record.isReceiveReceipt,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fin_plane_train_ticket
+    set id = #{record.id,jdbcType=VARCHAR},
+      traffic_type = #{record.trafficType,jdbcType=VARCHAR},
+      work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      order_tickets_date = #{record.orderTicketsDate,jdbcType=DATE},
+      departure_time = #{record.departureTime,jdbcType=TIMESTAMP},
+      travel_personnel = #{record.travelPersonnel,jdbcType=VARCHAR},
+      start_point = #{record.startPoint,jdbcType=VARCHAR},
+      end_point = #{record.endPoint,jdbcType=VARCHAR},
+      plane_train_number = #{record.planeTrainNumber,jdbcType=VARCHAR},
+      seat = #{record.seat,jdbcType=VARCHAR},
+      berth = #{record.berth,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=REAL},
+      order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      is_lock = #{record.isLock,jdbcType=BIT},
+      is_receive_receipt = #{record.isReceiveReceipt,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket" >
+    update fin_plane_train_ticket
+    <set >
+      <if test="trafficType != null" >
+        traffic_type = #{trafficType,jdbcType=VARCHAR},
+      </if>
+      <if test="workCardNo != null" >
+        work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTicketsDate != null" >
+        order_tickets_date = #{orderTicketsDate,jdbcType=DATE},
+      </if>
+      <if test="departureTime != null" >
+        departure_time = #{departureTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="travelPersonnel != null" >
+        travel_personnel = #{travelPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="startPoint != null" >
+        start_point = #{startPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="endPoint != null" >
+        end_point = #{endPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="planeTrainNumber != null" >
+        plane_train_number = #{planeTrainNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null" >
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="berth != null" >
+        berth = #{berth,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        is_lock = #{isLock,jdbcType=BIT},
+      </if>
+      <if test="isReceiveReceipt != null" >
+        is_receive_receipt = #{isReceiveReceipt,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket" >
+    update fin_plane_train_ticket
+    set traffic_type = #{trafficType,jdbcType=VARCHAR},
+      work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      order_tickets_date = #{orderTicketsDate,jdbcType=DATE},
+      departure_time = #{departureTime,jdbcType=TIMESTAMP},
+      travel_personnel = #{travelPersonnel,jdbcType=VARCHAR},
+      start_point = #{startPoint,jdbcType=VARCHAR},
+      end_point = #{endPoint,jdbcType=VARCHAR},
+      plane_train_number = #{planeTrainNumber,jdbcType=VARCHAR},
+      seat = #{seat,jdbcType=VARCHAR},
+      berth = #{berth,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_lock = #{isLock,jdbcType=BIT},
+      is_receive_receipt = #{isReceiveReceipt,jdbcType=BIT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+        
+  
+  <!-- 自定义 -->
+  <!-- 查询所有的厂购火车票 -->
+  <select id="findAllPlaneTrainTicketList" parameterType="cn.chiucheung.pojo.finance.planetrainticket.FinPlaneTrainTicketQueryVo" resultType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket">
+  	SELECT
+		id id,
+		traffic_type trafficType,
+		work_card_no workCardNo, 
+		order_tickets_date orderTicketsDate, 
+		departure_time departureTime, 
+		travel_personnel travelPersonnel, 
+		start_point startPoint, 
+    	end_point endPoint, 
+    	plane_train_number planeTrainNumber, 
+    	seat seat,
+    	berth berth, 
+    	price price, 
+    	order_number orderNumber, 
+    	remark remark,
+    	is_lock isLock,
+    	is_receive_receipt isReceiveReceipt
+	FROM
+		fin_plane_train_ticket
+	<where>
+		<if test="workCardNo != null and workCardNo != ''">
+			AND work_card_no LIKE '%${workCardNo}%'
+		</if>
+		<if test="trafficType != null and trafficType != ''">
+			AND traffic_type = #{trafficType}
+		</if>
+		<if test="travelPersonnel != null and travelPersonnel != ''">
+			AND travel_personnel LIKE '%${travelPersonnel}%'
+		</if>
+		<if test="startTime != null and startTime != ''">
+	   		AND order_tickets_date &gt;= #{startTime}
+	   	</if>
+	   	<if test="endTime != null and endTime != ''">
+	   		AND order_tickets_date &lt;= #{endTime}
+	   	</if>
+	   	<if test="orderNumber != null and orderNumber != ''">
+	   		AND order_number LIKE '%${orderNumber}%'
+	   	</if>
+	   	<if test="isLock != null">
+			AND is_lock = #{isLock}
+		</if>
+		<if test="isReceiveReceipt != null">
+			AND is_receive_receipt = #{isReceiveReceipt}
+		</if>
+	</where>
+	<if test="sort != null and sort != ''">
+		<if test="sort == 'workCardNo'">
+  			ORDER BY RIGHT(workCardNo,2) ${order},LEFT(workCardNo,6) ${order}
+  		</if>
+  		<if test="sort != 'workCardNo'">
+  			ORDER BY #{sort} ${order}
+  		</if>
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY order_tickets_date DESC 
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+  
+  
+  <!-- 查询所有的厂购火车票的总数 -->
+  <select id="findAllPlaneTrainTicketTotal" parameterType="cn.chiucheung.pojo.finance.planetrainticket.FinPlaneTrainTicketQueryVo" resultType="string">
+  	SELECT
+		COUNT(*)
+	FROM
+		fin_plane_train_ticket
+	<where>
+		<if test="workCardNo != null and workCardNo != ''">
+			AND work_card_no LIKE '%${workCardNo}%'
+		</if>
+		<if test="trafficType != null and trafficType != ''">
+			AND traffic_type = #{trafficType}
+		</if>
+		<if test="travelPersonnel != null and travelPersonnel != ''">
+			AND travel_personnel LIKE '%${travelPersonnel}%'
+		</if>
+		<if test="startTime != null and startTime != ''">
+	   		AND order_tickets_date &gt;= #{startTime}
+	   	</if>
+	   	<if test="endTime != null and endTime != ''">
+	   		AND order_tickets_date &lt;= #{endTime}
+	   	</if>
+	   	<if test="orderNumber != null and orderNumber != ''">
+	   		AND order_number LIKE '%${orderNumber}%'
+	   	</if>
+	   	<if test="isLock != null">
+			AND is_lock = #{isLock}
+		</if>
+		<if test="isReceiveReceipt != null">
+			AND is_receive_receipt = #{isReceiveReceipt}
+		</if>
+	</where>
+  </select>
+  
+  <update id="updatePlaneTrainTicketByIdForLock" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket" >
+    UPDATE
+    	fin_plane_train_ticket
+    SET
+		is_lock = #{isLock}
+    WHERE
+    	id = #{id}
+  </update>
+  
+  <update id="updatePlaneTrainTicketByIdForReceiveReceipt" parameterType="cn.chiucheung.po.finance.planetrainticket.FinPlaneTrainTicket" >
+    UPDATE
+    	fin_plane_train_ticket
+    SET
+		is_receive_receipt = #{isReceiveReceipt}
+    WHERE
+    	id = #{id}
+  </update>
+  
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into fin_plane_train_ticket (id, traffic_type, work_card_no, order_tickets_date, departure_time, travel_personnel, start_point, 
+    end_point, plane_train_number, seat, berth, price, order_number, remark, is_lock, 
+    is_receive_receipt) values 
+    
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.trafficType},
+			#{item.workCardNo},
+			#{item.orderTicketsDate},
+			#{item.departureTime},
+			#{item.travelPersonnel},
+			#{item.startPoint},
+			#{item.endPoint},
+			#{item.planeTrainNumber},
+			#{item.seat},
+			#{item.berth},
+			#{item.price},
+			#{item.orderNumber},
+			#{item.remark},
+			#{item.isLock},
+			#{item.isReceiveReceipt}
+		)
+	</foreach>
+  </insert>
+</mapper>

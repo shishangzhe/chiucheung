@@ -1,0 +1,18 @@
+package cn.chiucheung.pojo.warehouse.standardaccessoriesstockout;
+
+import java.util.List;
+
+import cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOut;
+
+public class WarStandardAccessoriesStockOutCustom extends WarStandardAccessoriesStockOut{
+	private List<WarStandardAccessoriesStockOutSubsidiaryCustom> standardAccessoriesStockOutSubsidiaryCustoms;
+
+	public List<WarStandardAccessoriesStockOutSubsidiaryCustom> getStandardAccessoriesStockOutSubsidiaryCustoms() {
+		return standardAccessoriesStockOutSubsidiaryCustoms;
+	}
+
+	public void setStandardAccessoriesStockOutSubsidiaryCustoms(List<WarStandardAccessoriesStockOutSubsidiaryCustom> standardAccessoriesStockOutSubsidiaryCustoms) {
+		this.standardAccessoriesStockOutSubsidiaryCustoms = standardAccessoriesStockOutSubsidiaryCustoms;
+	}
+	
+}

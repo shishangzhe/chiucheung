@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.production.standard.ProTechnologyBasicDataMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.production.standard.ProTechnologyBasicData" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="technology" property="technology" jdbcType="VARCHAR" />
+    <result column="technology_identification" property="technologyIdentification" jdbcType="VARCHAR" />
+    <result column="pro_process_id" property="proProcessId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, technology, technology_identification, pro_process_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.production.standard.ProTechnologyBasicDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_technology_basic_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_technology_basic_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pro_technology_basic_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.production.standard.ProTechnologyBasicDataExample" >
+    delete from pro_technology_basic_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.production.standard.ProTechnologyBasicData" >
+    insert into pro_technology_basic_data (id, technology, technology_identification, 
+      pro_process_id)
+    values (#{id,jdbcType=VARCHAR}, #{technology,jdbcType=VARCHAR}, #{technologyIdentification,jdbcType=VARCHAR}, 
+      #{proProcessId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.production.standard.ProTechnologyBasicData" >
+    insert into pro_technology_basic_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="technology != null" >
+        technology,
+      </if>
+      <if test="technologyIdentification != null" >
+        technology_identification,
+      </if>
+      <if test="proProcessId != null" >
+        pro_process_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="technology != null" >
+        #{technology,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyIdentification != null" >
+        #{technologyIdentification,jdbcType=VARCHAR},
+      </if>
+      <if test="proProcessId != null" >
+        #{proProcessId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.production.standard.ProTechnologyBasicDataExample" resultType="java.lang.Integer" >
+    select count(*) from pro_technology_basic_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_technology_basic_data
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technology != null" >
+        technology = #{record.technology,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyIdentification != null" >
+        technology_identification = #{record.technologyIdentification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proProcessId != null" >
+        pro_process_id = #{record.proProcessId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_technology_basic_data
+    set id = #{record.id,jdbcType=VARCHAR},
+      technology = #{record.technology,jdbcType=VARCHAR},
+      technology_identification = #{record.technologyIdentification,jdbcType=VARCHAR},
+      pro_process_id = #{record.proProcessId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.production.standard.ProTechnologyBasicData" >
+    update pro_technology_basic_data
+    <set >
+      <if test="technology != null" >
+        technology = #{technology,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyIdentification != null" >
+        technology_identification = #{technologyIdentification,jdbcType=VARCHAR},
+      </if>
+      <if test="proProcessId != null" >
+        pro_process_id = #{proProcessId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.production.standard.ProTechnologyBasicData" >
+    update pro_technology_basic_data
+    set technology = #{technology,jdbcType=VARCHAR},
+      technology_identification = #{technologyIdentification,jdbcType=VARCHAR},
+      pro_process_id = #{proProcessId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+    
+  
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 查询所有的工艺 -->
+  <select id="findAllProProcessTechnologyCustomList" parameterType="string" resultType="cn.chiucheung.pojo.production.standard.ProProcessTechnologyCustom">
+  	SELECT
+		t.id id,
+		t.technology technology,
+	  	t.technology_identification technologyIdentification,
+	  	t.pro_process_id proProcessId,
+	  	CONCAT_WS("-",p.process_name,p.process_category) process
+	FROM
+		pro_technology_basic_data t,
+		pro_process p
+	WHERE
+		t.pro_process_id = p.id
+	AND
+		t.pro_process_id = #{proProcessId}
+    ORDER BY technology
+  </select>
+  
+  <!-- 根据id查找工艺 -->
+  <select id="findTechnologyById" parameterType="string" resultType="cn.chiucheung.pojo.production.standard.ProProcessTechnologyCustom">
+  	SELECT
+		t.id id,
+		t.technology technology,
+		t.technology_identification technologyIdentification,
+		p.id proProcessId,
+		CONCAT_WS("-",p.process_name,p.process_category) PROCESS
+	FROM
+		pro_technology_basic_data t,
+		pro_process p
+	WHERE
+		t.id = #{id}
+	AND
+		t.pro_process_id = p.id
+  </select>
+  
+  
+  <!-- 根据工序id查找工艺 -->
+  <select id="findProTechnologyBasicDataByProProcessId" parameterType="string" resultType="cn.chiucheung.pojo.production.standard.ProTechnologyBasicDataCustom">
+  	SELECT 
+    	id id,
+    	technology technology,
+    	technology_identification technologyIdentification, 
+      	pro_process_id proProcessId
+    FROM
+    	pro_technology_basic_data
+    WHERE
+    	pro_process_id = #{id}
+    ORDER BY technology
+  </select>
+</mapper>

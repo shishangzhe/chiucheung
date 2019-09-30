@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="storageWarehouseWorkCard" name="存仓工咭" isExecutable="true">
+    <startEvent id="startevent1" name="Start" activiti:initiator="loginName"></startEvent>
+    <userTask id="startAudit" name="发起审核" activiti:assignee="${loginName}"></userTask>
+    <userTask id="workCardLeaderReviewer" name="工咭负责人审核" activiti:candidateUsers="pmc01"></userTask>
+    <userTask id="generalManagerReviewer" name="总经理审核" activiti:candidateUsers="pro01,carmen"></userTask>
+    <userTask id="notifyPro" name="通知生产" activiti:candidateUsers="pro02"></userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="startAudit"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="startAudit" targetRef="workCardLeaderReviewer"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="workCardLeaderReviewer" targetRef="generalManagerReviewer"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="generalManagerReviewer" targetRef="notifyPro"></sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="notifyPro" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_storageWarehouseWorkCard">
+    <bpmndi:BPMNPlane bpmnElement="storageWarehouseWorkCard" id="BPMNPlane_storageWarehouseWorkCard">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="490.0" y="90.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startAudit" id="BPMNShape_startAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="455.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="workCardLeaderReviewer" id="BPMNShape_workCardLeaderReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="455.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="generalManagerReviewer" id="BPMNShape_generalManagerReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="455.0" y="370.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="notifyPro" id="BPMNShape_notifyPro">
+        <omgdc:Bounds height="55.0" width="105.0" x="455.0" y="480.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="490.0" y="580.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="507.0" y="125.0"></omgdi:waypoint>
+        <omgdi:waypoint x="507.0" y="160.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="507.0" y="215.0"></omgdi:waypoint>
+        <omgdi:waypoint x="507.0" y="260.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="507.0" y="315.0"></omgdi:waypoint>
+        <omgdi:waypoint x="507.0" y="370.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="507.0" y="425.0"></omgdi:waypoint>
+        <omgdi:waypoint x="507.0" y="480.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="507.0" y="535.0"></omgdi:waypoint>
+        <omgdi:waypoint x="507.0" y="580.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

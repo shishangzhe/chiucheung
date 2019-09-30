@@ -1,0 +1,53 @@
+#\u53EF\u4EE5\u8BBE\u7F6E\u7EA7\u522B\uFF1Adebug>info>error   
+#debug\uFF1A\u663E\u793Adebug\u3001info\u3001error   
+#info\uFF1A\u663E\u793Ainfo\u3001error   
+#error\uFF1A\u53EAerror
+#database,appender1\u8FD9\u91CC\u6307\u7684\u662F\u540E\u9762log4j.appender.appender1\u548Clog4j.appender.database\u914D\u7F6E\uFF0C\u6307\u5B9A\u4E86\u624D\u751F\u6548
+log4j.rootLogger=error,appender1
+#\u6CE8\u610F\u7684\u5730\u65B9database \u5BF9\u5E94 log4j.appender.database.URL\u7684database \u82E5\u8BA4log4j.rootLogger=debug,info,db \u90A3\u4E48 log4j.appender.database.URL\u7684database \u8981\u6539\u6210db
+#log4j.appender.logfile=org.apache.log4j.DailyRollingFileAppender
+#log4j.appender.logfile.DatePattern=.yyyy-MM-dd
+#log4j.appender.logfile.layout=org.apache.log4j.PatternLayout  
+#\u8F93\u51FA\u5230\u63A7\u5236\u53F0   
+#log4j.appender.appender1=org.apache.log4j.ConsoleAppender   
+#\u6837\u5F0F\u4E3ATTCCLayout   
+#log4j.appender.appender1.layout=org.apache.log4j.TTCCLayout  
+#\u8BBE\u7F6E\u7EA7\u522B\uFF1A   
+#log4j.rootLogger=debug,appender1   
+  
+#\u8F93\u51FA\u5230\u6587\u4EF6(\u8FD9\u91CC\u9ED8\u8BA4\u4E3A\u8FFD\u52A0\u65B9\u5F0F)   
+log4j.appender.appender1=org.apache.log4j.FileAppender   
+#\u8BBE\u7F6E\u6587\u4EF6\u8F93\u51FA\u8DEF\u5F84   
+#\u30101\u3011\u6587\u672C\u6587\u4EF6   
+log4j.appender.appender1.File=/CCCLWebApp/logs/log.log   
+#\u30102\u3011HTML\u6587\u4EF6   
+#log4j.appender.appender1.File=d:/Log4JDemo02.html   
+#\u8BBE\u7F6E\u6587\u4EF6\u8F93\u51FA\u6837\u5F0F   
+#log4j.appender.appender1.layout=org.apache.log4j.TTCCLayout   
+#log4j.appender.appender1.layout=org.apache.log4j.HTMLLayout  
+log4j.appender.appender1.layout=org.apache.log4j.PatternLayout  
+#log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+#log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %p [%c] - - <%m>%n
+#\u751F\u6210\u65E5\u5FD7\u6587\u4EF6\u7684\u683C\u5F0F
+log4j.appender.appender1.layout.ConversionPattern=[log] time:"%d{yyyy-MM-dd HH:mm:ss}" level:"%p" msg:"%m"%n%n
+#\u540E\u9762\u7684\u5E94\u8BE5\u6CA1\u7528
+log4j.appender.logfile=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.logfile.DatePattern=.yyyy-MM-dd
+log4j.appender.logfile.layout=org.apache.log4j.PatternLayout
+log4j.appender.logfile.layout.ConversionPattern=%d %p [%c] wang- <%m>%n
+#log4j.appender.db=com.neam.commons.MyJDBCAppender
+#\u4E0B\u9762\u662F\u914D\u7F6E\u5C06\u65E5\u5FD7\u4FE1\u606F\u63D2\u5165\u6570\u636E\u5E93\uFF0C
+#\u914D\u7F6E\u8F93\u51FA\u76EE\u6807\u4E3A\u6570\u636E\u5E93\uFF08\u5047\u5982\u8981\u5C06\u65E5\u5FD7\u5728\u63A7\u5236\u53F0\u8F93\u51FA\uFF0C\u914D\u7F6E\u4E3Alog4j.appender. stdout =org.apache.log4j.ConsoleAppender\uFF1B\u5C06\u65E5\u5FD7\u5199\u5165\u6587\u4EF6\uFF0C\u914D\u7F6E\u4E3Alog4j.appender.logfile=org.apache.log4j.DailyRollingFileAppender
+#\u8FD9\u6837\u7684\u914D\u7F6E\u5728\u8BB8\u591A\u5730\u65B9\u90FD\u8981\u6709\uFF0C\u9700\u8981\u53EF\u67E5\u6709\u5173\u8D44\u6599\uFF09,\u5F53\u7136\u4F60\u4E5F\u53EF\u4EE5\u81EA\u5DF1\u6269\u5C55org.apache.log4j.jdbc.JDBCAppender\u8FD9\u4E2A\u7C7B\uFF0C\u53EA\u9700\u8981\u5728\u8FD9\u91CC\u914D\u7F6E\u5C31\u53EF\u4EE5\u4E86\u4F8B\u5982\u6211\u4EEC\u914D\u7F6E\u6211\u81EA\u5DF1\u6269\u5C55\u7684MyJDBCAppender\uFF0C\u914D\u7F6E\u4E3A#log4j.appender.db=com.neam.commons.MyJDBCAppender
+log4j.appender.database.Threshold=info
+#\u5B9A\u4E49\u4EC0\u4E48\u7EA7\u522B\u7684\u9519\u8BEF\u5C06\u5199\u5165\u5230\u6570\u636E\u5E93\u4E2D
+log4j.appender.database.BufferSize=1
+#\u8BBE\u7F6E\u7F13\u5B58\u5927\u5C0F\uFF0C\u5C31\u662F\u5F53\u67091\u6761\u65E5\u5FD7\u4FE1\u606F\u662F\u624D\u5FD8\u6570\u636E\u5E93\u63D2\u4E00\u6B21
+log4j.appender.database=org.apache.log4j.jdbc.JDBCAppender
+log4j.appender.database.driver=com.mysql.jdbc.Driver
+#\u8BBE\u7F6E\u8981\u5C06\u65E5\u5FD7\u63D2\u5165\u5230\u6570\u636E\u5E93\u7684\u9A71\u52A8
+log4j.appender.database.URL=jdbc:mysql://localhost:3306/test
+log4j.appender.database.user=root
+log4j.appender.database.password=root
+log4j.appender.database.sql=insert into WDZLOG (Class,Mothod,createTime,LogLevel,MSG) values ('%C','%M','%d{yyyy-MM-dd HH:mm:ss}','%p','%m')
+log4j.appender.database.layout=org.apache.log4j.PatternLayout 

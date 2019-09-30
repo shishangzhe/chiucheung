@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.production.producttechnologyworkhours.ProProductTechnologyWorkHoursMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHours" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="process_coefficient" property="processCoefficient" jdbcType="DECIMAL" />
+    <result column="accessories_coefficient" property="accessoriesCoefficient" jdbcType="DECIMAL" />
+    <result column="total_time" property="totalTime" jdbcType="DECIMAL" />
+    <result column="total_artificial_time" property="totalArtificialTime" jdbcType="DECIMAL" />
+    <result column="war_standard_accessories_id" property="warStandardAccessoriesId" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, process_coefficient, accessories_coefficient, total_time, total_artificial_time, 
+    war_material_id as warStandardAccessoriesId, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHoursExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_product_technology_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_product_technology_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pro_product_technology_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHoursExample" >
+    delete from pro_product_technology_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHours" >
+    insert into pro_product_technology_work_hours (id, process_coefficient, accessories_coefficient, 
+      total_time, total_artificial_time, war_material_id, 
+      state)
+    values (#{id,jdbcType=VARCHAR}, #{processCoefficient,jdbcType=DECIMAL}, #{accessoriesCoefficient,jdbcType=DECIMAL}, 
+      #{totalTime,jdbcType=DECIMAL}, #{totalArtificialTime,jdbcType=DECIMAL}, #{warStandardAccessoriesId,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHours" >
+    insert into pro_product_technology_work_hours
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="processCoefficient != null" >
+        process_coefficient,
+      </if>
+      <if test="accessoriesCoefficient != null" >
+        accessories_coefficient,
+      </if>
+      <if test="totalTime != null" >
+        total_time,
+      </if>
+      <if test="totalArtificialTime != null" >
+        total_artificial_time,
+      </if>
+      <if test="warStandardAccessoriesId != null" >
+        war_standard_accessories_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="processCoefficient != null" >
+        #{processCoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="accessoriesCoefficient != null" >
+        #{accessoriesCoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="totalTime != null" >
+        #{totalTime,jdbcType=DECIMAL},
+      </if>
+      <if test="totalArtificialTime != null" >
+        #{totalArtificialTime,jdbcType=DECIMAL},
+      </if>
+      <if test="warStandardAccessoriesId != null" >
+        #{warStandardAccessoriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHoursExample" resultType="java.lang.Integer" >
+    select count(*) from pro_product_technology_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_product_technology_work_hours
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processCoefficient != null" >
+        process_coefficient = #{record.processCoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="record.accessoriesCoefficient != null" >
+        accessories_coefficient = #{record.accessoriesCoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalTime != null" >
+        total_time = #{record.totalTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalArtificialTime != null" >
+        total_artificial_time = #{record.totalArtificialTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.warStandardAccessoriesId != null" >
+        war_standard_accessories_id = #{record.warStandardAccessoriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_product_technology_work_hours
+    set id = #{record.id,jdbcType=VARCHAR},
+      process_coefficient = #{record.processCoefficient,jdbcType=DECIMAL},
+      accessories_coefficient = #{record.accessoriesCoefficient,jdbcType=DECIMAL},
+      total_time = #{record.totalTime,jdbcType=DECIMAL},
+      total_artificial_time = #{record.totalArtificialTime,jdbcType=DECIMAL},
+      war_standard_accessories_id = #{record.warStandardAccessoriesId,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHours" >
+    update pro_product_technology_work_hours
+    <set >
+      <if test="processCoefficient != null" >
+        process_coefficient = #{processCoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="accessoriesCoefficient != null" >
+        accessories_coefficient = #{accessoriesCoefficient,jdbcType=DECIMAL},
+      </if>
+      <if test="totalTime != null" >
+        total_time = #{totalTime,jdbcType=DECIMAL},
+      </if>
+      <if test="totalArtificialTime != null" >
+        total_artificial_time = #{totalArtificialTime,jdbcType=DECIMAL},
+      </if>
+      <if test="warStandardAccessoriesId != null" >
+        war_material_id = #{warStandardAccessoriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyWorkHours" >
+    update pro_product_technology_work_hours
+    set process_coefficient = #{processCoefficient,jdbcType=DECIMAL},
+      accessories_coefficient = #{accessoriesCoefficient,jdbcType=DECIMAL},
+      total_time = #{totalTime,jdbcType=DECIMAL},
+      total_artificial_time = #{totalArtificialTime,jdbcType=DECIMAL},
+      war_material_id = #{warStandardAccessoriesId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 查询所有的产品工艺工时 -->
+  <select id="findAllProductTechnologyWorkHoursList" parameterType="cn.chiucheung.pojo.warehouse.standardaccessories.WarStandardAccessoriesQueryVo" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyWorkHoursCustom">
+	
+	SELECT 
+		a.id id,
+		a.material_code accessoriesCode,
+		d9.dictionarie_name accessoriesType,
+		a.material_name accessoriesName,
+		d1.dictionarie_name unit,
+		a.applicable_product product,
+		d2.dictionarie_name classification,
+		d3.dictionarie_name materialProperties,
+		d4.dictionarie_name height,
+		d5.dictionarie_name width,
+		d6.dictionarie_name depth,
+		d7.dictionarie_name color,
+		d8.dictionarie_name specifications,
+		a.drawing_number drawingNumber,
+		a.remark remark,
+		f.id fileId,
+		a.process_coefficient processCoefficient,
+		a.accessories_coefficient accessoriesCoefficient,
+		a.total_time totalTime,
+		a.total_artificial_time totalArtificialTime,
+		a.war_material_id warStandardAccessoriesId,
+		a.state state
+	FROM 
+		(
+			SELECT
+				t.*,
+				sa.material_code,
+				sa.material_type,
+				sa.material_name,
+				sa.use_unit,
+				sa.applicable_product,
+				sa.classification,
+				sa.material_properties,
+				sa.height,
+				sa.width,
+				sa.depth,
+				sa.color,
+				sa.specifications,
+				sa.drawing_number,
+				sa.remark remark
+			FROM
+				war_material sa,
+				pro_product_technology_work_hours t
+			<if test="calculationFormulaIsChange != null and calculationFormulaIsChange != '' and calculationFormulaIsChange == 'on'">
+				INNER JOIN pro_product_technology_process_work_hours tp ON t.id = tp.pro_product_technology_work_hours_id
+				INNER JOIN pro_process p ON tp.pro_process_id = p.id AND SUBSTRING_INDEX(tp.calculation_method,'&amp;#10;',-1) != p.calculation_formula
+			</if>
+			WHERE
+				sa.id = t.war_material_id
+			<if test="calculationFormulaIsChange != null and calculationFormulaIsChange != '' and calculationFormulaIsChange == 'on'">
+				GROUP BY t.id
+			</if>
+		) a
+	LEFT JOIN war_material_file f ON a.war_material_id = f.war_material_id
+	LEFT JOIN war_base_data d1 ON a.use_unit = d1.dictionarie_code AND d1.keyword = '单位'
+	LEFT JOIN war_base_data d2 ON a.classification = d2.dictionarie_code AND d2.keyword = '分类'
+	LEFT JOIN war_base_data d3 ON a.material_properties = d3.dictionarie_code AND d3.keyword = '物料属性'
+	LEFT JOIN war_base_data d4 ON a.height = d4.dictionarie_code AND d4.keyword = '高度'
+	LEFT JOIN war_base_data d5 ON a.width = d5.dictionarie_code AND d5.keyword = '宽度'
+	LEFT JOIN war_base_data d6 ON a.depth = d6.dictionarie_code AND d6.keyword = '深度'
+	LEFT JOIN war_base_data d7 ON a.color = d7.dictionarie_code AND d7.keyword = '颜色'
+	LEFT JOIN war_base_data d8 ON a.specifications = d8.dictionarie_code AND d8.keyword = '规格型号'
+	LEFT JOIN war_base_data d9 ON a.material_type = d9.dictionarie_code AND d9.keyword = '类型'
+	<where>
+	and d9.dictionarie_name is not null
+		<if test="accessoriesCode != null and accessoriesCode != ''">
+			AND material_code LIKE '%${accessoriesCode}%'
+		</if>
+		<if test="accessoriesType != null and accessoriesType != ''">
+			AND material_type = #{accessoriesType}
+		</if>
+		<if test="accessoriesName != null and accessoriesName != ''">
+			AND material_name LIKE '%${accessoriesName}%'
+		</if>
+		<if test="product != null and product != ''">
+			AND (applicable_product = #{product} OR applicable_product LIKE '${product},%' OR applicable_product LIKE '%,${product},%' OR applicable_product LIKE '%,${product}')
+		</if>
+		<if test="classification != null and classification != ''">
+			AND classification = #{classification}
+		</if>
+		<if test="materialProperties != null and materialProperties != ''">
+			AND material_properties = #{materialProperties}
+		</if>
+		<if test="specifications != null and specifications != ''">
+			AND specifications = #{specifications}
+		</if>
+		<if test="height != null and height != ''">
+			AND (height = #{height} OR height = '' OR height IS NULL)
+		</if>
+		<if test="width != null and width != ''">
+			AND (width = #{width} OR width = '' OR width IS NULL)
+		</if>
+		<if test="depth != null and depth != ''">
+			AND (depth = #{depth} OR depth = '' OR depth IS NULL)
+		</if>
+		<if test="color != null and color != ''">
+			AND color = #{color}
+		</if>
+		<if test="notInId != null and notInId.size>0">
+	  		AND a.id NOT IN
+	  		<foreach collection="notInId" item="id" open="(" separator="," close=")">
+	  			#{id}
+	  		</foreach>
+	  	</if>
+	</where>
+	<if test="sort != null and sort != ''">
+		ORDER by #{sort} ${order}
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER by material_name
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+  
+  <!-- 查询所有的产品工艺工时的总记录数 -->
+  <select id="findAllProductTechnologyWorkHoursTotal" parameterType="cn.chiucheung.pojo.warehouse.standardaccessories.WarStandardAccessoriesQueryVo" resultType="string">
+
+  	SELECT
+  		COUNT(*)
+  	FROM
+  		(
+  			SELECT
+				a.*
+			FROM
+				war_material a,
+				pro_product_technology_work_hours t
+			<if test="calculationFormulaIsChange != null and calculationFormulaIsChange != '' and calculationFormulaIsChange == 'on'">
+				INNER JOIN pro_product_technology_process_work_hours tp ON t.id = tp.pro_product_technology_work_hours_id
+				INNER JOIN pro_process p ON tp.pro_process_id = p.id AND SUBSTRING_INDEX(tp.calculation_method,'&amp;#10;',-1) != p.calculation_formula
+			</if>
+			WHERE
+				t.war_material_id = a.id
+			<if test="calculationFormulaIsChange != null and calculationFormulaIsChange != '' and calculationFormulaIsChange == 'on'">
+				GROUP BY t.id
+			</if>
+		) a
+	where
+		a.material_type != ''
+		<if test="accessoriesCode != null and accessoriesCode != ''">
+			AND material_code LIKE '%${accessoriesCode}%'
+		</if>
+		<if test="accessoriesType != null and accessoriesType != ''">
+			AND material_type = #{accessoriesType}
+		</if>
+		<if test="accessoriesName != null and accessoriesName != ''">
+			AND material_name LIKE '%${accessoriesName}%'
+		</if>
+		<if test="product != null and product != ''">
+			AND (applicable_product = #{product} OR applicable_product LIKE '${product},%' OR applicable_product LIKE '%,${product},%' OR applicable_product LIKE '%,${product}')
+		</if>
+		<if test="classification != null and classification != ''">
+			AND classification = #{classification}
+		</if>
+		<if test="materialProperties != null and materialProperties != ''">
+			AND material_properties = #{materialProperties}
+		</if>
+		<if test="specifications != null and specifications != ''">
+			AND specifications = #{specifications}
+		</if>
+		<if test="height != null and height != ''">
+			AND (height = #{height} OR height = '' OR height IS NULL)
+		</if>
+		<if test="width != null and width != ''">
+			AND (width = #{width} OR width = '' OR width IS NULL)
+		</if>
+		<if test="depth != null and depth != ''">
+			AND (depth = #{depth} OR depth = '' OR depth IS NULL)
+		</if>
+		<if test="color != null and color != ''">
+			AND color = #{color}
+		</if>
+		<if test="notInId != null and notInId.size>0">
+	  		AND a.id NOT IN
+	  		<foreach collection="notInId" item="id" open="(" separator="," close=")">
+	  			#{id}
+	  		</foreach>
+	  	</if>
+
+  </select>
+  
+  <!-- 根据产品工艺工时的id查询子节点加载的数据（工序） -->
+  <select id="findAllProductTechnologyProcessWorkHoursListByProProductTechnologyWorkHoursId" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyWorkHoursCustom">
+  	SELECT
+		tp.id proProductTechnologyWorkHoursId,
+		tp.total_time totalTime,
+		tp.total_artificial_time totalArtificialTime,
+		tp.calculation_method calculationMethod,
+		p.process_name processName,
+		p.process_category processCategory,
+		SUBSTRING_INDEX(tp.calculation_method,'&amp;#10;',-1) = p.calculation_formula calculationFormulaIsChange
+	FROM
+		pro_product_technology_process_work_hours tp,
+		pro_process p
+	WHERE
+		tp.pro_process_id = p.id
+	AND
+		tp.pro_product_technology_work_hours_id = #{id}
+	ORDER BY tp.number
+  </select>
+  
+  
+  <!-- 根据产品工艺工时的id查询子节点加载的数据（零部件） -->
+  <select id="findAllProductTechnologyAccessoriesWorkHoursListByProProductTechnologyWorkHoursId" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyWorkHoursCustom">
+  	
+  	  	SELECT 
+		a.id proProductTechnologyWorkHoursId,
+		a.material_code accessoriesCode,
+		d9.dictionarie_name accessoriesType,
+		a.material_name accessoriesName,
+		d1.dictionarie_name unit,
+		a.applicable_product product,
+		d2.dictionarie_name classification,
+		d3.dictionarie_name materialProperties,
+		d4.dictionarie_name height,
+		d5.dictionarie_name width,
+		d6.dictionarie_name depth,
+		d7.dictionarie_name color,
+		d8.dictionarie_name specifications,
+		a.drawing_number drawingNumber,
+		a.remark remark,
+		f.id fileId,
+		a.process_coefficient processCoefficient,
+		a.accessories_coefficient accessoriesCoefficient,
+		a.total_time totalTime,
+		a.total_artificial_time totalArtificialTime,
+		a.war_material_id warStandardAccessoriesId,
+		a.each_number eachNumber,
+		a.state state
+	FROM
+		(
+		SELECT
+			a.id id,
+			a.each_number,
+			t.accessories_coefficient,
+			t.process_coefficient,
+			t.state,
+			t.total_time,
+			t.total_artificial_time,
+			t.war_material_id,
+			sa.material_code,
+			sa.material_type,
+			sa.material_name,
+			sa.use_unit,
+			sa.applicable_product,
+			sa.classification,
+			sa.material_properties,
+			sa.height,
+			sa.width,
+			sa.depth,
+			sa.color,
+			sa.specifications,
+			sa.drawing_number,
+			sa.remark remark,
+			a.number
+		FROM
+			pro_product_technology_accessories_work_hours a,
+			war_material sa,
+			pro_product_technology_work_hours t
+		WHERE
+			a.pro_product_technology_work_hours_id = #{id}
+		AND
+			a.pro_product_technology_accessories_work_hours_id = t.id
+		AND
+			t.war_material_id = sa.id
+		) a
+	LEFT JOIN war_material_file f ON a.war_material_id = f.war_material_id
+	LEFT JOIN war_base_data d1 ON a.use_unit = d1.dictionarie_code AND d1.keyword = '单位'
+	LEFT JOIN war_base_data d2 ON a.classification = d2.dictionarie_code AND d2.keyword = '分类'
+	LEFT JOIN war_base_data d3 ON a.material_properties = d3.dictionarie_code AND d3.keyword = '物料属性'
+	LEFT JOIN war_base_data d4 ON a.height = d4.dictionarie_code AND d4.keyword = '高度'
+	LEFT JOIN war_base_data d5 ON a.width = d5.dictionarie_code AND d5.keyword = '宽度'
+	LEFT JOIN war_base_data d6 ON a.depth = d6.dictionarie_code AND d6.keyword = '深度'
+	LEFT JOIN war_base_data d7 ON a.color = d7.dictionarie_code AND d7.keyword = '颜色'
+	LEFT JOIN war_base_data d8 ON a.specifications = d8.dictionarie_code AND d8.keyword = '规格型号'
+	LEFT JOIN war_base_data d9 ON a.material_type = d9.dictionarie_code AND d9.keyword = '类型'
+	ORDER BY a.number
+  </select>
+  
+  
+  <!-- 根据产品工艺工时的id查询子节点的子节点加载的数据（工序） -->
+  <select id="findAllProductTechnologyProcessWorkHoursListByProProductTechnologyAccessoriesWorkHoursId" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyWorkHoursCustom">
+  	SELECT
+		tp.total_time totalTime,
+		tp.total_artificial_time totalArtificialTime,
+		tp.calculation_method calculationMethod,
+		p.process_name processName,
+		p.process_category processCategory,
+		SUBSTRING_INDEX(tp.calculation_method,'&amp;#10;',-1) = p.calculation_formula calculationFormulaIsChange
+	FROM
+		pro_product_technology_process_work_hours tp,
+		pro_product_technology_accessories_work_hours ta,
+		pro_process p
+	WHERE
+		tp.pro_process_id = p.id
+	AND
+		tp.pro_product_technology_work_hours_id = ta.pro_product_technology_accessories_work_hours_id
+	AND
+		ta.id = #{id}
+	ORDER BY tp.number
+  </select>
+  
+  <!-- 根据产品工艺工时的id查询子节点的子节点加载的数据（零部件） -->
+  <select id="findAllProductTechnologyAccessoriesWorkHoursListByProProductTechnologyAccessoriesWorkHoursId" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyWorkHoursCustom">
+  	
+  	SELECT 
+		a.id proProductTechnologyWorkHoursId,
+		a.material_code accessoriesCode,
+		d9.dictionarie_name accessoriesType,
+		a.material_name accessoriesName,
+		d1.dictionarie_name unit,
+		a.applicable_product product,
+		d2.dictionarie_name classification,
+		d3.dictionarie_name materialProperties,
+		d4.dictionarie_name height,
+		d5.dictionarie_name width,
+		d6.dictionarie_name depth,
+		d7.dictionarie_name color,
+		d8.dictionarie_name specifications,
+		a.drawing_number drawingNumber,
+		a.remark remark,
+		f.id fileId,
+		a.process_coefficient processCoefficient,
+		a.accessories_coefficient accessoriesCoefficient,
+		a.total_time totalTime,
+		a.total_artificial_time totalArtificialTime,
+		a.war_material_id warStandardAccessoriesId,
+		a.each_number eachNumber,
+		a.state state
+	FROM
+		(
+		SELECT
+			a.id id,
+			a.each_number,
+			t.accessories_coefficient,
+			t.process_coefficient,
+			t.state,
+			t.total_time,
+			t.total_artificial_time,
+			t.war_material_id,
+			sa.material_code,
+			sa.material_type,
+			sa.material_name,
+			sa.use_unit,
+			sa.applicable_product,
+			sa.classification,
+			sa.material_properties,
+			sa.height,
+			sa.width,
+			sa.depth,
+			sa.color,
+			sa.specifications,
+			sa.drawing_number,
+			sa.remark remark,
+			a.number
+		FROM
+			pro_product_technology_accessories_work_hours a,
+			pro_product_technology_accessories_work_hours a1,
+			war_material sa,
+			pro_product_technology_work_hours t
+		WHERE
+			a.pro_product_technology_work_hours_id = a1.pro_product_technology_accessories_work_hours_id
+		AND
+			a.pro_product_technology_accessories_work_hours_id = t.id
+		AND
+			t.war_material_id = sa.id
+		AND
+			a1.id = #{id}
+		) a
+	LEFT JOIN war_material_file f ON a.war_material_id = f.war_material_id
+	LEFT JOIN war_base_data d1 ON a.use_unit = d1.dictionarie_code AND d1.keyword = '单位'
+	LEFT JOIN war_base_data d2 ON a.classification = d2.dictionarie_code AND d2.keyword = '分类'
+	LEFT JOIN war_base_data d3 ON a.material_properties = d3.dictionarie_code AND d3.keyword = '物料属性'
+	LEFT JOIN war_base_data d4 ON a.height = d4.dictionarie_code AND d4.keyword = '高度'
+	LEFT JOIN war_base_data d5 ON a.width = d5.dictionarie_code AND d5.keyword = '宽度'
+	LEFT JOIN war_base_data d6 ON a.depth = d6.dictionarie_code AND d6.keyword = '深度'
+	LEFT JOIN war_base_data d7 ON a.color = d7.dictionarie_code AND d7.keyword = '颜色'
+	LEFT JOIN war_base_data d8 ON a.specifications = d8.dictionarie_code AND d8.keyword = '规格型号'
+	LEFT JOIN war_base_data d9 ON a.material_type = d9.dictionarie_code AND d9.keyword = '类型'
+	ORDER BY a.number
+  </select>
+  
+  <!-- 查询所有未关联的标准配件 -->
+  <select id="findAllWarStandardAccessoriesForIsAssociatedList" parameterType="cn.chiucheung.pojo.warehouse.standardaccessories.WarStandardAccessoriesQueryVo" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyWorkHoursCustom">
+  	
+  	SELECT 
+		a.id id,
+		a.material_code accessoriesCode,
+		d9.dictionarie_name accessoriesType,
+		a.material_name accessoriesName,
+		d1.dictionarie_name unit,
+		a.applicable_product product,
+		d2.dictionarie_name classification,
+		d3.dictionarie_name materialProperties,
+		d4.dictionarie_name height,
+		d5.dictionarie_name width,
+		d6.dictionarie_name depth,
+		d7.dictionarie_name color,
+		d8.dictionarie_name specifications,
+		f.id fileId,
+		a.batch eachNumber,
+		a.pro_product_technology_work_hours_id proProductTechnologyWorkHoursId,
+		a.total_time totalTime,
+		a.total_artificial_time totalArtificialTime
+	FROM 
+		(
+			SELECT
+				a.*,
+				t.id pro_product_technology_work_hours_id,
+				t.total_time,
+				t.total_artificial_time
+			FROM
+				war_material a
+			LEFT JOIN pro_product_technology_work_hours t ON a.id = t.war_material_id
+			WHERE
+				<if test="isAssociated">
+					 t.id IS NULL
+				</if>
+				<if test="!isAssociated">
+					 t.id IS NOT NULL
+				</if>
+				<if test="orWarStandardAccessoriesId != null and orWarStandardAccessoriesId != ''">
+					OR t.war_material_id = #{orWarStandardAccessoriesId}
+				</if>
+				<if test="dictionarieCode == 1">
+					and a.material_type =1
+				</if>
+				<if test="dictionarieCode == 2">
+					and 2 >= a.material_type >=1
+				</if>
+				<if test="dictionarieCode == 3">
+					and 3 >= a.material_type >=1
+				</if>
+				<if test="dictionarieCode == 4">
+					and 4 >= a.material_type >=1
+				</if>
+		) a
+	LEFT JOIN war_material_file f ON a.id = f.war_material_id
+	LEFT JOIN war_base_data d1 ON a.use_unit = d1.dictionarie_code AND d1.keyword = '单位'
+	LEFT JOIN war_base_data d2 ON a.classification = d2.dictionarie_code AND d2.keyword = '分类'
+	LEFT JOIN war_base_data d3 ON a.material_properties = d3.dictionarie_code AND d3.keyword = '物料属性'
+	LEFT JOIN war_base_data d4 ON a.height = d4.dictionarie_code AND d4.keyword = '高度'
+	LEFT JOIN war_base_data d5 ON a.width = d5.dictionarie_code AND d5.keyword = '宽度'
+	LEFT JOIN war_base_data d6 ON a.depth = d6.dictionarie_code AND d6.keyword = '深度'
+	LEFT JOIN war_base_data d7 ON a.color = d7.dictionarie_code AND d7.keyword = '颜色'
+	LEFT JOIN war_base_data d8 ON a.specifications = d8.dictionarie_code AND d8.keyword = '规格型号'
+	LEFT JOIN war_base_data d9 ON a.material_type = d9.dictionarie_code AND d9.keyword = '类型'
+	<where>
+	d9.dictionarie_name is not null
+		<if test="id != null and id != ''">
+			AND a.id = #{id}
+		</if>
+		<if test="accessoriesCode != null and accessoriesCode != ''">
+			AND material_code LIKE '%${accessoriesCode}%'
+		</if>
+		<if test="accessoriesType != null and accessoriesType != ''">
+			AND material_type = #{accessoriesType}
+		</if>
+		<if test="accessoriesName != null and accessoriesName != ''">
+			AND material_name LIKE '%${accessoriesName}%'
+		</if>
+		<if test="product != null and product != ''">
+			AND (applicable_product = #{product} OR applicable_product LIKE '${product},%' OR applicable_product LIKE '%,${product},%' OR applicable_product LIKE '%,${product}')
+		</if>
+		<if test="classification != null and classification != ''">
+			AND classification = #{classification}
+		</if>
+		<if test="materialProperties != null and materialProperties != ''">
+			AND material_properties = #{materialProperties}
+		</if>
+		<if test="specifications != null and specifications != ''">
+			AND specifications = #{specifications}
+		</if>
+		<if test="height != null and height != ''">
+			AND (height = #{height} OR height = '' OR height IS NULL)
+		</if>
+		<if test="width != null and width != ''">
+			AND (width = #{width} OR width = '' OR width IS NULL)
+		</if>
+		<if test="depth != null and depth != ''">
+			AND (depth = #{depth} OR depth = '' OR depth IS NULL)
+		</if>
+		<if test="color != null and color != ''">
+			AND color = #{color}
+		</if>
+		<if test="notInId != null and notInId.size>0">
+	  		AND a.id NOT IN
+	  		<foreach collection="notInId" item="id" open="(" separator="," close=")">
+	  			#{id}
+	  		</foreach>
+	  	</if>
+	</where>
+	<if test="sort != null and sort != ''">
+		ORDER by #{sort} ${order}
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER by a.material_name
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+  
+  
+  <!-- 查询所有未关联的标准配件的总数 -->
+  <select id="findAllWarStandardAccessoriesForIsAssociatedTotal" parameterType="cn.chiucheung.pojo.warehouse.standardaccessories.WarStandardAccessoriesQueryVo" resultType="string">
+  	
+  	SELECT
+		COUNT(*)
+	FROM 
+		(
+			SELECT
+				a.*,
+				t.id pro_product_technology_work_hours_id,
+				t.total_time,
+				t.total_artificial_time
+			FROM
+				war_material a
+			LEFT JOIN pro_product_technology_work_hours t ON a.id = t.war_material_id
+			WHERE
+				<if test="isAssociated">
+					 t.id IS NULL
+				</if>
+				<if test="!isAssociated">
+					 t.id IS NOT NULL
+				</if>
+				<if test="orWarStandardAccessoriesId != null and orWarStandardAccessoriesId != ''">
+					OR t.war_material_id = #{orWarStandardAccessoriesId}
+				</if>
+				<if test="dictionarieCode == 1">
+					and a.material_type =1
+				</if>
+				<if test="dictionarieCode == 2">
+					and 2 >= a.material_type >=1
+				</if>
+				<if test="dictionarieCode == 3">
+					and 3 >= a.material_type >=1
+				</if>
+				<if test="dictionarieCode == 4">
+					and 4 >= a.material_type >=1
+				</if>
+		) a
+	where
+	a.material_type != ''
+		<if test="accessoriesCode != null and accessoriesCode != ''">
+			AND material_code LIKE '%${accessoriesCode}%'
+		</if>
+		<if test="accessoriesType != null and accessoriesType != ''">
+			AND material_type = #{accessoriesType}
+		</if>
+		<if test="accessoriesName != null and accessoriesName != ''">
+			AND material_name LIKE '%${accessoriesName}%'
+		</if>
+		<if test="product != null and product != ''">
+			AND (applicable_product = #{product} OR applicable_product LIKE '${product},%' OR applicable_product LIKE '%,${product},%' OR applicable_product LIKE '%,${product}')
+		</if>
+		<if test="classification != null and classification != ''">
+			AND classification = #{classification}
+		</if>
+		<if test="materialProperties != null and materialProperties != ''">
+			AND material_properties = #{materialProperties}
+		</if>
+		<if test="specifications != null and specifications != ''">
+			AND specifications = #{specifications}
+		</if>
+		<if test="height != null and height != ''">
+			AND (height = #{height} OR height = '' OR height IS NULL)
+		</if>
+		<if test="width != null and width != ''">
+			AND (width = #{width} OR width = '' OR width IS NULL)
+		</if>
+		<if test="depth != null and depth != ''">
+			AND (depth = #{depth} OR depth = '' OR depth IS NULL)
+		</if>
+		<if test="color != null and color != ''">
+			AND color = #{color}
+		</if>
+		<if test="notInId != null and notInId.size>0">
+	  		AND a.id NOT IN
+	  		<foreach collection="notInId" item="id" open="(" separator="," close=")">
+	  			#{id}
+	  		</foreach>
+	  	</if>
+  </select>
+  
+  
+  <!-- 批量更新 -->
+  <update id="updateList" parameterType="java.util.List">
+  	<foreach collection="list" item="item" separator=";">
+		UPDATE
+			pro_product_technology_work_hours
+    	SET
+      		total_time = #{item.totalTime},
+      		total_artificial_time = #{item.totalArtificialTime}
+    	WHERE
+    		id = #{item.id}
+	</foreach>
+  </update>
+  
+  
+  <!-- 为计算工时treegrid加载数据 -->
+  <select id="findAllProProcessListForCalculateProcessTimes" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProCalculateProcessTimesCustom">
+  	SELECT
+		id id,
+		process_number processNumber,
+		parent_process_number parentProcessNumber,
+		process_name processName,
+		process_category processCategory,
+		machine_group_number machineGroupNumber,
+    	per_machine_group_people_number perMachineGroupPeopleNumber,
+    	calculation_formula calculationFormula,
+		IF(LENGTH(TRIM(calculation_formula))=0,'closed','') state,
+		0 totalTime,
+		0 totalArtificialTime
+	FROM
+		pro_process
+	ORDER BY process_number
+  </select>
+  
+  
+  <!-- 下面是导出Excel的查询 -->
+  <!-- 获取当前需要导出的产品的相关信息 -->
+  <select id="findProductTechnologyWorkHoursByIdForExportExcel" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyWorkHoursForExportExcelCustom">
+  	SELECT
+		t.id,
+		s.material_code accessoriesCode,
+		s.material_name accessoriesName,
+		d1.dictionarie_name specifications,
+		s.drawing_number drawingNumber,
+		d2.dictionarie_name unit,
+		process_coefficient processCoefficient,
+		accessories_coefficient accessoriesCoefficient
+	FROM
+		pro_product_technology_work_hours t,
+		war_material s
+	LEFT JOIN war_base_data d1 ON d1.dictionarie_code = s.specifications AND d1.keyword = '规格型号'
+	LEFT JOIN war_base_data d2 ON d2.dictionarie_code = s.use_unit AND d2.keyword = '单位'
+	WHERE
+			t.war_material_id = s.id
+	AND
+		t.id = #{id}
+  </select>
+  
+  <!-- 每道工序所需要的工时，没有经过的工序，则为0 -->
+  <select id="findProcessTimesByProProductTechnologyWorkHoursIdForExportExcel" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProCalculateProcessTimesForExportExcelCustom">
+  	SELECT
+		IFNULL(tp.total_time,0) totalTime,
+		IFNULL(tp.total_artificial_time,0) totalArtificialTime
+	FROM
+		pro_process p
+	LEFT JOIN pro_product_technology_process_work_hours tp ON tp.pro_product_technology_work_hours_id = #{id} AND tp.pro_process_id = p.id
+	WHERE
+		p.calculation_formula IS NOT NULL
+	AND
+		p.calculation_formula != ''
+	ORDER BY process_number
+  </select>
+</mapper>

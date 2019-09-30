@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.finance.checksheet.FinCheckSheetMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.finance.checksheet.FinCheckSheet" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="check_sheet_no" property="checkSheetNo" jdbcType="VARCHAR" />
+    <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="install_work_card_no" property="installWorkCardNo" jdbcType="VARCHAR" />
+    <result column="project_manager" property="projectManager" jdbcType="VARCHAR" />
+    <result column="business_trip_date" property="businessTripDate" jdbcType="DATE" />
+    <result column="departure_date" property="departureDate" jdbcType="DATE" />
+    <result column="travel_place" property="travelPlace" jdbcType="VARCHAR" />
+    <result column="accompanying_personnel" property="accompanyingPersonnel" jdbcType="VARCHAR" />
+    <result column="is_lock" property="isLock" jdbcType="BIT" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, check_sheet_no, applicant, install_work_card_no, project_manager, business_trip_date, 
+    departure_date, travel_place, accompanying_personnel, is_lock, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.finance.checksheet.FinCheckSheetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_check_sheet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fin_check_sheet
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fin_check_sheet
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.finance.checksheet.FinCheckSheetExample" >
+    delete from fin_check_sheet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.finance.checksheet.FinCheckSheet" >
+    insert into fin_check_sheet (id, check_sheet_no, applicant, 
+      install_work_card_no, project_manager, business_trip_date, 
+      departure_date, travel_place, accompanying_personnel, 
+      is_lock, state)
+    values (#{id,jdbcType=VARCHAR}, #{checkSheetNo,jdbcType=VARCHAR}, #{applicant,jdbcType=VARCHAR}, 
+      #{installWorkCardNo,jdbcType=VARCHAR}, #{projectManager,jdbcType=VARCHAR}, #{businessTripDate,jdbcType=DATE}, 
+      #{departureDate,jdbcType=DATE}, #{travelPlace,jdbcType=VARCHAR}, #{accompanyingPersonnel,jdbcType=VARCHAR}, 
+      #{isLock,jdbcType=BIT}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.finance.checksheet.FinCheckSheet" >
+    insert into fin_check_sheet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="checkSheetNo != null" >
+        check_sheet_no,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="installWorkCardNo != null" >
+        install_work_card_no,
+      </if>
+      <if test="projectManager != null" >
+        project_manager,
+      </if>
+      <if test="businessTripDate != null" >
+        business_trip_date,
+      </if>
+      <if test="departureDate != null" >
+        departure_date,
+      </if>
+      <if test="travelPlace != null" >
+        travel_place,
+      </if>
+      <if test="accompanyingPersonnel != null" >
+        accompanying_personnel,
+      </if>
+      <if test="isLock != null" >
+        is_lock,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="checkSheetNo != null" >
+        #{checkSheetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="installWorkCardNo != null" >
+        #{installWorkCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectManager != null" >
+        #{projectManager,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTripDate != null" >
+        #{businessTripDate,jdbcType=DATE},
+      </if>
+      <if test="departureDate != null" >
+        #{departureDate,jdbcType=DATE},
+      </if>
+      <if test="travelPlace != null" >
+        #{travelPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="accompanyingPersonnel != null" >
+        #{accompanyingPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        #{isLock,jdbcType=BIT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.finance.checksheet.FinCheckSheetExample" resultType="java.lang.Integer" >
+    select count(*) from fin_check_sheet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fin_check_sheet
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkSheetNo != null" >
+        check_sheet_no = #{record.checkSheetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicant != null" >
+        applicant = #{record.applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.installWorkCardNo != null" >
+        install_work_card_no = #{record.installWorkCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectManager != null" >
+        project_manager = #{record.projectManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTripDate != null" >
+        business_trip_date = #{record.businessTripDate,jdbcType=DATE},
+      </if>
+      <if test="record.departureDate != null" >
+        departure_date = #{record.departureDate,jdbcType=DATE},
+      </if>
+      <if test="record.travelPlace != null" >
+        travel_place = #{record.travelPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accompanyingPersonnel != null" >
+        accompanying_personnel = #{record.accompanyingPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLock != null" >
+        is_lock = #{record.isLock,jdbcType=BIT},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fin_check_sheet
+    set id = #{record.id,jdbcType=VARCHAR},
+      check_sheet_no = #{record.checkSheetNo,jdbcType=VARCHAR},
+      applicant = #{record.applicant,jdbcType=VARCHAR},
+      install_work_card_no = #{record.installWorkCardNo,jdbcType=VARCHAR},
+      project_manager = #{record.projectManager,jdbcType=VARCHAR},
+      business_trip_date = #{record.businessTripDate,jdbcType=DATE},
+      departure_date = #{record.departureDate,jdbcType=DATE},
+      travel_place = #{record.travelPlace,jdbcType=VARCHAR},
+      accompanying_personnel = #{record.accompanyingPersonnel,jdbcType=VARCHAR},
+      is_lock = #{record.isLock,jdbcType=BIT},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.finance.checksheet.FinCheckSheet" >
+    update fin_check_sheet
+    <set >
+      <if test="checkSheetNo != null" >
+        check_sheet_no = #{checkSheetNo,jdbcType=VARCHAR},
+      </if>
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="installWorkCardNo != null" >
+        install_work_card_no = #{installWorkCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectManager != null" >
+        project_manager = #{projectManager,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTripDate != null" >
+        business_trip_date = #{businessTripDate,jdbcType=DATE},
+      </if>
+      <if test="departureDate != null" >
+        departure_date = #{departureDate,jdbcType=DATE},
+      </if>
+      <if test="travelPlace != null" >
+        travel_place = #{travelPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="accompanyingPersonnel != null" >
+        accompanying_personnel = #{accompanyingPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        is_lock = #{isLock,jdbcType=BIT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.finance.checksheet.FinCheckSheet" >
+    update fin_check_sheet
+    set check_sheet_no = #{checkSheetNo,jdbcType=VARCHAR},
+      applicant = #{applicant,jdbcType=VARCHAR},
+      install_work_card_no = #{installWorkCardNo,jdbcType=VARCHAR},
+      project_manager = #{projectManager,jdbcType=VARCHAR},
+      business_trip_date = #{businessTripDate,jdbcType=DATE},
+      departure_date = #{departureDate,jdbcType=DATE},
+      travel_place = #{travelPlace,jdbcType=VARCHAR},
+      accompanying_personnel = #{accompanyingPersonnel,jdbcType=VARCHAR},
+      is_lock = #{isLock,jdbcType=BIT},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+    <!-- 自定义 -->
+  <!-- 根据当天日期查询当前日期的最大报账单号 -->
+  <select id="findMaxCheckSheetNo" parameterType="string" resultType="int">
+  	SELECT
+		IFNULL(MAX(SUBSTRING(check_sheet_no,7,3)),0)
+	FROM
+		fin_check_sheet
+	WHERE
+		check_sheet_no LIKE '%${checkSheetNo}%'
+  </select>
+  
+  <!-- 查询所有的报账单 -->
+  <select id="findAllCheckSheetList" parameterType="cn.chiucheung.pojo.finance.checksheet.FinCheckSheetQueryVo" resultType="cn.chiucheung.pojo.finance.checksheet.FinCheckSheetCustom">
+  	SELECT
+		s.id id,
+		s.check_sheet_no checkSheetNo,
+		s.applicant applicant,
+		s.install_work_card_no installWorkCardNo,
+		i.project_leader projectManager,
+		s.business_trip_date businessTripDate,
+		s.departure_date departureDate,
+		s.travel_place travelPlace,
+		s.accompanying_personnel accompanyingPersonnel,
+		s.state state,
+		(
+			SELECT
+				SUM(IFNULL(r.live_price,0)
+				+IFNULL(r.lunch,0)
+				+IFNULL(r.dinner,0)
+				+IFNULL(r.midnight_snack,0)
+				+IFNULL((SELECT SUM(price) FROM log_travel_traffic_spending WHERE log_travel_spending_records_id = r.id),0)
+				+IFNULL((SELECT SUM(price) FROM log_travel_other_spending WHERE log_travel_spending_records_id = r.id),0)) totalPrice
+			FROM 
+				log_travel_spending_records r
+	  		WHERE
+				r.fin_check_sheet_id = s.id
+	  	) totalCost
+		
+	FROM 
+		fin_check_sheet s
+	LEFT JOIN fin_work_card_info i ON i.work_card_no = s.install_work_card_no
+  	WHERE
+  		s.is_lock = #{isLock}
+	<if test="checkSheetNo != null and checkSheetNo != ''">
+		AND s.check_sheet_no LIKE '%${checkSheetNo}%'
+	</if>
+	<if test="applicant != null and applicant != ''">
+		AND s.applicant LIKE '%${applicant}%'
+	</if>
+	<if test="installWorkCardNo != null and installWorkCardNo != ''">
+		AND s.install_work_card_no LIKE '%${installWorkCardNo}%'
+	</if>
+	<if test="projectManager != null and projectManager != ''">
+		AND i.project_leader LIKE '%${projectManager}%'
+	</if>
+  	<if test="sort != null and sort != ''">
+		ORDER BY #{sort} ${order}
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY s.check_sheet_no 
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+  
+  <!-- 查询所有报账单的总记录数 -->
+  <select id="findAllCheckSheetTotal" parameterType="cn.chiucheung.pojo.finance.checksheet.FinCheckSheetQueryVo" resultType="string">
+  	SELECT
+  		COUNT(*)
+  	FROM
+  		fin_check_sheet s
+	LEFT JOIN fin_work_card_info i ON i.work_card_no = s.install_work_card_no
+  	WHERE
+  		is_lock = #{isLock}
+	<if test="checkSheetNo != null and checkSheetNo != ''">
+		AND check_sheet_no LIKE '%${checkSheetNo}%'
+	</if>
+	<if test="applicant != null and applicant != ''">
+		AND applicant LIKE '%${applicant}%'
+	</if>
+	<if test="installWorkCardNo != null and installWorkCardNo != ''">
+		AND install_work_card_no LIKE '%${installWorkCardNo}%'
+	</if>
+	<if test="projectManager != null and projectManager != ''">
+		AND i.project_leader LIKE '%${projectManager}%'
+	</if>
+  </select>
+  
+  <!-- 根据id查找报账单，用于页面的报账单数据导出 -->
+  <select id="findFinCheckSheetById" parameterType="java.lang.String" resultType="cn.chiucheung.po.finance.checksheet.FinCheckSheet">
+  	SELECT 
+	    s.id id,
+	    s.check_sheet_no checkSheetNo,
+	    s.applicant applicant,
+	    s.install_work_card_no installWorkCardNo,
+	    i.project_leader projectManager,
+	    s.business_trip_date businessTripDate, 
+	    s.departure_date departureDate,
+	    s.travel_place travelPlace,
+	    s.accompanying_personnel accompanyingPersonnel
+    FROM
+    	fin_check_sheet s
+    LEFT JOIN fin_work_card_info i ON i.work_card_no = s.install_work_card_no
+    WHERE
+    	s.id = #{id}
+  </select>
+</mapper>

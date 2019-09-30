@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.engineering.bom.EngBomSubsidiaryMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.engineering.bom.EngBomSubsidiary" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
+    <result column="order_number" property="orderNumber" jdbcType="INTEGER" />
+    <result column="material_code" property="materialCode" jdbcType="VARCHAR" />
+    <result column="material_name" property="materialName" jdbcType="VARCHAR" />
+    <result column="specifications" property="specifications" jdbcType="VARCHAR" />
+    <result column="drawing_number" property="drawingNumber" jdbcType="VARCHAR" />
+    <result column="material_properties" property="materialProperties" jdbcType="VARCHAR" />
+    <result column="production_workshop" property="productionWorkshop" jdbcType="VARCHAR" />
+    <result column="surface_treatment" property="surfaceTreatment" jdbcType="VARCHAR" />
+    <result column="singleton_consumption" property="singletonConsumption" jdbcType="DECIMAL" />
+    <result column="use_unit" property="useUnit" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="eng_bom_id" property="engBomId" jdbcType="VARCHAR" />
+    <result column="eng_bom_subsidiary_id" property="engBomSubsidiaryId" jdbcType="VARCHAR" />
+    <result column="war_material_id" property="warMaterialId" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, serial_number, order_number, material_code, material_name, specifications, drawing_number, 
+    material_properties, production_workshop, surface_treatment, singleton_consumption, 
+    use_unit, remark, eng_bom_id, eng_bom_subsidiary_id, war_material_id, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from eng_bom_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from eng_bom_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from eng_bom_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiaryExample" >
+    delete from eng_bom_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiary" >
+    insert into eng_bom_subsidiary (id, serial_number, order_number, 
+      material_code, material_name, specifications, 
+      drawing_number, material_properties, production_workshop, 
+      surface_treatment, singleton_consumption, 
+      use_unit, remark, eng_bom_id, 
+      eng_bom_subsidiary_id, war_material_id, state
+      )
+    values (#{id,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, #{orderNumber,jdbcType=INTEGER}, 
+      #{materialCode,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, #{specifications,jdbcType=VARCHAR}, 
+      #{drawingNumber,jdbcType=VARCHAR}, #{materialProperties,jdbcType=VARCHAR}, #{productionWorkshop,jdbcType=VARCHAR}, 
+      #{surfaceTreatment,jdbcType=VARCHAR}, #{singletonConsumption,jdbcType=DECIMAL}, 
+      #{useUnit,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{engBomId,jdbcType=VARCHAR}, 
+      #{engBomSubsidiaryId,jdbcType=VARCHAR}, #{warMaterialId,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiary" >
+    insert into eng_bom_subsidiary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="serialNumber != null" >
+        serial_number,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="materialCode != null" >
+        material_code,
+      </if>
+      <if test="materialName != null" >
+        material_name,
+      </if>
+      <if test="specifications != null" >
+        specifications,
+      </if>
+      <if test="drawingNumber != null" >
+        drawing_number,
+      </if>
+      <if test="materialProperties != null" >
+        material_properties,
+      </if>
+      <if test="productionWorkshop != null" >
+        production_workshop,
+      </if>
+      <if test="surfaceTreatment != null" >
+        surface_treatment,
+      </if>
+      <if test="singletonConsumption != null" >
+        singleton_consumption,
+      </if>
+      <if test="useUnit != null" >
+        use_unit,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="engBomId != null" >
+        eng_bom_id,
+      </if>
+      <if test="engBomSubsidiaryId != null" >
+        eng_bom_subsidiary_id,
+      </if>
+      <if test="warMaterialId != null" >
+        war_material_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="materialCode != null" >
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="drawingNumber != null" >
+        #{drawingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="materialProperties != null" >
+        #{materialProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="productionWorkshop != null" >
+        #{productionWorkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="surfaceTreatment != null" >
+        #{surfaceTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="singletonConsumption != null" >
+        #{singletonConsumption,jdbcType=DECIMAL},
+      </if>
+      <if test="useUnit != null" >
+        #{useUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="engBomId != null" >
+        #{engBomId,jdbcType=VARCHAR},
+      </if>
+      <if test="engBomSubsidiaryId != null" >
+        #{engBomSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="warMaterialId != null" >
+        #{warMaterialId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiaryExample" resultType="java.lang.Integer" >
+    select count(*) from eng_bom_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update eng_bom_subsidiary
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialNumber != null" >
+        serial_number = #{record.serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNumber != null" >
+        order_number = #{record.orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.materialCode != null" >
+        material_code = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null" >
+        material_name = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specifications != null" >
+        specifications = #{record.specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawingNumber != null" >
+        drawing_number = #{record.drawingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialProperties != null" >
+        material_properties = #{record.materialProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productionWorkshop != null" >
+        production_workshop = #{record.productionWorkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surfaceTreatment != null" >
+        surface_treatment = #{record.surfaceTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singletonConsumption != null" >
+        singleton_consumption = #{record.singletonConsumption,jdbcType=DECIMAL},
+      </if>
+      <if test="record.useUnit != null" >
+        use_unit = #{record.useUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engBomId != null" >
+        eng_bom_id = #{record.engBomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engBomSubsidiaryId != null" >
+        eng_bom_subsidiary_id = #{record.engBomSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warMaterialId != null" >
+        war_material_id = #{record.warMaterialId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update eng_bom_subsidiary
+    set id = #{record.id,jdbcType=VARCHAR},
+      serial_number = #{record.serialNumber,jdbcType=VARCHAR},
+      order_number = #{record.orderNumber,jdbcType=INTEGER},
+      material_code = #{record.materialCode,jdbcType=VARCHAR},
+      material_name = #{record.materialName,jdbcType=VARCHAR},
+      specifications = #{record.specifications,jdbcType=VARCHAR},
+      drawing_number = #{record.drawingNumber,jdbcType=VARCHAR},
+      material_properties = #{record.materialProperties,jdbcType=VARCHAR},
+      production_workshop = #{record.productionWorkshop,jdbcType=VARCHAR},
+      surface_treatment = #{record.surfaceTreatment,jdbcType=VARCHAR},
+      singleton_consumption = #{record.singletonConsumption,jdbcType=DECIMAL},
+      use_unit = #{record.useUnit,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      eng_bom_id = #{record.engBomId,jdbcType=VARCHAR},
+      eng_bom_subsidiary_id = #{record.engBomSubsidiaryId,jdbcType=VARCHAR},
+      war_material_id = #{record.warMaterialId,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiary" >
+    update eng_bom_subsidiary
+    <set >
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="materialCode != null" >
+        material_code = #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        material_name = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        specifications = #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="drawingNumber != null" >
+        drawing_number = #{drawingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="materialProperties != null" >
+        material_properties = #{materialProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="productionWorkshop != null" >
+        production_workshop = #{productionWorkshop,jdbcType=VARCHAR},
+      </if>
+      <if test="surfaceTreatment != null" >
+        surface_treatment = #{surfaceTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="singletonConsumption != null" >
+        singleton_consumption = #{singletonConsumption,jdbcType=DECIMAL},
+      </if>
+      <if test="useUnit != null" >
+        use_unit = #{useUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="engBomId != null" >
+        eng_bom_id = #{engBomId,jdbcType=VARCHAR},
+      </if>
+      <if test="engBomSubsidiaryId != null" >
+        eng_bom_subsidiary_id = #{engBomSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="warMaterialId != null" >
+        war_material_id = #{warMaterialId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiary" >
+    update eng_bom_subsidiary
+    set serial_number = #{serialNumber,jdbcType=VARCHAR},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      material_code = #{materialCode,jdbcType=VARCHAR},
+      material_name = #{materialName,jdbcType=VARCHAR},
+      specifications = #{specifications,jdbcType=VARCHAR},
+      drawing_number = #{drawingNumber,jdbcType=VARCHAR},
+      material_properties = #{materialProperties,jdbcType=VARCHAR},
+      production_workshop = #{productionWorkshop,jdbcType=VARCHAR},
+      surface_treatment = #{surfaceTreatment,jdbcType=VARCHAR},
+      singleton_consumption = #{singletonConsumption,jdbcType=DECIMAL},
+      use_unit = #{useUnit,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      eng_bom_id = #{engBomId,jdbcType=VARCHAR},
+      eng_bom_subsidiary_id = #{engBomSubsidiaryId,jdbcType=VARCHAR},
+      war_material_id = #{warMaterialId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 查找所有的EngBomSubsidiary，要关联物料查找 -->
+  <select id="findAllEngBomSubsidiaryList" parameterType="cn.chiucheung.po.engineering.bom.EngBomSubsidiary" resultType="cn.chiucheung.po.engineering.bom.EngBomSubsidiary">
+  	SELECT 
+		m.id warMaterialId,
+		m.material_code materialCode,
+		m.material_name materialName,
+		<if test="engBomId != null and engBomId != ''">
+			s.id id,
+			s.serial_number serialNumber,
+			s.order_number orderNumber,
+			s.production_workshop productionWorkshop,
+			s.singleton_consumption singletonConsumption,
+			s.remark remark,
+			s.eng_bom_id engBomId,
+			s.eng_bom_subsidiary_id engBomSubsidiaryId,
+			s.state state,
+		</if>
+		<if test="engBomSubsidiaryId != null and engBomSubsidiaryId != ''">
+			s.id id,
+			s.serial_number serialNumber,
+			s.order_number orderNumber,
+			s.production_workshop productionWorkshop,
+			s.singleton_consumption singletonConsumption,
+			s.remark remark,
+			s.eng_bom_id engBomId,
+			s.eng_bom_subsidiary_id engBomSubsidiaryId,
+			s.state state,
+		</if>
+		d1.dictionarie_name useUnit,
+		d2.dictionarie_name materialProperties,
+		d3.dictionarie_name surfaceTreatment,
+		d4.dictionarie_name specifications,
+		m.drawing_number drawingNumber
+	FROM 
+		war_material m
+	<if test="engBomId != null and engBomId != ''">
+		INNER JOIN eng_bom_subsidiary s ON m.id = s.war_material_id AND s.eng_bom_id = #{engBomId}
+	</if>
+	<if test="engBomSubsidiaryId != null and engBomSubsidiaryId != ''">
+		INNER JOIN eng_bom_subsidiary s ON m.id = s.war_material_id AND s.eng_bom_subsidiary_id = #{engBomSubsidiaryId}
+	</if>
+	LEFT JOIN war_base_data d1 ON m.use_unit = d1.dictionarie_code AND d1.keyword = '单位'
+	LEFT JOIN war_base_data d2 ON m.material_properties = d2.dictionarie_code AND d2.keyword = '物料属性'
+	LEFT JOIN war_base_data d3 ON m.color = d3.dictionarie_code AND d3.keyword = '颜色'
+	LEFT JOIN war_base_data d4 ON m.specifications = d4.dictionarie_code AND d4.keyword = '规格型号'
+	<where>
+		<if test="materialCode != null and materialCode != ''">
+			m.material_code = #{materialCode}
+		</if>
+	</where>
+  </select>
+</mapper>

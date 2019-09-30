@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiaryMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiary" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="pro_storage_warehouse_work_card_subsidiary_id" property="proStorageWarehouseWorkCardSubsidiaryId" jdbcType="VARCHAR" />
+    <result column="war_storage_warehouse_work_card_stock_in_id" property="warStorageWarehouseWorkCardStockInId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sequence, quantity, remark, pro_storage_warehouse_work_card_subsidiary_id, war_storage_warehouse_work_card_stock_in_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from war_storage_warehouse_work_card_stock_in_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from war_storage_warehouse_work_card_stock_in_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from war_storage_warehouse_work_card_stock_in_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiaryExample" >
+    delete from war_storage_warehouse_work_card_stock_in_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiary" >
+    insert into war_storage_warehouse_work_card_stock_in_subsidiary (id, sequence, quantity, 
+      remark, pro_storage_warehouse_work_card_subsidiary_id, 
+      war_storage_warehouse_work_card_stock_in_id)
+    values (#{id,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{proStorageWarehouseWorkCardSubsidiaryId,jdbcType=VARCHAR}, 
+      #{warStorageWarehouseWorkCardStockInId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiary" >
+    insert into war_storage_warehouse_work_card_stock_in_subsidiary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="proStorageWarehouseWorkCardSubsidiaryId != null" >
+        pro_storage_warehouse_work_card_subsidiary_id,
+      </if>
+      <if test="warStorageWarehouseWorkCardStockInId != null" >
+        war_storage_warehouse_work_card_stock_in_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="proStorageWarehouseWorkCardSubsidiaryId != null" >
+        #{proStorageWarehouseWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="warStorageWarehouseWorkCardStockInId != null" >
+        #{warStorageWarehouseWorkCardStockInId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiaryExample" resultType="java.lang.Integer" >
+    select count(*) from war_storage_warehouse_work_card_stock_in_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update war_storage_warehouse_work_card_stock_in_subsidiary
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proStorageWarehouseWorkCardSubsidiaryId != null" >
+        pro_storage_warehouse_work_card_subsidiary_id = #{record.proStorageWarehouseWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warStorageWarehouseWorkCardStockInId != null" >
+        war_storage_warehouse_work_card_stock_in_id = #{record.warStorageWarehouseWorkCardStockInId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update war_storage_warehouse_work_card_stock_in_subsidiary
+    set id = #{record.id,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=INTEGER},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      pro_storage_warehouse_work_card_subsidiary_id = #{record.proStorageWarehouseWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      war_storage_warehouse_work_card_stock_in_id = #{record.warStorageWarehouseWorkCardStockInId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiary" >
+    update war_storage_warehouse_work_card_stock_in_subsidiary
+    <set >
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="proStorageWarehouseWorkCardSubsidiaryId != null" >
+        pro_storage_warehouse_work_card_subsidiary_id = #{proStorageWarehouseWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="warStorageWarehouseWorkCardStockInId != null" >
+        war_storage_warehouse_work_card_stock_in_id = #{warStorageWarehouseWorkCardStockInId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiary" >
+    update war_storage_warehouse_work_card_stock_in_subsidiary
+    set sequence = #{sequence,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      pro_storage_warehouse_work_card_subsidiary_id = #{proStorageWarehouseWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      war_storage_warehouse_work_card_stock_in_id = #{warStorageWarehouseWorkCardStockInId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+    <!-- 自定义 -->
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+  	 insert into war_storage_warehouse_work_card_stock_in_subsidiary (id, sequence, quantity, remark, pro_storage_warehouse_work_card_subsidiary_id, 
+  	 war_storage_warehouse_work_card_stock_in_id) values 
+	   
+  	<foreach collection="list" item="item" index="index" separator=",">
+  		(
+			#{item.id},
+			#{item.sequence},
+			#{item.quantity},
+			#{item.remark},
+			#{item.proStorageWarehouseWorkCardSubsidiaryId},
+			#{item.warStorageWarehouseWorkCardStockInId}
+		)
+  	</foreach>
+  </insert>
+  
+  <!-- 页面的数据展开 -->
+  <select id="findAllWarStorageWarehouseWorkCardStockInSubsidiaryListByWarStorageWarehouseWorkCardStockInId" parameterType="string" resultType="cn.chiucheung.pojo.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInSubsidiaryCustom">
+  	SELECT
+		ws.id id,
+		ws.sequence sequence,
+		pc.work_card_no workCardNo,
+		m.material_code materialCode,
+		m.material_name materialName,
+		m.useUnit useUnit,
+		ws.pro_storage_warehouse_work_card_subsidiary_id proStorageWarehouseWorkCardSubsidiaryId,
+		SUBSTRING(CONCAT(IFNULL(CONCAT(",",m.specifications),''),IFNULL(CONCAT(",",m.height),''),IFNULL(CONCAT(",",m.width),''),IFNULL(CONCAT(",",m.depth),''),IFNULL(CONCAT(",",m.color),'')),2) materialModel,
+		ws.quantity quantity,
+		m.warehouse,
+		m.warehousePositions,
+		ws.remark remark
+	FROM
+		war_storage_warehouse_work_card_stock_in_subsidiary ws,
+		pro_storage_warehouse_work_card_subsidiary  ps,
+		pro_storage_warehouse_work_card pc,
+		(
+		SELECT 
+			m.id,
+			m.material_code,
+			m.material_name,
+			specifications.dictionarie_name specifications,
+		    length.dictionarie_name length,
+		    width.dictionarie_name width,
+		    height.dictionarie_name height,
+		    depth.dictionarie_name depth,
+		    color.dictionarie_name color,
+		    useUnit.dictionarie_name useUnit,
+		    warehouse.dictionarie_name warehouse,
+		    warehousePositions.dictionarie_name warehousePositions
+		FROM 
+			war_material m 
+		LEFT JOIN war_base_data specifications ON m.specifications = specifications.dictionarie_code AND specifications.keyword = '规格型号'
+		LEFT JOIN war_base_data length ON m.length = length.dictionarie_code AND length.keyword = '长度'
+		LEFT JOIN war_base_data width ON m.width = width.dictionarie_code AND width.keyword = '宽度'
+		LEFT JOIN war_base_data height ON m.height = height.dictionarie_code AND height.keyword = '高度'
+		LEFT JOIN war_base_data depth ON m.depth = depth.dictionarie_code AND depth.keyword = '深度'
+		LEFT JOIN war_base_data color ON m.color = color.dictionarie_code AND color.keyword = '颜色'
+		LEFT JOIN war_base_data useUnit ON m.use_unit = useUnit.dictionarie_code AND useUnit.keyword = '单位'
+		LEFT JOIN war_base_data warehouse ON warehouse.dictionarie_code = m.warehouse AND warehouse.keyword = '仓库'
+  		LEFT JOIN war_base_data warehousePositions ON warehousePositions.dictionarie_code = m.warehouse_positions AND warehousePositions.keyword = '仓位'
+		) m
+	WHERE
+		ws.war_storage_warehouse_work_card_stock_in_id = #{warStorageWarehouseWorkCardStockInId}
+	AND
+		ws.pro_storage_warehouse_work_card_subsidiary_id = ps.id
+	AND
+		ps.pro_storage_warehouse_work_card_id = pc.id
+	AND
+		ps.war_material_id = m.id
+	ORDER BY ws.sequence
+  </select>
+  
+  
+  <!-- 根据存仓工咭的子项id计算存仓工咭和入库单的差异（用于新增、修改入库单时，入库的数量不能大于存仓工咭的子项） -->
+  <select id="calculateWarStorageWarehouseWorkCardStockInSubsidiaryDifferencesByProStorageWarehouseWorkCardSubsidiaryId" parameterType="string" resultType="java.lang.Integer">
+  	SELECT
+		ps.quantity-IFNULL(SUM(ws.quantity),0)
+	FROM
+		pro_storage_warehouse_work_card_subsidiary ps
+		LEFT JOIN
+		(
+			SELECT
+				*
+			FROM
+				war_storage_warehouse_work_card_stock_in_subsidiary
+			<if test="warStorageWarehouseWorkCardStockInId != null and warStorageWarehouseWorkCardStockInId != ''">
+				<where>
+					war_storage_warehouse_work_card_stock_in_id != #{warStorageWarehouseWorkCardStockInId}
+				</where>
+			</if>
+		) ws ON pro_storage_warehouse_work_card_subsidiary_id = ps.id
+	WHERE
+		ps.id = #{proStorageWarehouseWorkCardSubsidiaryId}
+	GROUP BY ws.pro_storage_warehouse_work_card_subsidiary_id
+  </select>
+</mapper>

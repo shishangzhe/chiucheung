@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+    <!-- 配置Service扫描 -->
+    <context:component-scan base-package="cn.chiucheung.service.*.impl" />
+</beans>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+     
+     <bean id="ProcessService" class="cn.chiucheung.service.production.impl.ProcessServiceImpl"></bean>
+     
+     <bean id="userService" class="cn.chiucheung.service.system.impl.UserServiceImpl"></bean>
+     
+     <bean id="dictionarieService" class="cn.chiucheung.service.system.impl.DictionarieServiceImpl"></bean>
+     
+     <bean id="roleService" class="cn.chiucheung.service.system.impl.RoleServiceImpl"></bean>
+     
+     <bean id="reviewerService" class="cn.chiucheung.service.sales.impl.ReviewerServiceImpl"></bean>
+     
+     <bean id="workHoursService" class="cn.chiucheung.service.engineering.impl.WorkHoursServiceImpl"></bean>
+     
+     <bean id="materialService" class="cn.chiucheung.service.purchase.impl.MaterialServiceImpl"></bean>
+     
+     <bean id="materialBaseDataService" class="cn.chiucheung.service.purchase.impl.MaterialBaseDataServiceImpl"></bean>
+     
+     <bean id="costBudgetService" class="cn.chiucheung.service.market.impl.CostBudgetServiceImpl"></bean>
+     
+     <bean id="messageService" class="cn.chiucheung.service.system.impl.MessageServiceImpl"></bean>
+     
+     <bean id="workCardService" class="cn.chiucheung.service.sales.impl.WorkCardServiceImpl"></bean>
+     
+     <bean id="travelUserService" class="cn.chiucheung.service.logistics.impl.TravelUserServiceImpl"></bean>
+     
+     <bean id="travelSpendingRecordsService" class="cn.chiucheung.service.logistics.impl.TravelSpendingRecordsServiceImpl"></bean>
+     
+     <bean id="travelClockInService" class="cn.chiucheung.service.logistics.impl.TravelClockInServiceImpl"></bean>
+     
+     <bean id="baseDataService" class="cn.chiucheung.service.warehouse.impl.BaseDataServiceImpl"></bean>
+     
+     <bean id="standardAccessoriesService" class="cn.chiucheung.service.warehouse.impl.StandardAccessoriesServiceImpl"></bean>
+     
+     <bean id="warMaterialService" class="cn.chiucheung.service.warehouse.impl.MaterialServiceImpl"></bean>
+     
+     <bean id="standardAccessoriesInventoryService" class="cn.chiucheung.service.warehouse.impl.StandardAccessoriesInventoryServiceImpl"></bean>
+     
+     <bean id="storageWarehouseWorkCardService" class="cn.chiucheung.service.production.impl.StorageWarehouseWorkCardServiceImpl"></bean>
+     
+     <bean id="standardAccessoriesStockInService" class="cn.chiucheung.service.warehouse.impl.StandardAccessoriesStockInServiceImpl"></bean>
+     
+     <bean id="planeTrainTicketService" class="cn.chiucheung.service.finance.impl.PlaneTrainTicketServiceImpl"></bean>
+     
+     <bean id="checkSheetService" class="cn.chiucheung.service.finance.impl.CheckSheetServiceImpl"></bean>
+     
+     <bean id="StandardAccessoriesStockOutService" class="cn.chiucheung.service.warehouse.impl.StandardAccessoriesStockOutServiceImpl"></bean>
+     
+     <bean id="workCardInfoService" class="cn.chiucheung.service.finance.impl.WorkCardInfoServiceImpl"></bean>
+     
+     <bean id="conductPropagandaFileService" class="cn.chiucheung.service.market.impl.ConductPropagandaFileServiceImpl"></bean>
+     
+     <bean id="deviceNameSerialNumberService" class="cn.chiucheung.service.market.impl.DeviceNameSerialNumberServiceImpl"></bean>
+     
+     <bean id="mapLliService" class="cn.chiucheung.service.system.impl.MapLliServiceImpl"></bean>
+     
+     <bean id="projectInfoService" class="cn.chiucheung.service.sales.impl.ProjectInfoServiceImpl"></bean>
+     
+     <bean id="exhibitionContactService" class="cn.chiucheung.service.market.impl.ExhibitionContactServiceImpl"></bean>
+     
+     <bean id="mapService" class="cn.chiucheung.service.market.impl.MapServiceImpl"></bean>
+     
+     <bean id="technologyWorkHoursBasicDataService" class="cn.chiucheung.service.production.impl.TechnologyWorkHoursBasicDataServiceImpl"></bean>
+     
+     <bean id="productTechnologyWorkHoursService" class="cn.chiucheung.service.production.impl.ProductTechnologyWorkHoursServiceImpl"></bean>
+     
+     <bean id="bomService" class="cn.chiucheung.service.engineering.impl.BomServiceImpl"></bean>
+     
+     <bean id="standardBomService" class="cn.chiucheung.service.engineering.impl.StandardBomServiceImpl"></bean>
+     
+     <bean id="dataDistribution" class="cn.chiucheung.service.engineering.impl.DataDistributionServiceImpl"></bean>
+</beans> -->

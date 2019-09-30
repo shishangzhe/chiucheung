@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.market.costbudget.MarCostBudgetMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.market.costbudget.MarCostBudget" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="theme" property="theme" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="peripheral_size" property="peripheralSize" jdbcType="VARCHAR" />
+    <result column="calculate" property="calculate" jdbcType="BIT" />
+    <result column="begin_time" property="beginTime" jdbcType="DATE" />
+    <result column="submit_time" property="submitTime" jdbcType="DATE" />
+    <result column="raw_material" property="rawMaterial" jdbcType="VARCHAR" />
+    <result column="difficulty" property="difficulty" jdbcType="VARCHAR" />
+    <result column="eng_cost" property="engCost" jdbcType="VARCHAR" />
+    <result column="additional" property="additional" jdbcType="VARCHAR" />
+    <result column="packaging" property="packaging" jdbcType="VARCHAR" />
+    <result column="total_number" property="totalNumber" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="unit_price" property="unitPrice" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="VARCHAR" />
+    <result column="preparer" property="preparer" jdbcType="VARCHAR" />
+    <result column="reviewer" property="reviewer" jdbcType="VARCHAR" />
+    <result column="sal_reviewer_id" property="salReviewerId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.chiucheung.po.market.costbudget.MarCostBudget" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, theme, customer_name, product_name, peripheral_size, calculate, begin_time, submit_time, 
+    raw_material, difficulty, eng_cost, additional, packaging, total_number, description, 
+    unit_price, total_price, preparer, reviewer, sal_reviewer_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudgetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mar_cost_budget
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudgetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mar_cost_budget
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mar_cost_budget
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mar_cost_budget
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudgetExample" >
+    delete from mar_cost_budget
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudget" >
+    insert into mar_cost_budget (id, theme, customer_name, 
+      product_name, peripheral_size, calculate, 
+      begin_time, submit_time, raw_material, 
+      difficulty, eng_cost, additional, 
+      packaging, total_number, description, 
+      unit_price, total_price, preparer, 
+      reviewer, sal_reviewer_id, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{peripheralSize,jdbcType=VARCHAR}, #{calculate,jdbcType=BIT}, 
+      #{beginTime,jdbcType=DATE}, #{submitTime,jdbcType=DATE}, #{rawMaterial,jdbcType=VARCHAR}, 
+      #{difficulty,jdbcType=VARCHAR}, #{engCost,jdbcType=VARCHAR}, #{additional,jdbcType=VARCHAR}, 
+      #{packaging,jdbcType=VARCHAR}, #{totalNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{unitPrice,jdbcType=VARCHAR}, #{totalPrice,jdbcType=VARCHAR}, #{preparer,jdbcType=VARCHAR}, 
+      #{reviewer,jdbcType=VARCHAR}, #{salReviewerId,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudget" >
+    insert into mar_cost_budget
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="theme != null" >
+        theme,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="peripheralSize != null" >
+        peripheral_size,
+      </if>
+      <if test="calculate != null" >
+        calculate,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+      <if test="rawMaterial != null" >
+        raw_material,
+      </if>
+      <if test="difficulty != null" >
+        difficulty,
+      </if>
+      <if test="engCost != null" >
+        eng_cost,
+      </if>
+      <if test="additional != null" >
+        additional,
+      </if>
+      <if test="packaging != null" >
+        packaging,
+      </if>
+      <if test="totalNumber != null" >
+        total_number,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="preparer != null" >
+        preparer,
+      </if>
+      <if test="reviewer != null" >
+        reviewer,
+      </if>
+      <if test="salReviewerId != null" >
+        sal_reviewer_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="theme != null" >
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="peripheralSize != null" >
+        #{peripheralSize,jdbcType=VARCHAR},
+      </if>
+      <if test="calculate != null" >
+        #{calculate,jdbcType=BIT},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=DATE},
+      </if>
+      <if test="rawMaterial != null" >
+        #{rawMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="engCost != null" >
+        #{engCost,jdbcType=VARCHAR},
+      </if>
+      <if test="additional != null" >
+        #{additional,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumber != null" >
+        #{totalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="preparer != null" >
+        #{preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null" >
+        #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewerId != null" >
+        #{salReviewerId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudgetExample" resultType="java.lang.Integer" >
+    select count(*) from mar_cost_budget
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mar_cost_budget
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.theme != null" >
+        theme = #{record.theme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peripheralSize != null" >
+        peripheral_size = #{record.peripheralSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calculate != null" >
+        calculate = #{record.calculate,jdbcType=BIT},
+      </if>
+      <if test="record.beginTime != null" >
+        begin_time = #{record.beginTime,jdbcType=DATE},
+      </if>
+      <if test="record.submitTime != null" >
+        submit_time = #{record.submitTime,jdbcType=DATE},
+      </if>
+      <if test="record.rawMaterial != null" >
+        raw_material = #{record.rawMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.difficulty != null" >
+        difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engCost != null" >
+        eng_cost = #{record.engCost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.additional != null" >
+        additional = #{record.additional,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packaging != null" >
+        packaging = #{record.packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalNumber != null" >
+        total_number = #{record.totalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null" >
+        unit_price = #{record.unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPrice != null" >
+        total_price = #{record.totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preparer != null" >
+        preparer = #{record.preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewer != null" >
+        reviewer = #{record.reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salReviewerId != null" >
+        sal_reviewer_id = #{record.salReviewerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update mar_cost_budget
+    set id = #{record.id,jdbcType=VARCHAR},
+      theme = #{record.theme,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      peripheral_size = #{record.peripheralSize,jdbcType=VARCHAR},
+      calculate = #{record.calculate,jdbcType=BIT},
+      begin_time = #{record.beginTime,jdbcType=DATE},
+      submit_time = #{record.submitTime,jdbcType=DATE},
+      raw_material = #{record.rawMaterial,jdbcType=VARCHAR},
+      difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      eng_cost = #{record.engCost,jdbcType=VARCHAR},
+      additional = #{record.additional,jdbcType=VARCHAR},
+      packaging = #{record.packaging,jdbcType=VARCHAR},
+      total_number = #{record.totalNumber,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=VARCHAR},
+      preparer = #{record.preparer,jdbcType=VARCHAR},
+      reviewer = #{record.reviewer,jdbcType=VARCHAR},
+      sal_reviewer_id = #{record.salReviewerId,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mar_cost_budget
+    set id = #{record.id,jdbcType=VARCHAR},
+      theme = #{record.theme,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      peripheral_size = #{record.peripheralSize,jdbcType=VARCHAR},
+      calculate = #{record.calculate,jdbcType=BIT},
+      begin_time = #{record.beginTime,jdbcType=DATE},
+      submit_time = #{record.submitTime,jdbcType=DATE},
+      raw_material = #{record.rawMaterial,jdbcType=VARCHAR},
+      difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      eng_cost = #{record.engCost,jdbcType=VARCHAR},
+      additional = #{record.additional,jdbcType=VARCHAR},
+      packaging = #{record.packaging,jdbcType=VARCHAR},
+      total_number = #{record.totalNumber,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=VARCHAR},
+      preparer = #{record.preparer,jdbcType=VARCHAR},
+      reviewer = #{record.reviewer,jdbcType=VARCHAR},
+      sal_reviewer_id = #{record.salReviewerId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudget" >
+    update mar_cost_budget
+    <set >
+      <if test="theme != null" >
+        theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="peripheralSize != null" >
+        peripheral_size = #{peripheralSize,jdbcType=VARCHAR},
+      </if>
+      <if test="calculate != null" >
+        calculate = #{calculate,jdbcType=BIT},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=DATE},
+      </if>
+      <if test="rawMaterial != null" >
+        raw_material = #{rawMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        difficulty = #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="engCost != null" >
+        eng_cost = #{engCost,jdbcType=VARCHAR},
+      </if>
+      <if test="additional != null" >
+        additional = #{additional,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        packaging = #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNumber != null" >
+        total_number = #{totalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="preparer != null" >
+        preparer = #{preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null" >
+        reviewer = #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewerId != null" >
+        sal_reviewer_id = #{salReviewerId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudget" >
+    update mar_cost_budget
+    set theme = #{theme,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      peripheral_size = #{peripheralSize,jdbcType=VARCHAR},
+      calculate = #{calculate,jdbcType=BIT},
+      begin_time = #{beginTime,jdbcType=DATE},
+      submit_time = #{submitTime,jdbcType=DATE},
+      raw_material = #{rawMaterial,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      eng_cost = #{engCost,jdbcType=VARCHAR},
+      additional = #{additional,jdbcType=VARCHAR},
+      packaging = #{packaging,jdbcType=VARCHAR},
+      total_number = #{totalNumber,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=VARCHAR},
+      preparer = #{preparer,jdbcType=VARCHAR},
+      reviewer = #{reviewer,jdbcType=VARCHAR},
+      sal_reviewer_id = #{salReviewerId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.market.costbudget.MarCostBudget" >
+    update mar_cost_budget
+    set theme = #{theme,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      peripheral_size = #{peripheralSize,jdbcType=VARCHAR},
+      calculate = #{calculate,jdbcType=BIT},
+      begin_time = #{beginTime,jdbcType=DATE},
+      submit_time = #{submitTime,jdbcType=DATE},
+      raw_material = #{rawMaterial,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      eng_cost = #{engCost,jdbcType=VARCHAR},
+      additional = #{additional,jdbcType=VARCHAR},
+      packaging = #{packaging,jdbcType=VARCHAR},
+      total_number = #{totalNumber,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=VARCHAR},
+      preparer = #{preparer,jdbcType=VARCHAR},
+      reviewer = #{reviewer,jdbcType=VARCHAR},
+      sal_reviewer_id = #{salReviewerId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 根据查询条件查找成本核算表 -->
+  <select id="findAllCostBudgetList" parameterType="cn.chiucheung.pojo.market.costbudget.MarCostBudgetVo" resultType="cn.chiucheung.po.market.costbudget.MarCostBudget">
+  	SELECT
+  		id, 
+  		theme, 
+  		customer_name customerName, 
+  		product_name productName, 
+  		peripheral_size peripheralSize, 
+  		calculate, 
+  		begin_time beginTime, 
+  		submit_time submitTime, 
+    	total_number totalNumber, 
+    	description, 
+    	unit_price unitPrice, 
+    	total_price totalPrice, 
+    	preparer, 
+    	sal_reviewer_id salReviewerId
+  	FROM mar_cost_budget
+	<where> 
+		<if test="theme != null and theme != ''" >
+	      	AND theme LIKE '%${theme}%'
+	    </if>
+	    <if test="customerName != null and customerName != ''" >
+	      	AND customer_name LIKE '%${customerName}%'
+	    </if>
+	    <if test="productName != null and productName != ''">
+			 AND product_name LIKE '%${productName}%'
+		</if>
+		<if test="description != null and description != ''">
+			 AND h.description LIKE '%${description}%'
+		</if>
+	</where>
+		<if test="sort != null and sort != ''">
+	  		<if test="sort == 'theme'">
+	  			ORDER BY RIGHT(theme,2) ${order},LEFT(theme,6) ${order}
+	  		</if>
+	  		<if test="sort != 'theme'">
+	  			ORDER BY #{sort} ${order}
+	  		</if>
+		</if>
+		<if test="sort == null or sort == ''">
+			ORDER by begin_time desc
+		</if>
+		<if test="page != 0 and rows != 0">
+			LIMIT #{startPage},#{rows}
+		</if>
+		
+   </select>
+   
+   <!-- 根据查询条件查找成本核算表的数量 -->
+   <select id="findAllCostBudgetTotal" parameterType="cn.chiucheung.pojo.market.costbudget.MarCostBudgetVo" resultType="string">
+  	SELECT
+  		COUNT(*)
+  	FROM mar_cost_budget
+	<where> 
+		<if test="theme != null and theme != ''" >
+	      	AND theme LIKE '%${theme}%'
+	    </if>
+	    <if test="customerName != null and customerName != ''" >
+	      	AND customer_name LIKE '%${customerName}%'
+	    </if>
+	    <if test="productName != null and productName != ''">
+			 AND product_name LIKE '%${productName}%'
+		</if>
+		<if test="description != null and description != ''">
+			 AND h.description LIKE '%${description}%'
+		</if>
+	</where>
+   </select>
+   
+   <!-- 根据查询条件查找需要导出的报表数据 -->
+  <select id="findCxportingReportDatas" parameterType="cn.chiucheung.pojo.market.costbudget.MarCostBudgetVo" resultType="cn.chiucheung.pojo.market.costbudget.MarCostBudgetCustom">
+  	SELECT 
+		s.quotation_no quotationNo,
+		a.END_TIME_ endTime,
+		s.project_leader projectLeader,
+		m.customer_name customerName,
+		m.product_name productName,
+		m.peripheral_size peripheralSize,
+		m.total_number totalNumber,
+		m.unit_price unitPrice,
+		m.total_price totalPrice,
+		m.submit_time submitTime,
+		m.preparer preparer,
+		m.reviewer reviewer
+	FROM 
+		mar_cost_budget m, 
+		sal_reviewer s, 
+		act_hi_procinst a
+	WHERE 
+		m.submit_time IS NOT NULL
+	AND
+		m.sal_reviewer_id = s.id
+	AND
+		s.processInstance_id = a.PROC_INST_ID_
+	<if test="beginTime != null" >
+      	AND m.submit_time &gt;= #{beginTime}
+    </if>
+    <if test="endTime != null" >
+      	AND m.submit_time &lt;= #{endTime}
+    </if>
+   	ORDER by
+   		a.END_TIME_
+   </select>
+   
+   <!-- 取消关联，也就是将sal_reviewer_id设置为null -->
+   <update id="updateCostBudgetByIdForCancelAssociated" parameterType="string" >
+    UPDATE mar_cost_budget SET sal_reviewer_id = NULL WHERE id = #{id}
+  </update>
+</mapper>

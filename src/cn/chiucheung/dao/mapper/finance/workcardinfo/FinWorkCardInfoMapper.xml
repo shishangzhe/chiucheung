@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.finance.workcardinfo.FinWorkCardInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="work_card_no" property="workCardNo" jdbcType="VARCHAR" />
+    <result column="project_leader" property="projectLeader" jdbcType="VARCHAR" />
+    <result column="contract_amount" property="contractAmount" jdbcType="DECIMAL" />
+    <result column="expected_installation_cost" property="expectedInstallationCost" jdbcType="DECIMAL" />
+    <result column="expected_installation_time" property="expectedInstallationTime" jdbcType="REAL" />
+    <result column="actual_auxiliary_time" property="actualAuxiliaryTime" jdbcType="REAL" />
+    <result column="completion_date" property="completionDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, work_card_no, project_leader, contract_amount, expected_installation_cost, expected_installation_time, 
+    actual_auxiliary_time, completion_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_work_card_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fin_work_card_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fin_work_card_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfoExample" >
+    delete from fin_work_card_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfo" >
+    insert into fin_work_card_info (id, work_card_no, project_leader, 
+      contract_amount, expected_installation_cost, 
+      expected_installation_time, actual_auxiliary_time, 
+      completion_date)
+    values (#{id,jdbcType=VARCHAR}, #{workCardNo,jdbcType=VARCHAR}, #{projectLeader,jdbcType=VARCHAR}, 
+      #{contractAmount,jdbcType=DECIMAL}, #{expectedInstallationCost,jdbcType=DECIMAL}, 
+      #{expectedInstallationTime,jdbcType=REAL}, #{actualAuxiliaryTime,jdbcType=REAL}, 
+      #{completionDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfo" >
+    insert into fin_work_card_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workCardNo != null" >
+        work_card_no,
+      </if>
+      <if test="projectLeader != null" >
+        project_leader,
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount,
+      </if>
+      <if test="expectedInstallationCost != null" >
+        expected_installation_cost,
+      </if>
+      <if test="expectedInstallationTime != null" >
+        expected_installation_time,
+      </if>
+      <if test="actualAuxiliaryTime != null" >
+        actual_auxiliary_time,
+      </if>
+      <if test="completionDate != null" >
+        completion_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workCardNo != null" >
+        #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLeader != null" >
+        #{projectLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="contractAmount != null" >
+        #{contractAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expectedInstallationCost != null" >
+        #{expectedInstallationCost,jdbcType=DECIMAL},
+      </if>
+      <if test="expectedInstallationTime != null" >
+        #{expectedInstallationTime,jdbcType=REAL},
+      </if>
+      <if test="actualAuxiliaryTime != null" >
+        #{actualAuxiliaryTime,jdbcType=REAL},
+      </if>
+      <if test="completionDate != null" >
+        #{completionDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfoExample" resultType="java.lang.Integer" >
+    select count(*) from fin_work_card_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fin_work_card_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCardNo != null" >
+        work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectLeader != null" >
+        project_leader = #{record.projectLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractAmount != null" >
+        contract_amount = #{record.contractAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expectedInstallationCost != null" >
+        expected_installation_cost = #{record.expectedInstallationCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expectedInstallationTime != null" >
+        expected_installation_time = #{record.expectedInstallationTime,jdbcType=REAL},
+      </if>
+      <if test="record.actualAuxiliaryTime != null" >
+        actual_auxiliary_time = #{record.actualAuxiliaryTime,jdbcType=REAL},
+      </if>
+      <if test="record.completionDate != null" >
+        completion_date = #{record.completionDate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fin_work_card_info
+    set id = #{record.id,jdbcType=VARCHAR},
+      work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      project_leader = #{record.projectLeader,jdbcType=VARCHAR},
+      contract_amount = #{record.contractAmount,jdbcType=DECIMAL},
+      expected_installation_cost = #{record.expectedInstallationCost,jdbcType=DECIMAL},
+      expected_installation_time = #{record.expectedInstallationTime,jdbcType=REAL},
+      actual_auxiliary_time = #{record.actualAuxiliaryTime,jdbcType=REAL},
+      completion_date = #{record.completionDate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfo" >
+    update fin_work_card_info
+    <set >
+      <if test="workCardNo != null" >
+        work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLeader != null" >
+        project_leader = #{projectLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount = #{contractAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expectedInstallationCost != null" >
+        expected_installation_cost = #{expectedInstallationCost,jdbcType=DECIMAL},
+      </if>
+      <if test="expectedInstallationTime != null" >
+        expected_installation_time = #{expectedInstallationTime,jdbcType=REAL},
+      </if>
+      <if test="actualAuxiliaryTime != null" >
+        actual_auxiliary_time = #{actualAuxiliaryTime,jdbcType=REAL},
+      </if>
+      <if test="completionDate != null" >
+        completion_date = #{completionDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfo" >
+    update fin_work_card_info
+    set work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      project_leader = #{projectLeader,jdbcType=VARCHAR},
+      contract_amount = #{contractAmount,jdbcType=DECIMAL},
+      expected_installation_cost = #{expectedInstallationCost,jdbcType=DECIMAL},
+      expected_installation_time = #{expectedInstallationTime,jdbcType=REAL},
+      actual_auxiliary_time = #{actualAuxiliaryTime,jdbcType=REAL},
+      completion_date = #{completionDate,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+      
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 查询所有的工咭信息表 -->
+  <select id="findAllWorkCardInfoList" parameterType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoQueryVo" resultType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoCustom">
+  	SELECT
+		i.id id,
+		i.work_card_no workCardNo,
+		project_leader projectLeader,
+		<if test="isShowContractAmount">
+			i.contract_amount contractAmount,
+		</if>
+		<if test="isShowExpectedInstallationCost">
+			i.expected_installation_cost expectedInstallationCost,
+		</if>
+		i.expected_installation_time expectedInstallationTime,
+		i.actual_auxiliary_time actualAuxiliaryTime,
+		i.completion_date completionDate,
+		(SELECT COUNT(*) FROM fin_check_sheet s WHERE  s.install_work_card_no = i.work_card_no AND !s.is_lock) unSubmitCheckSheetNumber,
+		(SELECT COUNT(*) FROM log_travel_spending_records WHERE work_card_no = i.work_card_no AND fin_check_sheet_id IS NULL) unGeneratCheckSheetNumber
+	FROM
+		fin_work_card_info i
+	<where>
+		<if test="workCardNo != null and workCardNo != ''">
+			AND i.work_card_no LIKE '%${workCardNo}%'
+		</if>
+		<if test="projectLeader != null and projectLeader != ''">
+			AND i.project_leader LIKE '%${projectLeader}%'
+		</if>
+		<if test="startTime != null and startTime != ''">
+	  		AND i.completion_date &gt;= #{startTime}
+	  	</if>
+	  	<if test="endTime != null and endTime != ''">
+	  		AND i.completion_date &lt;= #{endTime}
+	  	</if>
+	</where>
+	<if test="sort != null and sort != ''">
+  		<if test="sort == 'workCardNo'">
+  			ORDER BY RIGHT(workCardNo,2) ${order},LEFT(workCardNo,6) ${order}
+  		</if>
+  		<if test="sort != 'workCardNo'">
+  			ORDER BY #{sort} ${order}
+  		</if>
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY RIGHT(workCardNo,2),LEFT(workCardNo,6)
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+  
+  <!-- 查询所有的工咭信息表的记录总数 -->
+  <select id="findAllWorkCardInfoTotal" parameterType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoQueryVo" resultType="string">
+  	SELECT
+		COUNT(*)
+	FROM
+		fin_work_card_info
+	<where>
+		<if test="workCardNo != null and workCardNo != ''">
+			AND work_card_no LIKE '%${workCardNo}%'
+		</if>
+		<if test="projectLeader != null and projectLeader != ''">
+			AND project_leader LIKE '%${projectLeader}%'
+		</if>
+		<if test="startTime != null and startTime != ''">
+	  		AND completion_date &gt;= #{startTime}
+	  	</if>
+	  	<if test="endTime != null and endTime != ''">
+	  		AND completion_date &lt;= #{endTime}
+	  	</if>
+	</where>
+  </select>
+  
+  <!-- 根据id查找工咭信息表 -->
+  <select id="findWorkCardInfoById" parameterType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoQueryVo" resultType="cn.chiucheung.po.finance.workcardinfo.FinWorkCardInfo">
+  	SELECT
+		id id,
+		work_card_no workCardNo,
+		project_leader projectLeader,
+		<if test="isShowContractAmount">
+			contract_amount contractAmount,
+		</if>
+		<if test="isShowExpectedInstallationCost">
+			expected_installation_cost expectedInstallationCost,
+		</if>
+		expected_installation_time expectedInstallationTime,
+		actual_auxiliary_time actualAuxiliaryTime,
+		completion_date completionDate
+	FROM
+		fin_work_card_info
+	WHERE
+		id = #{id}
+  </select>
+  
+  <!-- 更新工咭信息表，根据权限来更新 -->
+  <update id="updateWorkCardInfo" parameterType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoForUpdateCustom" >
+    update fin_work_card_info
+    <set >
+      <if test="workCardNo != null and isEditWorkCardNo" >
+        work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLeader != null and isEditProjectLeader" >
+        project_leader = #{projectLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="contractAmount != null and isShowContractAmount" >
+        contract_amount = #{contractAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expectedInstallationCost != null and isShowExpectedInstallationCost" >
+        expected_installation_cost = #{expectedInstallationCost,jdbcType=DECIMAL},
+      </if>
+      <if test="isEditExpectedInstallationTime" >
+        expected_installation_time = #{expectedInstallationTime,jdbcType=REAL},
+      </if>
+      <if test="isEditActualAuxiliaryTime" >
+        actual_auxiliary_time = #{actualAuxiliaryTime,jdbcType=REAL},
+      </if>
+      <if test="isEditCompletionDate" >
+        completion_date = #{completionDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 查询所有完成工咭的各方面成本 -->
+  <select id="FindAllCompletionWorkCardCostForGenerateExcel" parameterType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoQueryVo" resultType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoForGenerateExcel">
+  	SELECT
+		i.work_card_no workCardNo,
+		
+		i.project_leader projectLeader,
+		
+		IFNULL(i.contract_amount,0) contractAmount,
+		
+		d.dictionarie_name office,
+		
+		GROUP_CONCAT(DISTINCT(CONCAT(provinces,'-',city))) installationPlace,
+		
+		COUNT(DISTINCT r.log_travel_user_id) installationNumber,
+		
+		GROUP_CONCAT(DISTINCT(CONCAT("'",u.username,"'"))) installationPersonnel,
+		
+		IFNULL(i.expected_installation_time,0) expectedInstallationTime,
+		
+		IFNULL(i.expected_installation_cost,0) expectedInstallationCost,
+		
+		SUM((IFNULL(TIME_TO_SEC(TIMEDIFF(r.end_time1,r.start_time1))/3600,0) +
+		IFNULL(TIME_TO_SEC(TIMEDIFF(r.end_time2,r.start_time2))/3600,0) +
+		IFNULL(IF(r.end_time3 > r.start_time3,TIME_TO_SEC(TIMEDIFF(r.end_time3,r.start_time3)),TIME_TO_SEC(TIMEDIFF('24:00:00',r.start_time3))+TIME_TO_SEC(TIMEDIFF(r.end_time3,'00:00:00')))/3600,0))) actualInstallationTime,
+		
+		IFNULL(i.actual_auxiliary_time,0) actualAuxiliaryTime,
+		
+		(IFNULL(SUM(r.lunch),0) +
+		IFNULL(SUM(r.dinner),0) +
+		IFNULL(SUM(r.midnight_snack),0) +
+		IFNULL(SUM(r.live_price),0) +
+		IFNULL(SUM((SELECT SUM(price) FROM log_travel_other_spending WHERE log_travel_spending_records_id = r.id)),0) +
+		IFNULL(SUM((SELECT SUM(price) FROM log_travel_traffic_spending WHERE log_travel_spending_records_id = r.id)),0)) actualInstallationCost,
+		
+		IFNULL((SELECT SUM(price) FROM fin_plane_train_ticket t,log_travel_user u WHERE t.work_card_no = r.work_card_no AND t.travel_personnel = u.username AND u.groups_id = d.dictionarie_code),0) trafficCost
+	FROM
+		fin_work_card_info i,
+		log_travel_spending_records r,
+		fin_check_sheet s,
+		log_travel_user u,
+		sys_dictionarie d
+	WHERE
+		r.work_card_no = i.work_card_no
+	AND
+		r.fin_check_sheet_id = s.id
+	AND
+		s.applicant = u.username
+	AND
+		u.groups_id = d.dictionarie_code
+	AND
+		d.keyword = '销售部'
+	AND
+		s.is_lock
+	AND
+		i.completion_date IS NOT NULL
+	<if test="startTime != null and startTime != ''">
+   		AND i.completion_date &gt;= #{startTime}
+   	</if>
+   	<if test="endTime != null and endTime != ''">
+   		AND i.completion_date &lt;= #{endTime}
+   	</if>
+   	<if test="groupsId != null and groupsId != ''">
+   		AND u.groups_id = #{groupsId}
+   	</if>
+   	<if test="workCardNo != null and workCardNo != ''">
+   		AND i.work_card_no = #{workCardNo}
+   	</if>
+	GROUP BY i.work_card_no,d.dictionarie_name
+	ORDER BY RIGHT(i.work_card_no,2),LEFT(i.work_card_no,6)
+  </select>
+  
+  
+  <select id="calculationTrafficCostInInstallationPersonnel" parameterType="cn.chiucheung.pojo.finance.workcardinfo.FinWorkCardInfoForGenerateExcel" resultType="java.math.BigDecimal">
+  	SELECT SUM(price) FROM fin_plane_train_ticket WHERE work_card_no = #{workCardNo} AND travel_personnel IN (${installationPersonnel})
+  </select>
+  
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into fin_work_card_info (id, work_card_no, project_leader, contract_amount, expected_installation_cost,completion_date) values 
+    
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.workCardNo},
+			#{item.projectLeader},
+			#{item.contractAmount},
+			#{item.expectedInstallationCost},
+			#{item.completionDate}
+		)
+	</foreach>
+  </insert>
+</mapper>

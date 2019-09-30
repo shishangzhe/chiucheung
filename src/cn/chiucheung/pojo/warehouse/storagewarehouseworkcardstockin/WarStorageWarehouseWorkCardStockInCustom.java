@@ -1,0 +1,18 @@
+package cn.chiucheung.pojo.warehouse.storagewarehouseworkcardstockin;
+
+import java.util.List;
+
+import cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockIn;
+
+public class WarStorageWarehouseWorkCardStockInCustom extends WarStorageWarehouseWorkCardStockIn{
+	private List<WarStorageWarehouseWorkCardStockInSubsidiaryCustom> storageWarehouseWorkCardStockInSubsidiaryCustoms;
+
+	public List<WarStorageWarehouseWorkCardStockInSubsidiaryCustom> getStorageWarehouseWorkCardStockInSubsidiaryCustoms() {
+		return storageWarehouseWorkCardStockInSubsidiaryCustoms;
+	}
+
+	public void setStorageWarehouseWorkCardStockInSubsidiaryCustoms(
+			List<WarStorageWarehouseWorkCardStockInSubsidiaryCustom> storageWarehouseWorkCardStockInSubsidiaryCustoms) {
+		this.storageWarehouseWorkCardStockInSubsidiaryCustoms = storageWarehouseWorkCardStockInSubsidiaryCustoms;
+	}
+}

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHoursMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHours" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="total_time" property="totalTime" jdbcType="DECIMAL" />
+    <result column="total_artificial_time" property="totalArtificialTime" jdbcType="DECIMAL" />
+    <result column="calculation_method" property="calculationMethod" jdbcType="VARCHAR" />
+    <result column="pro_process_id" property="proProcessId" jdbcType="VARCHAR" />
+    <result column="pro_product_technology_work_hours_id" property="proProductTechnologyWorkHoursId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, number, total_time, total_artificial_time, calculation_method, pro_process_id, 
+    pro_product_technology_work_hours_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHoursExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_product_technology_process_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_product_technology_process_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pro_product_technology_process_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHoursExample" >
+    delete from pro_product_technology_process_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHours" >
+    insert into pro_product_technology_process_work_hours (id, number, total_time, 
+      total_artificial_time, calculation_method, 
+      pro_process_id, pro_product_technology_work_hours_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{totalTime,jdbcType=DECIMAL}, 
+      #{totalArtificialTime,jdbcType=DECIMAL}, #{calculationMethod,jdbcType=VARCHAR}, 
+      #{proProcessId,jdbcType=VARCHAR}, #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHours" >
+    insert into pro_product_technology_process_work_hours
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="totalTime != null" >
+        total_time,
+      </if>
+      <if test="totalArtificialTime != null" >
+        total_artificial_time,
+      </if>
+      <if test="calculationMethod != null" >
+        calculation_method,
+      </if>
+      <if test="proProcessId != null" >
+        pro_process_id,
+      </if>
+      <if test="proProductTechnologyWorkHoursId != null" >
+        pro_product_technology_work_hours_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalTime != null" >
+        #{totalTime,jdbcType=DECIMAL},
+      </if>
+      <if test="totalArtificialTime != null" >
+        #{totalArtificialTime,jdbcType=DECIMAL},
+      </if>
+      <if test="calculationMethod != null" >
+        #{calculationMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="proProcessId != null" >
+        #{proProcessId,jdbcType=VARCHAR},
+      </if>
+      <if test="proProductTechnologyWorkHoursId != null" >
+        #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHoursExample" resultType="java.lang.Integer" >
+    select count(*) from pro_product_technology_process_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_product_technology_process_work_hours
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalTime != null" >
+        total_time = #{record.totalTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalArtificialTime != null" >
+        total_artificial_time = #{record.totalArtificialTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.calculationMethod != null" >
+        calculation_method = #{record.calculationMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proProcessId != null" >
+        pro_process_id = #{record.proProcessId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proProductTechnologyWorkHoursId != null" >
+        pro_product_technology_work_hours_id = #{record.proProductTechnologyWorkHoursId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_product_technology_process_work_hours
+    set id = #{record.id,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      total_time = #{record.totalTime,jdbcType=DECIMAL},
+      total_artificial_time = #{record.totalArtificialTime,jdbcType=DECIMAL},
+      calculation_method = #{record.calculationMethod,jdbcType=VARCHAR},
+      pro_process_id = #{record.proProcessId,jdbcType=VARCHAR},
+      pro_product_technology_work_hours_id = #{record.proProductTechnologyWorkHoursId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHours" >
+    update pro_product_technology_process_work_hours
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalTime != null" >
+        total_time = #{totalTime,jdbcType=DECIMAL},
+      </if>
+      <if test="totalArtificialTime != null" >
+        total_artificial_time = #{totalArtificialTime,jdbcType=DECIMAL},
+      </if>
+      <if test="calculationMethod != null" >
+        calculation_method = #{calculationMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="proProcessId != null" >
+        pro_process_id = #{proProcessId,jdbcType=VARCHAR},
+      </if>
+      <if test="proProductTechnologyWorkHoursId != null" >
+        pro_product_technology_work_hours_id = #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHours" >
+    update pro_product_technology_process_work_hours
+    set number = #{number,jdbcType=INTEGER},
+      total_time = #{totalTime,jdbcType=DECIMAL},
+      total_artificial_time = #{totalArtificialTime,jdbcType=DECIMAL},
+      calculation_method = #{calculationMethod,jdbcType=VARCHAR},
+      pro_process_id = #{proProcessId,jdbcType=VARCHAR},
+      pro_product_technology_work_hours_id = #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+      
+  
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into pro_product_technology_process_work_hours (id, number, total_time, total_artificial_time, calculation_method, pro_process_id, pro_product_technology_work_hours_id) values 
+    
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.number},
+			#{item.totalTime},
+			#{item.totalArtificialTime},
+			#{item.calculationMethod},
+			#{item.proProcessId},
+			#{item.proProductTechnologyWorkHoursId}
+		)
+	</foreach>
+  </insert>
+  
+  <!-- 根据产品工艺工时id查询工序，用于页面修改 -->
+  <select id="findAllProProductTechnologyProcessWorkHoursListByProProductTechnologyWorkHoursId" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyProcessWorkHoursCustom">
+  	SELECT
+		p.id,
+		p.process_number processNumber,
+		p.parent_process_number parentProcessNumber,
+		p.process_name processName,
+		p.process_category processCategory,
+		p.machine_group_number machineGroupNumber,
+		p.per_machine_group_people_number perMachineGroupPeopleNumber,
+		p.calculation_formula calculationFormula,
+		t.total_time totalTime,
+		t.total_artificial_time totalArtificialTime,
+		t.calculation_method calculationMethod
+	FROM
+		pro_product_technology_process_work_hours t,
+		pro_process p
+	WHERE
+		t.pro_product_technology_work_hours_id = #{id}
+	AND
+		t.pro_process_id = p.id
+	ORDER BY t.number
+  </select>
+</mapper>

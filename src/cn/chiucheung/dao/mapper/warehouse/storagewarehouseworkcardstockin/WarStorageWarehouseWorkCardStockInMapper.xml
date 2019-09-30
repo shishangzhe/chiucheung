@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockIn" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="stock_in_no" property="stockInNo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="preparer" property="preparer" jdbcType="VARCHAR" />
+    <result column="qc_acceptance" property="qcAcceptance" jdbcType="VARCHAR" />
+    <result column="stock_in_people" property="stockInPeople" jdbcType="VARCHAR" />
+    <result column="reviewer" property="reviewer" jdbcType="VARCHAR" />
+    <result column="audit_time" property="auditTime" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="process_instance_id" property="processInstanceId" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, stock_in_no, create_time, preparer, qc_acceptance, stock_in_people, reviewer, 
+    audit_time, remark, process_instance_id, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from war_storage_warehouse_work_card_stock_in
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from war_storage_warehouse_work_card_stock_in
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from war_storage_warehouse_work_card_stock_in
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInExample" >
+    delete from war_storage_warehouse_work_card_stock_in
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockIn" >
+    insert into war_storage_warehouse_work_card_stock_in (id, stock_in_no, create_time, 
+      preparer, qc_acceptance, stock_in_people, 
+      reviewer, audit_time, remark, 
+      process_instance_id, state)
+    values (#{id,jdbcType=VARCHAR}, #{stockInNo,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{preparer,jdbcType=VARCHAR}, #{qcAcceptance,jdbcType=VARCHAR}, #{stockInPeople,jdbcType=VARCHAR}, 
+      #{reviewer,jdbcType=VARCHAR}, #{auditTime,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, 
+      #{processInstanceId,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockIn" >
+    insert into war_storage_warehouse_work_card_stock_in
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stockInNo != null" >
+        stock_in_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="preparer != null" >
+        preparer,
+      </if>
+      <if test="qcAcceptance != null" >
+        qc_acceptance,
+      </if>
+      <if test="stockInPeople != null" >
+        stock_in_people,
+      </if>
+      <if test="reviewer != null" >
+        reviewer,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="processInstanceId != null" >
+        process_instance_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stockInNo != null" >
+        #{stockInNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="preparer != null" >
+        #{preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="qcAcceptance != null" >
+        #{qcAcceptance,jdbcType=VARCHAR},
+      </if>
+      <if test="stockInPeople != null" >
+        #{stockInPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null" >
+        #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="processInstanceId != null" >
+        #{processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInExample" resultType="java.lang.Integer" >
+    select count(*) from war_storage_warehouse_work_card_stock_in
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update war_storage_warehouse_work_card_stock_in
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockInNo != null" >
+        stock_in_no = #{record.stockInNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.preparer != null" >
+        preparer = #{record.preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qcAcceptance != null" >
+        qc_acceptance = #{record.qcAcceptance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockInPeople != null" >
+        stock_in_people = #{record.stockInPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewer != null" >
+        reviewer = #{record.reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null" >
+        audit_time = #{record.auditTime,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processInstanceId != null" >
+        process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update war_storage_warehouse_work_card_stock_in
+    set id = #{record.id,jdbcType=VARCHAR},
+      stock_in_no = #{record.stockInNo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=DATE},
+      preparer = #{record.preparer,jdbcType=VARCHAR},
+      qc_acceptance = #{record.qcAcceptance,jdbcType=VARCHAR},
+      stock_in_people = #{record.stockInPeople,jdbcType=VARCHAR},
+      reviewer = #{record.reviewer,jdbcType=VARCHAR},
+      audit_time = #{record.auditTime,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockIn" >
+    update war_storage_warehouse_work_card_stock_in
+    <set >
+      <if test="stockInNo != null" >
+        stock_in_no = #{stockInNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="preparer != null" >
+        preparer = #{preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="qcAcceptance != null" >
+        qc_acceptance = #{qcAcceptance,jdbcType=VARCHAR},
+      </if>
+      <if test="stockInPeople != null" >
+        stock_in_people = #{stockInPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null" >
+        reviewer = #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="processInstanceId != null" >
+        process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockIn" >
+    update war_storage_warehouse_work_card_stock_in
+    set stock_in_no = #{stockInNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      preparer = #{preparer,jdbcType=VARCHAR},
+      qc_acceptance = #{qcAcceptance,jdbcType=VARCHAR},
+      stock_in_people = #{stockInPeople,jdbcType=VARCHAR},
+      reviewer = #{reviewer,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+    <!-- 自定义 -->
+  <!-- 根据当天日期查询当前日期的最大入库单号 -->
+  <select id="findMaxStockInNo" parameterType="string" resultType="int">
+  	SELECT
+		IFNULL(MAX(SUBSTRING(stock_in_no,7,3)),0)
+	FROM
+		war_storage_warehouse_work_card_stock_in
+	WHERE
+		stock_in_no LIKE '%${stockInNo}%'
+  </select>
+  
+  <!-- 查询所有的入库单 -->
+  <select id="findAllWarStorageWarehouseWorkCardStockInList" parameterType="cn.chiucheung.pojo.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInQueryVo" resultType="cn.chiucheung.po.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockIn">
+  	<if test="materialCode != null and materialCode != ''">
+	  	SELECT
+			wi.id id,
+			wi.stock_in_no stockInNo,
+			wi.create_time createTime,
+			wi.preparer preparer,
+			wi.state state,
+			IF(p.END_TIME_,CONCAT('&lt;a href=&quot;queryTaskByProcessInstanceId.action?processInstanceId=',wi.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核完成&lt;/a&gt;'),CONCAT('&lt;a href=&quot;queryActivityMap.action?processInstanceId=',wi.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核中&lt;/a&gt;')) processInstanceId
+		FROM
+			war_storage_warehouse_work_card_stock_in wi
+		INNER JOIN war_storage_warehouse_work_card_stock_in_subsidiary ws ON wi.id = ws.war_storage_warehouse_work_card_stock_in_id
+		INNER JOIN pro_storage_warehouse_work_card_subsidiary ps ON ws.pro_storage_warehouse_work_card_subsidiary_id = ps.id
+		INNER JOIN war_material m ON ps.war_material_id = m.id
+		LEFT JOIN act_hi_procinst p ON wi.process_instance_id = p.PROC_INST_ID_
+		<where>
+			<if test="stockInNo != null and stockInNo !=''">
+				AND wi.stock_in_no LIKE '%${stockInNo}%'
+			</if>
+			<if test="preparer != null and preparer != ''">
+				AND wi.preparer LIKE '%${preparer}%'
+			</if>
+			<if test="startCreateTime != null and startCreateTime != ''">
+		   		AND wi.create_time &gt;= #{startCreateTime}
+		   	</if>
+		   	<if test="endCreateTime != null and endCreateTime != ''">
+		   		AND wi.create_time &lt;= #{endCreateTime}
+		   	</if>
+		   	<if test="materialCode != null and materialCode != ''">
+		   		AND m.material_code LIKE '%${materialCode}%'
+		   	</if>
+		</where>
+	   	GROUP BY wi.id
+		<if test="sort != null and sort != ''">
+			ORDER BY #{sort} ${order}
+		</if>
+		<if test="sort == null or sort == ''">
+			ORDER BY stock_in_no 
+		</if>
+		<if test="page != 0 and rows != 0">
+			LIMIT #{startPage},#{rows}
+		</if>
+  	</if>
+  	<if test="materialCode == null or materialCode == ''">
+  		SELECT
+			wi.id id,
+			wi.stock_in_no stockInNo,
+			wi.create_time createTime,
+			wi.preparer preparer,
+			wi.state state,
+			IF(p.END_TIME_,CONCAT('&lt;a href=&quot;queryTaskByProcessInstanceId.action?processInstanceId=',wi.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核完成&lt;/a&gt;'),CONCAT('&lt;a href=&quot;queryActivityMap.action?processInstanceId=',wi.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核中&lt;/a&gt;')) processInstanceId
+		FROM
+			war_storage_warehouse_work_card_stock_in wi
+		LEFT JOIN act_hi_procinst p ON wi.process_instance_id = p.PROC_INST_ID_
+		<where>
+			<if test="stockInNo != null and stockInNo !=''">
+				AND wi.stock_in_no LIKE '%${stockInNo}%'
+			</if>
+			<if test="preparer != null and preparer != ''">
+				AND wi.preparer LIKE '%${preparer}%'
+			</if>
+			<if test="startCreateTime != null and startCreateTime != ''">
+		   		AND wi.create_time &gt;= #{startCreateTime}
+		   	</if>
+		   	<if test="endCreateTime != null and endCreateTime != ''">
+		   		AND wi.create_time &lt;= #{endCreateTime}
+		   	</if>
+		</where>
+		<if test="sort != null and sort != ''">
+			ORDER BY #{sort} ${order}
+		</if>
+		<if test="sort == null or sort == ''">
+			ORDER BY stock_in_no 
+		</if>
+		<if test="page != 0 and rows != 0">
+			LIMIT #{startPage},#{rows}
+		</if>
+  	</if>
+  </select>
+  
+  <!-- 查询所有的入库单的总数 -->
+  <select id="findAllWarStandardAccessoriesStockInTotal" parameterType="cn.chiucheung.pojo.warehouse.storagewarehouseworkcardstockin.WarStorageWarehouseWorkCardStockInQueryVo" resultType="string">
+  	<if test="materialCode != null and materialCode != ''">
+	  	SELECT
+	  		COUNT(*)
+	  	FROM
+			(
+				SELECT
+					wi.*
+				FROM
+					war_storage_warehouse_work_card_stock_in wi,
+					war_storage_warehouse_work_card_stock_in_subsidiary ws,
+					pro_storage_warehouse_work_card_subsidiary ps,
+					war_material m
+				WHERE
+					wi.id = ws.war_storage_warehouse_work_card_stock_in_id
+				AND
+					ws.pro_storage_warehouse_work_card_subsidiary_id = ps.id
+				AND
+					ps.war_material_id = m.id
+				<if test="stockInNo != null and stockInNo !=''">
+					AND wi.stock_in_no LIKE '%${stockInNo}%'
+				</if>
+				<if test="preparer != null and preparer != ''">
+					AND wi.preparer LIKE '%${preparer}%'
+				</if>
+				<if test="startCreateTime != null and startCreateTime != ''">
+			   		AND wi.create_time &gt;= #{startCreateTime}
+			   	</if>
+			   	<if test="endCreateTime != null and endCreateTime != ''">
+			   		AND wi.create_time &lt;= #{endCreateTime}
+			   	</if>
+			   	<if test="materialCode != null and materialCode != ''">
+			   		AND m.material_code LIKE '%${materialCode}%'
+			   	</if>
+				GROUP BY wi.id
+			) w
+  	</if>
+  	<if test="materialCode == null or materialCode == ''">
+  		SELECT
+			COUNT(*)
+		FROM
+			war_storage_warehouse_work_card_stock_in wi
+		<where>
+			<if test="stockInNo != null and stockInNo !=''">
+				AND wi.stock_in_no LIKE '%${stockInNo}%'
+			</if>
+			<if test="preparer != null and preparer != ''">
+				AND wi.preparer LIKE '%${preparer}%'
+			</if>
+			<if test="startCreateTime != null and startCreateTime != ''">
+		   		AND wi.create_time &gt;= #{startCreateTime}
+		   	</if>
+		   	<if test="endCreateTime != null and endCreateTime != ''">
+		   		AND wi.create_time &lt;= #{endCreateTime}
+		   	</if>
+		</where>
+  	</if>
+  </select>
+  
+  
+   <!-- 入库单审核之后的，库存数量需要根据当前的入库单进行添加 -->
+  <update id="updateWarMaterialInventoryByWarStorageWarehouseWorkCardStockInIdForAdd" parameterType="string">
+	UPDATE 
+		war_material_inventory wi,
+		(
+			SELECT
+				SUM(ws.quantity) quantity,
+				ps.war_material_id
+			FROM
+				war_storage_warehouse_work_card_stock_in_subsidiary ws,
+				pro_storage_warehouse_work_card_subsidiary ps
+			WHERE
+				ws.pro_storage_warehouse_work_card_subsidiary_id = ps.id
+			AND
+				ws.war_storage_warehouse_work_card_stock_in_id = #{id}
+			GROUP BY ps.war_material_id
+		) w
+	SET
+		wi.existing_quantity = wi.existing_quantity + w.quantity
+	WHERE
+		wi.war_material_id = w.war_material_id
+  </update>
+  
+  <!-- 根据入库单的id查询入库单对应物料的入库数量、现存数量、占有量(等后面看怎么占有在加上去) -->
+  <select id="queryStockInQuantityAndExistingQuantityAndOccupyQuantityByWarStorageWarehouseWorkCardStockInId" parameterType="string" resultType="cn.chiucheung.pojo.warehouse.storagewarehouseworkcardstockin.Quantity">
+  	SELECT
+		wi.existing_quantity existingQuantity,
+		IFNULL(ws.quantity,0) stockInQuantity,
+		0 occupyQuantity
+		<!-- IFNULL(wos.quantity,0) occupyQuantity -->
+	FROM
+		(
+			SELECT
+				SUM(ws.quantity) quantity,
+				ps.war_material_id
+			FROM
+				war_storage_warehouse_work_card_stock_in_subsidiary ws,
+				pro_storage_warehouse_work_card_subsidiary ps
+			WHERE
+				ws.pro_storage_warehouse_work_card_subsidiary_id = ps.id
+			AND
+				ws.war_storage_warehouse_work_card_stock_in_id = #{id}
+			GROUP BY ps.war_material_id
+		) ws
+	INNER JOIN war_material_inventory wi ON wi.war_material_id = ws.war_material_id
+	<!-- LEFT JOIN	
+		(
+			SELECT
+				ws.war_standard_accessories_id,
+				ws.quantity
+			FROM
+				war_standard_accessories_stock_out wo,
+				war_standard_accessories_stock_out_subsidiary ws,
+				act_hi_procinst p
+			WHERE
+				wo.process_instance_id = p.PROC_INST_ID_
+			AND
+				p.END_TIME_ IS NULL
+				
+		) wos ON wos.war_standard_accessories_id = ws.war_standard_accessories_id -->
+	  	
+  </select>
+  
+  <!-- 入库单反审之后的，库存数量需要根据当前的入库单进行减少 -->
+  <update id="updateWarMaterialInventoryByWarStorageWarehouseWorkCardStockInIdForSubtract" parameterType="string">
+  UPDATE 
+		war_material_inventory wi,
+		(
+			SELECT
+				SUM(ws.quantity) quantity,
+				ps.war_material_id
+			FROM
+				war_storage_warehouse_work_card_stock_in_subsidiary ws,
+				pro_storage_warehouse_work_card_subsidiary ps
+			WHERE
+				ws.pro_storage_warehouse_work_card_subsidiary_id = ps.id
+			AND
+				ws.war_storage_warehouse_work_card_stock_in_id = #{id}
+			GROUP BY ps.war_material_id
+		) w
+	SET
+		wi.existing_quantity = wi.existing_quantity - w.quantity
+	WHERE
+		wi.war_material_id = w.war_material_id
+  </update>
+</mapper>

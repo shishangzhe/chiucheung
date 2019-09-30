@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.sales.projectinfo.SalProjectInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.sales.projectinfo.SalProjectInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="work_card_no" property="workCardNo" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="custom" property="custom" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, work_card_no, year, country, province, city, industry, custom
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.sales.projectinfo.SalProjectInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sal_project_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sal_project_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sal_project_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.sales.projectinfo.SalProjectInfoExample" >
+    delete from sal_project_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.sales.projectinfo.SalProjectInfo" >
+    insert into sal_project_info (id, work_card_no, year, 
+      country, province, city, 
+      industry, custom)
+    values (#{id,jdbcType=VARCHAR}, #{workCardNo,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{industry,jdbcType=VARCHAR}, #{custom,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.sales.projectinfo.SalProjectInfo" >
+    insert into sal_project_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workCardNo != null" >
+        work_card_no,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="custom != null" >
+        custom,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workCardNo != null" >
+        #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="custom != null" >
+        #{custom,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.sales.projectinfo.SalProjectInfoExample" resultType="java.lang.Integer" >
+    select count(*) from sal_project_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sal_project_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCardNo != null" >
+        work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null" >
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custom != null" >
+        custom = #{record.custom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sal_project_info
+    set id = #{record.id,jdbcType=VARCHAR},
+      work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=INTEGER},
+      country = #{record.country,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      custom = #{record.custom,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.sales.projectinfo.SalProjectInfo" >
+    update sal_project_info
+    <set >
+      <if test="workCardNo != null" >
+        work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="custom != null" >
+        custom = #{custom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.sales.projectinfo.SalProjectInfo" >
+    update sal_project_info
+    set work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      custom = #{custom,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 查找所有项目信息 -->
+  <select id="findAllProjectInfoList" parameterType="cn.chiucheung.pojo.sales.projectinfo.SalProjectInfoQueryVo" resultType="cn.chiucheung.pojo.sales.projectinfo.SalProjectInfoCustom">
+  	SELECT
+		i.id,
+		i.work_card_no workCardNo,
+		i.year,
+		i.country,
+		i.province,
+		i.city,
+		i.industry,
+		i.custom,
+		(SELECT GROUP_CONCAT(p.id) FROM sal_project_info_pic p WHERE i.id = p.sal_project_info_id GROUP BY p.sal_project_info_id) picIds
+	FROM
+		sal_project_info i
+	<where>
+		<if test="id != null and id != ''" ><!-- 这里是为了页面编辑单个的查询 -->
+	      	AND i.id = #{id}
+	    </if>
+	    <if test="workCardNo != null and workCardNo != ''">
+	    	AND work_card_no LIKE '%${workCardNo}%'
+	    </if>
+		<if test="year != null and year != ''" >
+	      	AND year LIKE '%${year}%'
+	    </if>
+	    <if test="country != null and country != ''" >
+	    	<if test="country == '俄罗斯'">
+	    		AND country = #{country}
+	    	</if>
+	    	<if test="country != '俄罗斯'">
+	    		AND country LIKE '%${country}%'
+	    	</if>
+	    </if>
+	    <if test="province != null and province != ''" >
+	      	AND province LIKE '%${province}%'
+	    </if>
+	    <if test="city != null and city != ''" >
+	      	AND city LIKE '%${city}%'
+	    </if>
+	    <if test="industry != null and industry != ''" >
+	      	AND industry LIKE '%${industry}%'
+	    </if>
+	    <if test="custom != null and custom != ''" >
+	      	AND custom LIKE '%${custom}%'
+	    </if>
+	</where>
+  	<if test="sort != null and sort != ''">
+		ORDER by #{sort} ${order}
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER by year desc
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+   </select>
+   
+   
+   <!-- 查找所有项目信息的总数 -->
+   <select id="findAllProjectInfoTotal" parameterType="cn.chiucheung.pojo.sales.projectinfo.SalProjectInfoQueryVo" resultType="string">
+   	SELECT
+		COUNT(*)
+	FROM
+		sal_project_info
+	<where> 
+		<if test="workCardNo != null and workCardNo != ''">
+	    	AND work_card_no LIKE '%${workCardNo}%'
+	    </if>
+		<if test="year != null and year != ''" >
+	      	AND year LIKE '%${year}%'
+	    </if>
+	    <if test="country != null and country != ''" >
+	    	<if test="country == '俄罗斯'">
+	    		AND country = #{country}
+	    	</if>
+	    	<if test="country != '俄罗斯'">
+	    		AND country LIKE '%${country}%'
+	    	</if>
+	    </if>
+	    <if test="province != null and province != ''" >
+	      	AND province LIKE '%${province}%'
+	    </if>
+	    <if test="city != null and city != ''" >
+	      	AND city LIKE '%${city}%'
+	    </if>
+	    <if test="industry != null and industry != ''" >
+	      	AND industry LIKE '%${industry}%'
+	    </if>
+	    <if test="custom != null and custom != ''" >
+	      	AND custom LIKE '%${custom}%'
+	    </if>
+	</where>
+   </select>
+   
+   <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into sal_project_info (id, work_card_no, year, country, province, city, industry, custom) values 
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.workCardNo},
+			#{item.year},
+			#{item.country},
+			#{item.province},
+			#{item.city},
+			#{item.industry},
+			#{item.custom}
+		)
+	</foreach>
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 下面是地图的查询数据 -->
+  
+  <!-- 查找中国每个省的项目总数 -->
+   <select id="getMapDataForWorld" resultType="cn.chiucheung.pojo.market.map.MapDataCustom">
+   	SELECT
+		i.country engName,
+		l.eng_name name,
+		COUNT(*) value
+	FROM
+		sal_project_info i,
+		sys_map_lli l
+	WHERE
+		l.parent = 'world'
+	AND
+		i.country = l.name
+	GROUP BY i.country
+   </select>
+  
+  <!-- 查找中国每个省的项目总数 -->
+   <select id="getMapDataForChina" resultType="cn.chiucheung.pojo.market.map.MapDataCustom">
+   	SELECT
+		i.province name,
+		l.eng_name engName,
+		COUNT(*) value
+	FROM
+		sys_map_lli l,
+		sal_project_info i
+	WHERE
+		l.parent = 'china'
+	AND
+		i.province = l.name
+	GROUP BY i.province
+   </select>
+   
+   <!-- 查找省份每个市的项目总数 -->
+   <select id="getMapDataForProvince" resultType="cn.chiucheung.pojo.market.map.MapDataCustom" parameterType="string">
+   	SELECT
+		i.city name,
+		l.eng_name engName,
+		COUNT(*) value
+	FROM
+		sal_project_info i,
+		sys_map_lli l
+	WHERE
+		i.province = #{province}
+	AND
+		i.city = l.name
+	AND
+		l.parent = i.province
+	GROUP BY i.city
+   </select>
+   
+   <!-- 按行业统计记录总数 -->
+   <select id="findProjectInfoIndustryCount" resultType="cn.chiucheung.pojo.market.map.ProjectInfoIndustryCount">
+   	SELECT
+		industry,
+		COUNT(*) count
+	FROM
+		sal_project_info
+	<where>
+	    <if test="country != null and country != ''" >
+	    	<if test="country == '俄罗斯'">
+	    		AND country = #{country}
+	    	</if>
+	    	<if test="country != '俄罗斯'">
+	    		AND country LIKE '%${country}%'
+	    	</if>
+	    </if>
+	    <if test="province != null and province != ''" >
+	      	AND province LIKE '%${province}%'
+	    </if>
+	    <if test="city != null and city != ''" >
+	      	AND city LIKE '%${city}%'
+	    </if>
+	    <if test="custom != null and custom != ''" >
+	      	AND custom LIKE '%${custom}%'
+	    </if>
+	</where>
+	GROUP BY industry
+   </select>
+</mapper>

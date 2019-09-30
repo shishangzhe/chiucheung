@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.sales.reviewer.SalReviewerFileMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.sales.reviewer.SalReviewerFile" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="doc_id" property="docId" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="extension" property="extension" jdbcType="VARCHAR" />
+    <result column="sal_reviewer_id" property="salReviewerId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, doc_id, filename, extension, sal_reviewer_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerFileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sal_reviewer_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sal_reviewer_file
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sal_reviewer_file
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerFileExample" >
+    delete from sal_reviewer_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerFile" >
+    insert into sal_reviewer_file (id, doc_id, filename, 
+      extension, sal_reviewer_id)
+    values (#{id,jdbcType=VARCHAR}, #{docId,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
+      #{extension,jdbcType=VARCHAR}, #{salReviewerId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerFile" >
+    insert into sal_reviewer_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="docId != null" >
+        doc_id,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="extension != null" >
+        extension,
+      </if>
+      <if test="salReviewerId != null" >
+        sal_reviewer_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="docId != null" >
+        #{docId,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null" >
+        #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewerId != null" >
+        #{salReviewerId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerFileExample" resultType="java.lang.Integer" >
+    select count(*) from sal_reviewer_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sal_reviewer_file
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docId != null" >
+        doc_id = #{record.docId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extension != null" >
+        extension = #{record.extension,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salReviewerId != null" >
+        sal_reviewer_id = #{record.salReviewerId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sal_reviewer_file
+    set id = #{record.id,jdbcType=VARCHAR},
+      doc_id = #{record.docId,jdbcType=VARCHAR},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      extension = #{record.extension,jdbcType=VARCHAR},
+      sal_reviewer_id = #{record.salReviewerId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerFile" >
+    update sal_reviewer_file
+    <set >
+      <if test="docId != null" >
+        doc_id = #{docId,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null" >
+        extension = #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewerId != null" >
+        sal_reviewer_id = #{salReviewerId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerFile" >
+    update sal_reviewer_file
+    set doc_id = #{docId,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      extension = #{extension,jdbcType=VARCHAR},
+      sal_reviewer_id = #{salReviewerId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+    
+  
+  <!-- 自定义 -->
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into sal_reviewer_file (id, doc_id, filename, extension, sal_reviewer_id) values 
+    
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.docId},
+			#{item.filename},
+			#{item.extension},
+			#{item.salReviewerId}
+		)
+	</foreach>
+  </insert>
+</mapper>

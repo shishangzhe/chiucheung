@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOut" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="stock_out_no" property="stockOutNo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="preparer" property="preparer" jdbcType="VARCHAR" />
+    <result column="receive_material" property="receiveMaterial" jdbcType="VARCHAR" />
+    <result column="reviewer" property="reviewer" jdbcType="VARCHAR" />
+    <result column="audit_time" property="auditTime" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="process_instance_id" property="processInstanceId" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, stock_out_no, create_time, preparer, receive_material, reviewer, audit_time, 
+    remark, process_instance_id, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from war_standard_accessories_stock_out
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from war_standard_accessories_stock_out
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from war_standard_accessories_stock_out
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutExample" >
+    delete from war_standard_accessories_stock_out
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOut" >
+    insert into war_standard_accessories_stock_out (id, stock_out_no, create_time, 
+      preparer, receive_material, reviewer, 
+      audit_time, remark, process_instance_id, 
+      state)
+    values (#{id,jdbcType=VARCHAR}, #{stockOutNo,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{preparer,jdbcType=VARCHAR}, #{receiveMaterial,jdbcType=VARCHAR}, #{reviewer,jdbcType=VARCHAR}, 
+      #{auditTime,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{processInstanceId,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOut" >
+    insert into war_standard_accessories_stock_out
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stockOutNo != null" >
+        stock_out_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="preparer != null" >
+        preparer,
+      </if>
+      <if test="receiveMaterial != null" >
+        receive_material,
+      </if>
+      <if test="reviewer != null" >
+        reviewer,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="processInstanceId != null" >
+        process_instance_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stockOutNo != null" >
+        #{stockOutNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="preparer != null" >
+        #{preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMaterial != null" >
+        #{receiveMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null" >
+        #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="processInstanceId != null" >
+        #{processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutExample" resultType="java.lang.Integer" >
+    select count(*) from war_standard_accessories_stock_out
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update war_standard_accessories_stock_out
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockOutNo != null" >
+        stock_out_no = #{record.stockOutNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.preparer != null" >
+        preparer = #{record.preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveMaterial != null" >
+        receive_material = #{record.receiveMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewer != null" >
+        reviewer = #{record.reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null" >
+        audit_time = #{record.auditTime,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processInstanceId != null" >
+        process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update war_standard_accessories_stock_out
+    set id = #{record.id,jdbcType=VARCHAR},
+      stock_out_no = #{record.stockOutNo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=DATE},
+      preparer = #{record.preparer,jdbcType=VARCHAR},
+      receive_material = #{record.receiveMaterial,jdbcType=VARCHAR},
+      reviewer = #{record.reviewer,jdbcType=VARCHAR},
+      audit_time = #{record.auditTime,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOut" >
+    update war_standard_accessories_stock_out
+    <set >
+      <if test="stockOutNo != null" >
+        stock_out_no = #{stockOutNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="preparer != null" >
+        preparer = #{preparer,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMaterial != null" >
+        receive_material = #{receiveMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null" >
+        reviewer = #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="processInstanceId != null" >
+        process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOut" >
+    update war_standard_accessories_stock_out
+    set stock_out_no = #{stockOutNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      preparer = #{preparer,jdbcType=VARCHAR},
+      receive_material = #{receiveMaterial,jdbcType=VARCHAR},
+      reviewer = #{reviewer,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+   <!-- 自定义 -->
+   <!-- 根据当天日期查询当前日期的最大出库单号 -->
+  <select id="findMaxStockOutNo" parameterType="string" resultType="int">
+  	SELECT
+		IFNULL(MAX(SUBSTRING(stock_out_no,7,3)),0)
+	FROM
+		war_standard_accessories_stock_out
+	WHERE
+		stock_out_no LIKE '%${stockOutNo}%'
+  </select>
+  
+  <!-- 查找所有的出库单 -->
+  <select id="findAllWarStandardAccessoriesStockOutList" parameterType="cn.chiucheung.pojo.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutQueryVo" resultType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOut">
+  	SELECT
+		wo.id id,
+		wo.stock_out_no stockOutNo,
+		wo.create_time createTime,
+		wo.preparer preparer,
+		wo.state state,
+		IF(p.END_TIME_,CONCAT('&lt;a href=&quot;queryTaskByProcessInstanceId.action?processInstanceId=',wo.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核完成&lt;/a&gt;'),CONCAT('&lt;a href=&quot;queryActivityMap.action?processInstanceId=',wo.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核中&lt;/a&gt;')) processInstanceId
+	FROM
+		war_standard_accessories_stock_out wo,
+		war_standard_accessories_stock_out_subsidiary ws,
+		war_standard_accessories wa,
+		act_hi_procinst p
+	WHERE
+		wo.id = ws.war_standard_accessories_stock_out_id
+	AND
+		ws.war_standard_accessories_id = wa.id
+	AND
+		wo.process_instance_id = p.PROC_INST_ID_
+	<if test="stockOutNo != null and stockOutNo !=''">
+		AND wo.stock_out_no LIKE '%${stockOutNo}%'
+	</if>
+	<if test="preparer != null and preparer != ''">
+		AND wo.preparer LIKE '%${preparer}%'
+	</if>
+	<if test="startCreateTime != null and startCreateTime != ''">
+   		AND wo.create_time &gt;= #{startCreateTime}
+   	</if>
+   	<if test="endCreateTime != null and endCreateTime != ''">
+   		AND wo.create_time &lt;= #{endCreateTime}
+   	</if>
+   	<if test="accessoriesCode != null and accessoriesCode != ''">
+   		AND wa.accessories_code LIKE '%${accessoriesCode}%'
+   	</if>
+   	GROUP BY wo.id
+	<if test="sort != null and sort != ''">
+		ORDER BY #{sort} ${order}
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY stock_out_no 
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+  
+  <!-- 查询所有的入库单的总数 -->
+  <select id="findAllWarStandardAccessoriesStockOutTotal" parameterType="cn.chiucheung.pojo.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutQueryVo" resultType="string">
+  	SELECT
+		COUNT(*)
+	FROM
+		(
+			SELECT
+				wo.*
+			FROM
+				war_standard_accessories_stock_out wo,
+				war_standard_accessories_stock_out_subsidiary ws,
+				war_standard_accessories wa,
+				act_hi_procinst p
+			WHERE
+				wo.id = ws.war_standard_accessories_stock_out_id
+			AND
+				ws.war_standard_accessories_id = wa.id
+			AND
+				wo.process_instance_id = p.PROC_INST_ID_
+			<if test="stockOutNo != null and stockOutNo !=''">
+				AND stock_out_no LIKE '%${stockOutNo}%'
+			</if>
+			<if test="preparer != null and preparer != ''">
+				AND preparer LIKE '%${preparer}%'
+			</if>
+			<if test="startCreateTime != null and startCreateTime != ''">
+		   		AND create_time &gt;= #{startCreateTime}
+		   	</if>
+		   	<if test="endCreateTime != null and endCreateTime != ''">
+		   		AND create_time &lt;= #{endCreateTime}
+		   	</if>
+		   	<if test="accessoriesCode != null and accessoriesCode != ''">
+		   		AND wa.accessories_code LIKE '%${accessoriesCode}%'
+		   	</if>
+			GROUP BY wo.id
+		) w
+  </select>
+  
+  <!-- 出库，根据出库的物料数量进行减少 -->
+  <update id="updateWarStandardAccessoriesInventoryByWarStandardAccessoriesStockOutIdForSubtract" parameterType="string">
+  	UPDATE
+		war_standard_accessories_inventory wi,
+		(
+			SELECT
+				ws.*
+			FROM
+				war_standard_accessories_stock_out wo,
+				war_standard_accessories_stock_out_subsidiary ws
+			WHERE
+				ws.war_standard_accessories_stock_out_id = wo.id
+			AND
+				wo.id=#{id}
+		) ws
+	SET
+		wi.existing_quantity = wi.existing_quantity - ws.quantity
+	WHERE
+		wi.war_standard_accessories_id = ws.war_standard_accessories_id
+  </update>
+  
+  <!-- 反审出库，根据出库的物料数量进行添加 -->
+  <update id="updateWarStandardAccessoriesInventoryByWarStandardAccessoriesStockOutIdForAdd" parameterType="string">
+  	UPDATE
+		war_standard_accessories_inventory wi,
+		(
+			SELECT
+				ws.*
+			FROM
+				war_standard_accessories_stock_out wo,
+				war_standard_accessories_stock_out_subsidiary ws
+			WHERE
+				ws.war_standard_accessories_stock_out_id = wo.id
+			AND
+				wo.id=#{id}
+		) ws
+	SET
+		wi.existing_quantity = wi.existing_quantity + ws.quantity
+	WHERE
+		wi.war_standard_accessories_id = ws.war_standard_accessories_id
+  </update>  
+</mapper>

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.purchase.material.PurMaterialMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.purchase.material.PurMaterial" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="material_type" property="materialType" jdbcType="VARCHAR" />
+    <result column="material_category" property="materialCategory" jdbcType="VARCHAR" />
+    <result column="material_name" property="materialName" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="thick" property="thick" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="VARCHAR" />
+    <result column="width" property="width" jdbcType="VARCHAR" />
+    <result column="density" property="density" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="kg_price" property="kgPrice" jdbcType="VARCHAR" />
+    <result column="unit_price" property="unitPrice" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="using_range" property="usingRange" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, material_type, material_category, material_name, specification, model, area, 
+    thick, length, width, density, weight, kg_price, unit_price, unit, supplier, using_range, 
+    remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.purchase.material.PurMaterialExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pur_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pur_material
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pur_material
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.purchase.material.PurMaterialExample" >
+    delete from pur_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.purchase.material.PurMaterial" >
+    insert into pur_material (id, material_type, material_category, 
+      material_name, specification, model, 
+      area, thick, length, 
+      width, density, weight, 
+      kg_price, unit_price, unit, 
+      supplier, using_range, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, #{materialCategory,jdbcType=VARCHAR}, 
+      #{materialName,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{thick,jdbcType=VARCHAR}, #{length,jdbcType=VARCHAR}, 
+      #{width,jdbcType=VARCHAR}, #{density,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, 
+      #{kgPrice,jdbcType=VARCHAR}, #{unitPrice,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{supplier,jdbcType=VARCHAR}, #{usingRange,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.purchase.material.PurMaterial" >
+    insert into pur_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="materialType != null" >
+        material_type,
+      </if>
+      <if test="materialCategory != null" >
+        material_category,
+      </if>
+      <if test="materialName != null" >
+        material_name,
+      </if>
+      <if test="specification != null" >
+        specification,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="thick != null" >
+        thick,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="density != null" >
+        density,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="kgPrice != null" >
+        kg_price,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="usingRange != null" >
+        using_range,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null" >
+        #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCategory != null" >
+        #{materialCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="thick != null" >
+        #{thick,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="density != null" >
+        #{density,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="kgPrice != null" >
+        #{kgPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="usingRange != null" >
+        #{usingRange,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.purchase.material.PurMaterialExample" resultType="java.lang.Integer" >
+    select count(*) from pur_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pur_material
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialType != null" >
+        material_type = #{record.materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialCategory != null" >
+        material_category = #{record.materialCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null" >
+        material_name = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specification != null" >
+        specification = #{record.specification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thick != null" >
+        thick = #{record.thick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=VARCHAR},
+      </if>
+      <if test="record.width != null" >
+        width = #{record.width,jdbcType=VARCHAR},
+      </if>
+      <if test="record.density != null" >
+        density = #{record.density,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kgPrice != null" >
+        kg_price = #{record.kgPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null" >
+        unit_price = #{record.unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplier != null" >
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usingRange != null" >
+        using_range = #{record.usingRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pur_material
+    set id = #{record.id,jdbcType=VARCHAR},
+      material_type = #{record.materialType,jdbcType=VARCHAR},
+      material_category = #{record.materialCategory,jdbcType=VARCHAR},
+      material_name = #{record.materialName,jdbcType=VARCHAR},
+      specification = #{record.specification,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      thick = #{record.thick,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=VARCHAR},
+      width = #{record.width,jdbcType=VARCHAR},
+      density = #{record.density,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=VARCHAR},
+      kg_price = #{record.kgPrice,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      using_range = #{record.usingRange,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.purchase.material.PurMaterial" >
+    update pur_material
+    <set >
+      <if test="materialType != null" >
+        material_type = #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCategory != null" >
+        material_category = #{materialCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        material_name = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="thick != null" >
+        thick = #{thick,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="density != null" >
+        density = #{density,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="kgPrice != null" >
+        kg_price = #{kgPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="usingRange != null" >
+        using_range = #{usingRange,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.purchase.material.PurMaterial" >
+    update pur_material
+    set material_type = #{materialType,jdbcType=VARCHAR},
+      material_category = #{materialCategory,jdbcType=VARCHAR},
+      material_name = #{materialName,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      thick = #{thick,jdbcType=VARCHAR},
+      length = #{length,jdbcType=VARCHAR},
+      width = #{width,jdbcType=VARCHAR},
+      density = #{density,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      kg_price = #{kgPrice,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      using_range = #{usingRange,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 根据查询条件查询，包括分页、排序 -->
+  <select id="findAllPurMaterialList" parameterType="cn.chiucheung.pojo.purchase.material.PurMaterialQueryVo" resultType="cn.chiucheung.po.purchase.material.PurMaterial">
+  	SELECT
+  		id, 
+  		material_type materialType, 
+  		material_category materialCategory, 
+  		material_name materialName, 
+  		specification, 
+  		model, 
+  		area, 
+    	thick, 
+    	length, 
+    	width, 
+    	density, 
+    	weight, 
+    	kg_price kgPrice, 
+    	unit_price unitPrice, 
+    	unit, 
+    	supplier, 
+    	using_range usingRange, 
+    	remark
+  	FROM pur_material
+	<where> 
+		<if test="materialType != null and materialType != ''" >
+	      	AND material_type LIKE '%${materialType}%'
+	    </if>
+	    <if test="materialCategory != null and materialCategory != ''" >
+	      	AND material_category LIKE '%${materialCategory}%'
+	    </if>
+		<if test="materialName != null and materialName != ''" >
+	      	AND material_name LIKE '%${materialName}%'
+	    </if>
+	    <if test="specification != null and specification != ''" >
+	      	AND specification LIKE '%${specification}%'
+	    </if>
+	    <if test="model != null and model != ''">
+			 AND model LIKE '%${model}%'
+		</if>
+		<if test="supplier != null and supplier != ''">
+			 AND supplier LIKE '%${supplier}%'
+		</if>
+	</where>
+		<if test="sort != null and sort != ''">
+			ORDER by #{sort} ${order}
+		</if>
+		<if test="page != 0 and rows != 0">
+			LIMIT #{startPage},#{rows}
+		</if>
+   </select>
+   
+   <!-- 根据查询条件查出总记录数 -->
+   <select id="findAllPurMaterialTotal" parameterType="cn.chiucheung.pojo.purchase.material.PurMaterialQueryVo" resultType="string">
+  	SELECT COUNT(*)
+  	FROM pur_material
+	<where> 
+		<if test="materialType != null and materialType != ''" >
+	      	AND material_type LIKE '%${materialType}%'
+	    </if>
+	    <if test="materialCategory != null and materialCategory != ''" >
+	      	AND material_category LIKE '%${materialCategory}%'
+	    </if>
+		<if test="materialName != null and materialName != ''" >
+	      	AND material_name LIKE '%${materialName}%'
+	    </if>
+	    <if test="specification != null and specification != ''" >
+	      	AND specification LIKE '%${specification}%'
+	    </if>
+	    <if test="model != null and model != ''">
+			 AND model LIKE '%${model}%'
+		</if>
+		<if test="supplier != null and supplier != ''">
+			 AND supplier LIKE '%${supplier}%'
+		</if>
+	</where>
+   </select>
+</mapper>

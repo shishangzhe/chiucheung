@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.sales.reviewer.SalReviewerMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.sales.reviewer.SalReviewer" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="quotation_no" property="quotationNo" jdbcType="VARCHAR" />
+    <result column="info_record_number" property="infoRecordNumber" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="project" property="project" jdbcType="VARCHAR" />
+    <result column="other_project" property="otherProject" jdbcType="VARCHAR" />
+    <result column="packaging" property="packaging" jdbcType="VARCHAR" />
+    <result column="other_packaging" property="otherPackaging" jdbcType="VARCHAR" />
+    <result column="delivery" property="delivery" jdbcType="VARCHAR" />
+    <result column="other_delivery" property="otherDelivery" jdbcType="VARCHAR" />
+    <result column="sal_preparer" property="salPreparer" jdbcType="VARCHAR" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="is_install" property="isInstall" jdbcType="BIT" />
+    <result column="expected_layout_date" property="expectedLayoutDate" jdbcType="DATE" />
+    <result column="project_leader" property="projectLeader" jdbcType="VARCHAR" />
+    <result column="importance" property="importance" jdbcType="VARCHAR" />
+    <result column="contract_delivery_date" property="contractDeliveryDate" jdbcType="VARCHAR" />
+    <result column="sal_reviewer" property="salReviewer" jdbcType="VARCHAR" />
+    <result column="required_cost_of_project" property="requiredCostOfProject" jdbcType="VARCHAR" />
+    <result column="required_completion_date" property="requiredCompletionDate" jdbcType="DATE" />
+    <result column="about_department" property="aboutDepartment" jdbcType="VARCHAR" />
+    <result column="develop" property="develop" jdbcType="VARCHAR" />
+    <result column="arrange" property="arrange" jdbcType="VARCHAR" />
+    <result column="special_material" property="specialMaterial" jdbcType="VARCHAR" />
+    <result column="eng_reviewer" property="engReviewer" jdbcType="VARCHAR" />
+    <result column="eng_reviewer_date" property="engReviewerDate" jdbcType="DATE" />
+    <result column="pur_period" property="purPeriod" jdbcType="VARCHAR" />
+    <result column="pur_reviewer" property="purReviewer" jdbcType="VARCHAR" />
+    <result column="pur_reviewer_date" property="purReviewerDate" jdbcType="DATE" />
+    <result column="pro_expected_shortest_completion_time" property="proExpectedShortestCompletionTime" jdbcType="VARCHAR" />
+    <result column="pro_expected_longest_completion_time" property="proExpectedLongestCompletionTime" jdbcType="VARCHAR" />
+    <result column="install_people_number" property="installPeopleNumber" jdbcType="VARCHAR" />
+    <result column="install_period" property="installPeriod" jdbcType="VARCHAR" />
+    <result column="is_special_processing" property="isSpecialProcessing" jdbcType="BIT" />
+    <result column="special_processing" property="specialProcessing" jdbcType="VARCHAR" />
+    <result column="pro_expected_start_time" property="proExpectedStartTime" jdbcType="DATE" />
+    <result column="pro_preparer" property="proPreparer" jdbcType="VARCHAR" />
+    <result column="pro_reviewer" property="proReviewer" jdbcType="VARCHAR" />
+    <result column="pro_reviewer_date" property="proReviewerDate" jdbcType="DATE" />
+    <result column="is_attached" property="isAttached" jdbcType="BIT" />
+    <result column="process_instance_id" property="processInstanceId" jdbcType="VARCHAR" />
+    <result column="is_cost" property="isCost" jdbcType="BIT" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.chiucheung.po.sales.reviewer.SalReviewerWithBLOBs" extends="BaseResultMap" >
+    <result column="project_content" property="projectContent" jdbcType="LONGVARCHAR" />
+    <result column="eng_remark" property="engRemark" jdbcType="LONGVARCHAR" />
+    <result column="pur_remark" property="purRemark" jdbcType="LONGVARCHAR" />
+    <result column="pro_remark" property="proRemark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, quotation_no, info_record_number, create_time, project, other_project, packaging, 
+    other_packaging, delivery, other_delivery, sal_preparer, destination, is_install, 
+    expected_layout_date, project_leader, importance, contract_delivery_date, sal_reviewer, 
+    required_cost_of_project, required_completion_date, about_department, develop, arrange, 
+    special_material, eng_reviewer, eng_reviewer_date, pur_period, pur_reviewer, pur_reviewer_date, 
+    pro_expected_shortest_completion_time, pro_expected_longest_completion_time, install_people_number, 
+    install_period, is_special_processing, special_processing, pro_expected_start_time, 
+    pro_preparer, pro_reviewer, pro_reviewer_date, is_attached, process_instance_id, 
+    is_cost, state
+  </sql>
+  <sql id="Blob_Column_List" >
+    project_content, eng_remark, pur_remark, pro_remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sal_reviewer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sal_reviewer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sal_reviewer
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sal_reviewer
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerExample" >
+    delete from sal_reviewer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerWithBLOBs" >
+    insert into sal_reviewer (id, quotation_no, info_record_number, 
+      create_time, project, other_project, 
+      packaging, other_packaging, delivery, 
+      other_delivery, sal_preparer, destination, 
+      is_install, expected_layout_date, project_leader, 
+      importance, contract_delivery_date, sal_reviewer, 
+      required_cost_of_project, required_completion_date, 
+      about_department, develop, arrange, 
+      special_material, eng_reviewer, eng_reviewer_date, 
+      pur_period, pur_reviewer, pur_reviewer_date, 
+      pro_expected_shortest_completion_time, pro_expected_longest_completion_time, 
+      install_people_number, install_period, is_special_processing, 
+      special_processing, pro_expected_start_time, pro_preparer, 
+      pro_reviewer, pro_reviewer_date, is_attached, 
+      process_instance_id, is_cost, state, 
+      project_content, eng_remark, pur_remark, 
+      pro_remark)
+    values (#{id,jdbcType=VARCHAR}, #{quotationNo,jdbcType=VARCHAR}, #{infoRecordNumber,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE}, #{project,jdbcType=VARCHAR}, #{otherProject,jdbcType=VARCHAR}, 
+      #{packaging,jdbcType=VARCHAR}, #{otherPackaging,jdbcType=VARCHAR}, #{delivery,jdbcType=VARCHAR}, 
+      #{otherDelivery,jdbcType=VARCHAR}, #{salPreparer,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR}, 
+      #{isInstall,jdbcType=BIT}, #{expectedLayoutDate,jdbcType=DATE}, #{projectLeader,jdbcType=VARCHAR}, 
+      #{importance,jdbcType=VARCHAR}, #{contractDeliveryDate,jdbcType=VARCHAR}, #{salReviewer,jdbcType=VARCHAR}, 
+      #{requiredCostOfProject,jdbcType=VARCHAR}, #{requiredCompletionDate,jdbcType=DATE}, 
+      #{aboutDepartment,jdbcType=VARCHAR}, #{develop,jdbcType=VARCHAR}, #{arrange,jdbcType=VARCHAR}, 
+      #{specialMaterial,jdbcType=VARCHAR}, #{engReviewer,jdbcType=VARCHAR}, #{engReviewerDate,jdbcType=DATE}, 
+      #{purPeriod,jdbcType=VARCHAR}, #{purReviewer,jdbcType=VARCHAR}, #{purReviewerDate,jdbcType=DATE}, 
+      #{proExpectedShortestCompletionTime,jdbcType=VARCHAR}, #{proExpectedLongestCompletionTime,jdbcType=VARCHAR}, 
+      #{installPeopleNumber,jdbcType=VARCHAR}, #{installPeriod,jdbcType=VARCHAR}, #{isSpecialProcessing,jdbcType=BIT}, 
+      #{specialProcessing,jdbcType=VARCHAR}, #{proExpectedStartTime,jdbcType=DATE}, #{proPreparer,jdbcType=VARCHAR}, 
+      #{proReviewer,jdbcType=VARCHAR}, #{proReviewerDate,jdbcType=DATE}, #{isAttached,jdbcType=BIT}, 
+      #{processInstanceId,jdbcType=VARCHAR}, #{isCost,jdbcType=BIT}, #{state,jdbcType=VARCHAR}, 
+      #{projectContent,jdbcType=LONGVARCHAR}, #{engRemark,jdbcType=LONGVARCHAR}, #{purRemark,jdbcType=LONGVARCHAR}, 
+      #{proRemark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerWithBLOBs" >
+    insert into sal_reviewer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="quotationNo != null" >
+        quotation_no,
+      </if>
+      <if test="infoRecordNumber != null" >
+        info_record_number,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="project != null" >
+        project,
+      </if>
+      <if test="otherProject != null" >
+        other_project,
+      </if>
+      <if test="packaging != null" >
+        packaging,
+      </if>
+      <if test="otherPackaging != null" >
+        other_packaging,
+      </if>
+      <if test="delivery != null" >
+        delivery,
+      </if>
+      <if test="otherDelivery != null" >
+        other_delivery,
+      </if>
+      <if test="salPreparer != null" >
+        sal_preparer,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="isInstall != null" >
+        is_install,
+      </if>
+      <if test="expectedLayoutDate != null" >
+        expected_layout_date,
+      </if>
+      <if test="projectLeader != null" >
+        project_leader,
+      </if>
+      <if test="importance != null" >
+        importance,
+      </if>
+      <if test="contractDeliveryDate != null" >
+        contract_delivery_date,
+      </if>
+      <if test="salReviewer != null" >
+        sal_reviewer,
+      </if>
+      <if test="requiredCostOfProject != null" >
+        required_cost_of_project,
+      </if>
+      <if test="requiredCompletionDate != null" >
+        required_completion_date,
+      </if>
+      <if test="aboutDepartment != null" >
+        about_department,
+      </if>
+      <if test="develop != null" >
+        develop,
+      </if>
+      <if test="arrange != null" >
+        arrange,
+      </if>
+      <if test="specialMaterial != null" >
+        special_material,
+      </if>
+      <if test="engReviewer != null" >
+        eng_reviewer,
+      </if>
+      <if test="engReviewerDate != null" >
+        eng_reviewer_date,
+      </if>
+      <if test="purPeriod != null" >
+        pur_period,
+      </if>
+      <if test="purReviewer != null" >
+        pur_reviewer,
+      </if>
+      <if test="purReviewerDate != null" >
+        pur_reviewer_date,
+      </if>
+      <if test="proExpectedShortestCompletionTime != null" >
+        pro_expected_shortest_completion_time,
+      </if>
+      <if test="proExpectedLongestCompletionTime != null" >
+        pro_expected_longest_completion_time,
+      </if>
+      <if test="installPeopleNumber != null" >
+        install_people_number,
+      </if>
+      <if test="installPeriod != null" >
+        install_period,
+      </if>
+      <if test="isSpecialProcessing != null" >
+        is_special_processing,
+      </if>
+      <if test="specialProcessing != null" >
+        special_processing,
+      </if>
+      <if test="proExpectedStartTime != null" >
+        pro_expected_start_time,
+      </if>
+      <if test="proPreparer != null" >
+        pro_preparer,
+      </if>
+      <if test="proReviewer != null" >
+        pro_reviewer,
+      </if>
+      <if test="proReviewerDate != null" >
+        pro_reviewer_date,
+      </if>
+      <if test="isAttached != null" >
+        is_attached,
+      </if>
+      <if test="processInstanceId != null" >
+        process_instance_id,
+      </if>
+      <if test="isCost != null" >
+        is_cost,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="projectContent != null" >
+        project_content,
+      </if>
+      <if test="engRemark != null" >
+        eng_remark,
+      </if>
+      <if test="purRemark != null" >
+        pur_remark,
+      </if>
+      <if test="proRemark != null" >
+        pro_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="quotationNo != null" >
+        #{quotationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoRecordNumber != null" >
+        #{infoRecordNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="project != null" >
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="otherProject != null" >
+        #{otherProject,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="otherPackaging != null" >
+        #{otherPackaging,jdbcType=VARCHAR},
+      </if>
+      <if test="delivery != null" >
+        #{delivery,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDelivery != null" >
+        #{otherDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="salPreparer != null" >
+        #{salPreparer,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="isInstall != null" >
+        #{isInstall,jdbcType=BIT},
+      </if>
+      <if test="expectedLayoutDate != null" >
+        #{expectedLayoutDate,jdbcType=DATE},
+      </if>
+      <if test="projectLeader != null" >
+        #{projectLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="importance != null" >
+        #{importance,jdbcType=VARCHAR},
+      </if>
+      <if test="contractDeliveryDate != null" >
+        #{contractDeliveryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewer != null" >
+        #{salReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="requiredCostOfProject != null" >
+        #{requiredCostOfProject,jdbcType=VARCHAR},
+      </if>
+      <if test="requiredCompletionDate != null" >
+        #{requiredCompletionDate,jdbcType=DATE},
+      </if>
+      <if test="aboutDepartment != null" >
+        #{aboutDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="develop != null" >
+        #{develop,jdbcType=VARCHAR},
+      </if>
+      <if test="arrange != null" >
+        #{arrange,jdbcType=VARCHAR},
+      </if>
+      <if test="specialMaterial != null" >
+        #{specialMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="engReviewer != null" >
+        #{engReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="engReviewerDate != null" >
+        #{engReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="purPeriod != null" >
+        #{purPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="purReviewer != null" >
+        #{purReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="purReviewerDate != null" >
+        #{purReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="proExpectedShortestCompletionTime != null" >
+        #{proExpectedShortestCompletionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="proExpectedLongestCompletionTime != null" >
+        #{proExpectedLongestCompletionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="installPeopleNumber != null" >
+        #{installPeopleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="installPeriod != null" >
+        #{installPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="isSpecialProcessing != null" >
+        #{isSpecialProcessing,jdbcType=BIT},
+      </if>
+      <if test="specialProcessing != null" >
+        #{specialProcessing,jdbcType=VARCHAR},
+      </if>
+      <if test="proExpectedStartTime != null" >
+        #{proExpectedStartTime,jdbcType=DATE},
+      </if>
+      <if test="proPreparer != null" >
+        #{proPreparer,jdbcType=VARCHAR},
+      </if>
+      <if test="proReviewer != null" >
+        #{proReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="proReviewerDate != null" >
+        #{proReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="isAttached != null" >
+        #{isAttached,jdbcType=BIT},
+      </if>
+      <if test="processInstanceId != null" >
+        #{processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="isCost != null" >
+        #{isCost,jdbcType=BIT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="projectContent != null" >
+        #{projectContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="engRemark != null" >
+        #{engRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purRemark != null" >
+        #{purRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="proRemark != null" >
+        #{proRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerExample" resultType="java.lang.Integer" >
+    select count(*) from sal_reviewer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sal_reviewer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quotationNo != null" >
+        quotation_no = #{record.quotationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoRecordNumber != null" >
+        info_record_number = #{record.infoRecordNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.project != null" >
+        project = #{record.project,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherProject != null" >
+        other_project = #{record.otherProject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packaging != null" >
+        packaging = #{record.packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherPackaging != null" >
+        other_packaging = #{record.otherPackaging,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delivery != null" >
+        delivery = #{record.delivery,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherDelivery != null" >
+        other_delivery = #{record.otherDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salPreparer != null" >
+        sal_preparer = #{record.salPreparer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destination != null" >
+        destination = #{record.destination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isInstall != null" >
+        is_install = #{record.isInstall,jdbcType=BIT},
+      </if>
+      <if test="record.expectedLayoutDate != null" >
+        expected_layout_date = #{record.expectedLayoutDate,jdbcType=DATE},
+      </if>
+      <if test="record.projectLeader != null" >
+        project_leader = #{record.projectLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importance != null" >
+        importance = #{record.importance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractDeliveryDate != null" >
+        contract_delivery_date = #{record.contractDeliveryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salReviewer != null" >
+        sal_reviewer = #{record.salReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requiredCostOfProject != null" >
+        required_cost_of_project = #{record.requiredCostOfProject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requiredCompletionDate != null" >
+        required_completion_date = #{record.requiredCompletionDate,jdbcType=DATE},
+      </if>
+      <if test="record.aboutDepartment != null" >
+        about_department = #{record.aboutDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.develop != null" >
+        develop = #{record.develop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrange != null" >
+        arrange = #{record.arrange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialMaterial != null" >
+        special_material = #{record.specialMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engReviewer != null" >
+        eng_reviewer = #{record.engReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engReviewerDate != null" >
+        eng_reviewer_date = #{record.engReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="record.purPeriod != null" >
+        pur_period = #{record.purPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purReviewer != null" >
+        pur_reviewer = #{record.purReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purReviewerDate != null" >
+        pur_reviewer_date = #{record.purReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="record.proExpectedShortestCompletionTime != null" >
+        pro_expected_shortest_completion_time = #{record.proExpectedShortestCompletionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proExpectedLongestCompletionTime != null" >
+        pro_expected_longest_completion_time = #{record.proExpectedLongestCompletionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.installPeopleNumber != null" >
+        install_people_number = #{record.installPeopleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.installPeriod != null" >
+        install_period = #{record.installPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSpecialProcessing != null" >
+        is_special_processing = #{record.isSpecialProcessing,jdbcType=BIT},
+      </if>
+      <if test="record.specialProcessing != null" >
+        special_processing = #{record.specialProcessing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proExpectedStartTime != null" >
+        pro_expected_start_time = #{record.proExpectedStartTime,jdbcType=DATE},
+      </if>
+      <if test="record.proPreparer != null" >
+        pro_preparer = #{record.proPreparer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proReviewer != null" >
+        pro_reviewer = #{record.proReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proReviewerDate != null" >
+        pro_reviewer_date = #{record.proReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="record.isAttached != null" >
+        is_attached = #{record.isAttached,jdbcType=BIT},
+      </if>
+      <if test="record.processInstanceId != null" >
+        process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCost != null" >
+        is_cost = #{record.isCost,jdbcType=BIT},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectContent != null" >
+        project_content = #{record.projectContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.engRemark != null" >
+        eng_remark = #{record.engRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.purRemark != null" >
+        pur_remark = #{record.purRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.proRemark != null" >
+        pro_remark = #{record.proRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sal_reviewer
+    set id = #{record.id,jdbcType=VARCHAR},
+      quotation_no = #{record.quotationNo,jdbcType=VARCHAR},
+      info_record_number = #{record.infoRecordNumber,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=DATE},
+      project = #{record.project,jdbcType=VARCHAR},
+      other_project = #{record.otherProject,jdbcType=VARCHAR},
+      packaging = #{record.packaging,jdbcType=VARCHAR},
+      other_packaging = #{record.otherPackaging,jdbcType=VARCHAR},
+      delivery = #{record.delivery,jdbcType=VARCHAR},
+      other_delivery = #{record.otherDelivery,jdbcType=VARCHAR},
+      sal_preparer = #{record.salPreparer,jdbcType=VARCHAR},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      is_install = #{record.isInstall,jdbcType=BIT},
+      expected_layout_date = #{record.expectedLayoutDate,jdbcType=DATE},
+      project_leader = #{record.projectLeader,jdbcType=VARCHAR},
+      importance = #{record.importance,jdbcType=VARCHAR},
+      contract_delivery_date = #{record.contractDeliveryDate,jdbcType=VARCHAR},
+      sal_reviewer = #{record.salReviewer,jdbcType=VARCHAR},
+      required_cost_of_project = #{record.requiredCostOfProject,jdbcType=VARCHAR},
+      required_completion_date = #{record.requiredCompletionDate,jdbcType=DATE},
+      about_department = #{record.aboutDepartment,jdbcType=VARCHAR},
+      develop = #{record.develop,jdbcType=VARCHAR},
+      arrange = #{record.arrange,jdbcType=VARCHAR},
+      special_material = #{record.specialMaterial,jdbcType=VARCHAR},
+      eng_reviewer = #{record.engReviewer,jdbcType=VARCHAR},
+      eng_reviewer_date = #{record.engReviewerDate,jdbcType=DATE},
+      pur_period = #{record.purPeriod,jdbcType=VARCHAR},
+      pur_reviewer = #{record.purReviewer,jdbcType=VARCHAR},
+      pur_reviewer_date = #{record.purReviewerDate,jdbcType=DATE},
+      pro_expected_shortest_completion_time = #{record.proExpectedShortestCompletionTime,jdbcType=VARCHAR},
+      pro_expected_longest_completion_time = #{record.proExpectedLongestCompletionTime,jdbcType=VARCHAR},
+      install_people_number = #{record.installPeopleNumber,jdbcType=VARCHAR},
+      install_period = #{record.installPeriod,jdbcType=VARCHAR},
+      is_special_processing = #{record.isSpecialProcessing,jdbcType=BIT},
+      special_processing = #{record.specialProcessing,jdbcType=VARCHAR},
+      pro_expected_start_time = #{record.proExpectedStartTime,jdbcType=DATE},
+      pro_preparer = #{record.proPreparer,jdbcType=VARCHAR},
+      pro_reviewer = #{record.proReviewer,jdbcType=VARCHAR},
+      pro_reviewer_date = #{record.proReviewerDate,jdbcType=DATE},
+      is_attached = #{record.isAttached,jdbcType=BIT},
+      process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
+      is_cost = #{record.isCost,jdbcType=BIT},
+      state = #{record.state,jdbcType=VARCHAR},
+      project_content = #{record.projectContent,jdbcType=LONGVARCHAR},
+      eng_remark = #{record.engRemark,jdbcType=LONGVARCHAR},
+      pur_remark = #{record.purRemark,jdbcType=LONGVARCHAR},
+      pro_remark = #{record.proRemark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sal_reviewer
+    set id = #{record.id,jdbcType=VARCHAR},
+      quotation_no = #{record.quotationNo,jdbcType=VARCHAR},
+      info_record_number = #{record.infoRecordNumber,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=DATE},
+      project = #{record.project,jdbcType=VARCHAR},
+      other_project = #{record.otherProject,jdbcType=VARCHAR},
+      packaging = #{record.packaging,jdbcType=VARCHAR},
+      other_packaging = #{record.otherPackaging,jdbcType=VARCHAR},
+      delivery = #{record.delivery,jdbcType=VARCHAR},
+      other_delivery = #{record.otherDelivery,jdbcType=VARCHAR},
+      sal_preparer = #{record.salPreparer,jdbcType=VARCHAR},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      is_install = #{record.isInstall,jdbcType=BIT},
+      expected_layout_date = #{record.expectedLayoutDate,jdbcType=DATE},
+      project_leader = #{record.projectLeader,jdbcType=VARCHAR},
+      importance = #{record.importance,jdbcType=VARCHAR},
+      contract_delivery_date = #{record.contractDeliveryDate,jdbcType=VARCHAR},
+      sal_reviewer = #{record.salReviewer,jdbcType=VARCHAR},
+      required_cost_of_project = #{record.requiredCostOfProject,jdbcType=VARCHAR},
+      required_completion_date = #{record.requiredCompletionDate,jdbcType=DATE},
+      about_department = #{record.aboutDepartment,jdbcType=VARCHAR},
+      develop = #{record.develop,jdbcType=VARCHAR},
+      arrange = #{record.arrange,jdbcType=VARCHAR},
+      special_material = #{record.specialMaterial,jdbcType=VARCHAR},
+      eng_reviewer = #{record.engReviewer,jdbcType=VARCHAR},
+      eng_reviewer_date = #{record.engReviewerDate,jdbcType=DATE},
+      pur_period = #{record.purPeriod,jdbcType=VARCHAR},
+      pur_reviewer = #{record.purReviewer,jdbcType=VARCHAR},
+      pur_reviewer_date = #{record.purReviewerDate,jdbcType=DATE},
+      pro_expected_shortest_completion_time = #{record.proExpectedShortestCompletionTime,jdbcType=VARCHAR},
+      pro_expected_longest_completion_time = #{record.proExpectedLongestCompletionTime,jdbcType=VARCHAR},
+      install_people_number = #{record.installPeopleNumber,jdbcType=VARCHAR},
+      install_period = #{record.installPeriod,jdbcType=VARCHAR},
+      is_special_processing = #{record.isSpecialProcessing,jdbcType=BIT},
+      special_processing = #{record.specialProcessing,jdbcType=VARCHAR},
+      pro_expected_start_time = #{record.proExpectedStartTime,jdbcType=DATE},
+      pro_preparer = #{record.proPreparer,jdbcType=VARCHAR},
+      pro_reviewer = #{record.proReviewer,jdbcType=VARCHAR},
+      pro_reviewer_date = #{record.proReviewerDate,jdbcType=DATE},
+      is_attached = #{record.isAttached,jdbcType=BIT},
+      process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
+      is_cost = #{record.isCost,jdbcType=BIT},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerWithBLOBs" >
+    update sal_reviewer
+    <set >
+      <if test="quotationNo != null" >
+        quotation_no = #{quotationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoRecordNumber != null" >
+        info_record_number = #{infoRecordNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="project != null" >
+        project = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="otherProject != null" >
+        other_project = #{otherProject,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        packaging = #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="otherPackaging != null" >
+        other_packaging = #{otherPackaging,jdbcType=VARCHAR},
+      </if>
+      <if test="delivery != null" >
+        delivery = #{delivery,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDelivery != null" >
+        other_delivery = #{otherDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="salPreparer != null" >
+        sal_preparer = #{salPreparer,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="isInstall != null" >
+        is_install = #{isInstall,jdbcType=BIT},
+      </if>
+      <if test="expectedLayoutDate != null" >
+        expected_layout_date = #{expectedLayoutDate,jdbcType=DATE},
+      </if>
+      <if test="projectLeader != null" >
+        project_leader = #{projectLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="importance != null" >
+        importance = #{importance,jdbcType=VARCHAR},
+      </if>
+      <if test="contractDeliveryDate != null" >
+        contract_delivery_date = #{contractDeliveryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewer != null" >
+        sal_reviewer = #{salReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="requiredCostOfProject != null" >
+        required_cost_of_project = #{requiredCostOfProject,jdbcType=VARCHAR},
+      </if>
+      <if test="requiredCompletionDate != null" >
+        required_completion_date = #{requiredCompletionDate,jdbcType=DATE},
+      </if>
+      <if test="aboutDepartment != null" >
+        about_department = #{aboutDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="develop != null" >
+        develop = #{develop,jdbcType=VARCHAR},
+      </if>
+      <if test="arrange != null" >
+        arrange = #{arrange,jdbcType=VARCHAR},
+      </if>
+      <if test="specialMaterial != null" >
+        special_material = #{specialMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="engReviewer != null" >
+        eng_reviewer = #{engReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="engReviewerDate != null" >
+        eng_reviewer_date = #{engReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="purPeriod != null" >
+        pur_period = #{purPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="purReviewer != null" >
+        pur_reviewer = #{purReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="purReviewerDate != null" >
+        pur_reviewer_date = #{purReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="proExpectedShortestCompletionTime != null" >
+        pro_expected_shortest_completion_time = #{proExpectedShortestCompletionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="proExpectedLongestCompletionTime != null" >
+        pro_expected_longest_completion_time = #{proExpectedLongestCompletionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="installPeopleNumber != null" >
+        install_people_number = #{installPeopleNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="installPeriod != null" >
+        install_period = #{installPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="isSpecialProcessing != null" >
+        is_special_processing = #{isSpecialProcessing,jdbcType=BIT},
+      </if>
+      <if test="specialProcessing != null" >
+        special_processing = #{specialProcessing,jdbcType=VARCHAR},
+      </if>
+      <if test="proExpectedStartTime != null" >
+        pro_expected_start_time = #{proExpectedStartTime,jdbcType=DATE},
+      </if>
+      <if test="proPreparer != null" >
+        pro_preparer = #{proPreparer,jdbcType=VARCHAR},
+      </if>
+      <if test="proReviewer != null" >
+        pro_reviewer = #{proReviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="proReviewerDate != null" >
+        pro_reviewer_date = #{proReviewerDate,jdbcType=DATE},
+      </if>
+      <if test="isAttached != null" >
+        is_attached = #{isAttached,jdbcType=BIT},
+      </if>
+      <if test="processInstanceId != null" >
+        process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="isCost != null" >
+        is_cost = #{isCost,jdbcType=BIT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="projectContent != null" >
+        project_content = #{projectContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="engRemark != null" >
+        eng_remark = #{engRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="purRemark != null" >
+        pur_remark = #{purRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="proRemark != null" >
+        pro_remark = #{proRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewerWithBLOBs" >
+    update sal_reviewer
+    set quotation_no = #{quotationNo,jdbcType=VARCHAR},
+      info_record_number = #{infoRecordNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      project = #{project,jdbcType=VARCHAR},
+      other_project = #{otherProject,jdbcType=VARCHAR},
+      packaging = #{packaging,jdbcType=VARCHAR},
+      other_packaging = #{otherPackaging,jdbcType=VARCHAR},
+      delivery = #{delivery,jdbcType=VARCHAR},
+      other_delivery = #{otherDelivery,jdbcType=VARCHAR},
+      sal_preparer = #{salPreparer,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      is_install = #{isInstall,jdbcType=BIT},
+      expected_layout_date = #{expectedLayoutDate,jdbcType=DATE},
+      project_leader = #{projectLeader,jdbcType=VARCHAR},
+      importance = #{importance,jdbcType=VARCHAR},
+      contract_delivery_date = #{contractDeliveryDate,jdbcType=VARCHAR},
+      sal_reviewer = #{salReviewer,jdbcType=VARCHAR},
+      required_cost_of_project = #{requiredCostOfProject,jdbcType=VARCHAR},
+      required_completion_date = #{requiredCompletionDate,jdbcType=DATE},
+      about_department = #{aboutDepartment,jdbcType=VARCHAR},
+      develop = #{develop,jdbcType=VARCHAR},
+      arrange = #{arrange,jdbcType=VARCHAR},
+      special_material = #{specialMaterial,jdbcType=VARCHAR},
+      eng_reviewer = #{engReviewer,jdbcType=VARCHAR},
+      eng_reviewer_date = #{engReviewerDate,jdbcType=DATE},
+      pur_period = #{purPeriod,jdbcType=VARCHAR},
+      pur_reviewer = #{purReviewer,jdbcType=VARCHAR},
+      pur_reviewer_date = #{purReviewerDate,jdbcType=DATE},
+      pro_expected_shortest_completion_time = #{proExpectedShortestCompletionTime,jdbcType=VARCHAR},
+      pro_expected_longest_completion_time = #{proExpectedLongestCompletionTime,jdbcType=VARCHAR},
+      install_people_number = #{installPeopleNumber,jdbcType=VARCHAR},
+      install_period = #{installPeriod,jdbcType=VARCHAR},
+      is_special_processing = #{isSpecialProcessing,jdbcType=BIT},
+      special_processing = #{specialProcessing,jdbcType=VARCHAR},
+      pro_expected_start_time = #{proExpectedStartTime,jdbcType=DATE},
+      pro_preparer = #{proPreparer,jdbcType=VARCHAR},
+      pro_reviewer = #{proReviewer,jdbcType=VARCHAR},
+      pro_reviewer_date = #{proReviewerDate,jdbcType=DATE},
+      is_attached = #{isAttached,jdbcType=BIT},
+      process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
+      is_cost = #{isCost,jdbcType=BIT},
+      state = #{state,jdbcType=VARCHAR},
+      project_content = #{projectContent,jdbcType=LONGVARCHAR},
+      eng_remark = #{engRemark,jdbcType=LONGVARCHAR},
+      pur_remark = #{purRemark,jdbcType=LONGVARCHAR},
+      pro_remark = #{proRemark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.sales.reviewer.SalReviewer" >
+    update sal_reviewer
+    set quotation_no = #{quotationNo,jdbcType=VARCHAR},
+      info_record_number = #{infoRecordNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      project = #{project,jdbcType=VARCHAR},
+      other_project = #{otherProject,jdbcType=VARCHAR},
+      packaging = #{packaging,jdbcType=VARCHAR},
+      other_packaging = #{otherPackaging,jdbcType=VARCHAR},
+      delivery = #{delivery,jdbcType=VARCHAR},
+      other_delivery = #{otherDelivery,jdbcType=VARCHAR},
+      sal_preparer = #{salPreparer,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      is_install = #{isInstall,jdbcType=BIT},
+      expected_layout_date = #{expectedLayoutDate,jdbcType=DATE},
+      project_leader = #{projectLeader,jdbcType=VARCHAR},
+      importance = #{importance,jdbcType=VARCHAR},
+      contract_delivery_date = #{contractDeliveryDate,jdbcType=VARCHAR},
+      sal_reviewer = #{salReviewer,jdbcType=VARCHAR},
+      required_cost_of_project = #{requiredCostOfProject,jdbcType=VARCHAR},
+      required_completion_date = #{requiredCompletionDate,jdbcType=DATE},
+      about_department = #{aboutDepartment,jdbcType=VARCHAR},
+      develop = #{develop,jdbcType=VARCHAR},
+      arrange = #{arrange,jdbcType=VARCHAR},
+      special_material = #{specialMaterial,jdbcType=VARCHAR},
+      eng_reviewer = #{engReviewer,jdbcType=VARCHAR},
+      eng_reviewer_date = #{engReviewerDate,jdbcType=DATE},
+      pur_period = #{purPeriod,jdbcType=VARCHAR},
+      pur_reviewer = #{purReviewer,jdbcType=VARCHAR},
+      pur_reviewer_date = #{purReviewerDate,jdbcType=DATE},
+      pro_expected_shortest_completion_time = #{proExpectedShortestCompletionTime,jdbcType=VARCHAR},
+      pro_expected_longest_completion_time = #{proExpectedLongestCompletionTime,jdbcType=VARCHAR},
+      install_people_number = #{installPeopleNumber,jdbcType=VARCHAR},
+      install_period = #{installPeriod,jdbcType=VARCHAR},
+      is_special_processing = #{isSpecialProcessing,jdbcType=BIT},
+      special_processing = #{specialProcessing,jdbcType=VARCHAR},
+      pro_expected_start_time = #{proExpectedStartTime,jdbcType=DATE},
+      pro_preparer = #{proPreparer,jdbcType=VARCHAR},
+      pro_reviewer = #{proReviewer,jdbcType=VARCHAR},
+      pro_reviewer_date = #{proReviewerDate,jdbcType=DATE},
+      is_attached = #{isAttached,jdbcType=BIT},
+      process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
+      is_cost = #{isCost,jdbcType=BIT},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 自定义 -->
+  <!-- 查询所有的交期评审表，用于页面的treegrid显示 (&gt;表达大于，&lt;表示小于)-->
+  <select id="findAllSalReviewerList" parameterType="cn.chiucheung.pojo.sales.reviewer.SalReviewerQueryVo" resultType="cn.chiucheung.pojo.sales.reviewer.SalReviewerCustom">
+  	SELECT 
+  	
+  	r.id id,
+  	r.quotation_no quotationNo,
+  	r.info_record_number infoRecordNumber,
+  	r.create_time createTime,
+  	r.project_leader projectLeader,
+  	r.special_material specialMaterial,
+  	r.is_attached isAttached,
+  	r.sal_preparer salPreparer,
+  	IF(p.END_TIME_,CONCAT('&lt;a href=&quot;queryTaskByProcessInstanceId.action?processInstanceId=',r.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核完成&lt;/a&gt;'),CONCAT('&lt;a href=&quot;queryActivityMap.action?processInstanceId=',r.process_instance_id,'&quot; target=&quot;_blank&quot;&gt;审核中&lt;/a&gt;')) processInstanceId,
+  	r.pro_expected_start_time proExpectedStartTime,
+  	r.pro_expected_shortest_completion_time proExpectedShortestCompletionTime,
+  	r.pro_expected_longest_completion_time proExpectedLongestCompletionTime,
+  	r.state state,
+  	c.work_card_no workCardNo
+  	
+  	FROM sal_reviewer r
+  	LEFT JOIN sal_work_card c ON r.id = c.sal_reviewer_id
+  	LEFT JOIN act_hi_procinst p ON r.process_instance_id = p.PROC_INST_ID_
+  	<if test="assignee != null and assignee != ''">
+		 INNER JOIN act_ru_task t ON t.PROC_INST_ID_ = r.process_instance_id AND t.ASSIGNEE_ = #{assignee}
+	</if>
+	<where>
+		<if test="quotationNo != null and quotationNo != ''">
+			 AND r.quotation_no LIKE '%${quotationNo}%-%'
+		</if>
+		<if test="quotationYear != null and quotationYear != ''">
+			 AND r.quotation_no LIKE '%-${quotationYear}%'
+		</if>
+		<if test="projectLeader != null and projectLeader != ''">
+			 AND r.project_leader LIKE '%${projectLeader}%'
+		</if>
+		<if test="startCreateTime != null and startCreateTime != ''">
+			 AND r.create_time &gt;= #{startCreateTime}
+		</if>
+		<if test="endCreateTime != null and endCreateTime != ''">
+			 AND r.create_time &lt;= #{endCreateTime}
+		</if>
+		<if test="isCost != null" >
+			 AND r.is_cost = #{isCost}
+		</if>
+  	</where>
+  	<if test="sort != null and sort != ''">
+  		<if test="sort == 'workCardNo'">
+  			ORDER BY RIGHT(workCardNo,2) ${order},LEFT(workCardNo,6) ${order}
+  		</if>
+  		<if test="sort == 'quotationNo'">
+  			ORDER BY RIGHT(quotationNo,2) ${order},LEFT(quotationNo,6) ${order}
+  		</if>
+  		<if test="sort != 'workCardNo' and sort != 'quotationNo'">
+  			ORDER BY #{sort} ${order}
+  		</if>
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY RIGHT(quotationNo,2) DESC,LEFT(quotationNo,6) DESC 
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+  
+  <!-- 查询所有的交期评审表的数量-->
+  <select id="findAllSalReviewerListTotal" parameterType="cn.chiucheung.pojo.sales.reviewer.SalReviewerQueryVo" resultType="string">
+  	SELECT 
+  		COUNT(*)
+  	FROM sal_reviewer r
+  	<if test="assignee != null and assignee != ''">
+		 INNER JOIN act_ru_task t ON t.PROC_INST_ID_ = r.process_instance_id AND t.ASSIGNEE_ = #{assignee}
+	</if>
+	<where>
+		<if test="quotationNo != null and quotationNo != ''">
+			 AND r.quotation_no LIKE '%${quotationNo}%-%'
+		</if>
+		<if test="quotationYear != null and quotationYear != ''">
+			 AND r.quotation_no LIKE '%-${quotationYear}%'
+		</if>
+		<if test="projectLeader != null and projectLeader != ''">
+			 AND r.project_leader LIKE '%${projectLeader}%'
+		</if>
+		<if test="startCreateTime != null and startCreateTime != ''">
+			 AND r.create_time &gt;= #{startCreateTime}
+		</if>
+		<if test="endCreateTime != null and endCreateTime != ''">
+			 AND r.create_time &lt;= #{endCreateTime}
+		</if>
+		<if test="isCost != null" >
+			 AND r.is_cost = #{isCost}
+		</if>
+  	</where>
+  </select>
+  
+  
+  <!-- 根据查询条件查询已完成的项目评审表-成本核算，用于成本核算关联 (&gt;表达大于，&lt;表示小于)-->
+  <select id="findCompleteReviewerCostCollect" parameterType="cn.chiucheung.pojo.sales.reviewer.SalReviewerQueryVo" resultType="cn.chiucheung.pojo.sales.reviewer.SalReviewerCustom">
+  	SELECT 
+  	
+	  	r.id id,
+	  	r.quotation_no quotationNo,
+	  	r.create_time createTime,
+	  	r.project_leader projectLeader,
+	  	r.sal_preparer salPreparer
+  	
+  	FROM 
+  		sal_reviewer r,
+  		act_hi_procinst p
+  	
+  	WHERE 
+  		p.PROC_INST_ID_ = r.process_instance_id 
+  	AND 
+  		p.END_TIME_ IS NOT NULL
+  	
+	<if test="quotationNo != null and quotationNo != ''">
+		 AND quotation_no LIKE '%${quotationNo}%-%'
+	</if>
+	<if test="quotationYear != null and quotationYear != ''">
+		 AND quotation_no LIKE '%-%${quotationYear}%'
+	</if>
+	<if test="startCreateTime != null and startCreateTime != ''">
+		 AND create_time &gt;= #{startCreateTime}
+	</if>
+	<if test="endCreateTime != null and endCreateTime != ''">
+		 AND create_time &lt;= #{endCreateTime}
+	</if>
+	<if test="isCost != null" >
+		 AND is_cost = #{isCost}
+	</if>
+	<if test="sort != null and sort != ''">
+  		<if test="sort == 'quotationNo'">
+  			ORDER BY RIGHT(quotationNo,2) ${order},LEFT(quotationNo,6) ${order}
+  		</if>
+  		<if test="sort != 'quotationNo'">
+  			ORDER BY #{sort} ${order}
+  		</if>
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY RIGHT(quotationNo,2) DESC,LEFT(quotationNo,6) DESC 
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+  </select>
+</mapper>

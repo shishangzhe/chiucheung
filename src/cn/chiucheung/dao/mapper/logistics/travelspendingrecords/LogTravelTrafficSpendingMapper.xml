@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.logistics.travelspendingrecords.LogTravelTrafficSpendingMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpending" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="start_point" property="startPoint" jdbcType="VARCHAR" />
+    <result column="end_point" property="endPoint" jdbcType="VARCHAR" />
+    <result column="traffic_type" property="trafficType" jdbcType="VARCHAR" />
+    <result column="invoice_type" property="invoiceType" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="log_travel_spending_records_id" property="logTravelSpendingRecordsId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sequence, start_point, end_point, traffic_type, invoice_type, price, log_travel_spending_records_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpendingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log_travel_traffic_spending
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from log_travel_traffic_spending
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from log_travel_traffic_spending
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpendingExample" >
+    delete from log_travel_traffic_spending
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpending" >
+    insert into log_travel_traffic_spending (id, sequence, start_point, 
+      end_point, traffic_type, invoice_type, 
+      price, log_travel_spending_records_id)
+    values (#{id,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{startPoint,jdbcType=VARCHAR}, 
+      #{endPoint,jdbcType=VARCHAR}, #{trafficType,jdbcType=VARCHAR}, #{invoiceType,jdbcType=VARCHAR}, 
+      #{price,jdbcType=REAL}, #{logTravelSpendingRecordsId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpending" >
+    insert into log_travel_traffic_spending
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="startPoint != null" >
+        start_point,
+      </if>
+      <if test="endPoint != null" >
+        end_point,
+      </if>
+      <if test="trafficType != null" >
+        traffic_type,
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="logTravelSpendingRecordsId != null" >
+        log_travel_spending_records_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="startPoint != null" >
+        #{startPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="endPoint != null" >
+        #{endPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficType != null" >
+        #{trafficType,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null" >
+        #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="logTravelSpendingRecordsId != null" >
+        #{logTravelSpendingRecordsId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpendingExample" resultType="java.lang.Integer" >
+    select count(*) from log_travel_traffic_spending
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log_travel_traffic_spending
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.startPoint != null" >
+        start_point = #{record.startPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endPoint != null" >
+        end_point = #{record.endPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trafficType != null" >
+        traffic_type = #{record.trafficType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceType != null" >
+        invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.logTravelSpendingRecordsId != null" >
+        log_travel_spending_records_id = #{record.logTravelSpendingRecordsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log_travel_traffic_spending
+    set id = #{record.id,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=INTEGER},
+      start_point = #{record.startPoint,jdbcType=VARCHAR},
+      end_point = #{record.endPoint,jdbcType=VARCHAR},
+      traffic_type = #{record.trafficType,jdbcType=VARCHAR},
+      invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=REAL},
+      log_travel_spending_records_id = #{record.logTravelSpendingRecordsId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpending" >
+    update log_travel_traffic_spending
+    <set >
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="startPoint != null" >
+        start_point = #{startPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="endPoint != null" >
+        end_point = #{endPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficType != null" >
+        traffic_type = #{trafficType,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="logTravelSpendingRecordsId != null" >
+        log_travel_spending_records_id = #{logTravelSpendingRecordsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.logistics.travelspendingrecords.LogTravelTrafficSpending" >
+    update log_travel_traffic_spending
+    set sequence = #{sequence,jdbcType=INTEGER},
+      start_point = #{startPoint,jdbcType=VARCHAR},
+      end_point = #{endPoint,jdbcType=VARCHAR},
+      traffic_type = #{trafficType,jdbcType=VARCHAR},
+      invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      log_travel_spending_records_id = #{logTravelSpendingRecordsId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into log_travel_traffic_spending (id, sequence, start_point, end_point, traffic_type, invoice_type, price, log_travel_spending_records_id) values 
+    
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.sequence},
+			#{item.startPoint},
+			#{item.endPoint},
+			#{item.trafficType},
+			#{item.invoiceType},
+			#{item.price},
+			#{item.logTravelSpendingRecordsId}
+		)
+	</foreach>
+  </insert>
+  
+  
+  <select id="findAllTravelTrafficSpendingByLogTravelSpendingRecordsId" parameterType="string" resultType="cn.chiucheung.pojo.logistics.travelspendingrecords.LogTravelSpendingRecordsSubsidiaryCustom">
+  	SELECT 
+  		id id,
+  		start_Point startPoint,
+  		end_Point endPoint,
+  		traffic_type trafficType,
+  		invoice_type invoiceType,
+  		price trafficPrice
+  	FROM 
+  		log_travel_traffic_spending 
+  	WHERE 
+  		log_travel_spending_records_id = #{id}
+  	ORDER BY sequence
+  </select>
+</mapper>

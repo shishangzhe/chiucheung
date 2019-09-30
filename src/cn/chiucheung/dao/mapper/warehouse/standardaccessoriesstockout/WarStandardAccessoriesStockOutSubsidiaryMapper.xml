@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiaryMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiary" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="war_standard_accessories_id" property="warStandardAccessoriesId" jdbcType="VARCHAR" />
+    <result column="war_standard_accessories_stock_out_id" property="warStandardAccessoriesStockOutId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sequence, quantity, remark, war_standard_accessories_id, war_standard_accessories_stock_out_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from war_standard_accessories_stock_out_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from war_standard_accessories_stock_out_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from war_standard_accessories_stock_out_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiaryExample" >
+    delete from war_standard_accessories_stock_out_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiary" >
+    insert into war_standard_accessories_stock_out_subsidiary (id, sequence, quantity, 
+      remark, war_standard_accessories_id, war_standard_accessories_stock_out_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{warStandardAccessoriesId,jdbcType=VARCHAR}, #{warStandardAccessoriesStockOutId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiary" >
+    insert into war_standard_accessories_stock_out_subsidiary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="warStandardAccessoriesId != null" >
+        war_standard_accessories_id,
+      </if>
+      <if test="warStandardAccessoriesStockOutId != null" >
+        war_standard_accessories_stock_out_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="warStandardAccessoriesId != null" >
+        #{warStandardAccessoriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="warStandardAccessoriesStockOutId != null" >
+        #{warStandardAccessoriesStockOutId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiaryExample" resultType="java.lang.Integer" >
+    select count(*) from war_standard_accessories_stock_out_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update war_standard_accessories_stock_out_subsidiary
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warStandardAccessoriesId != null" >
+        war_standard_accessories_id = #{record.warStandardAccessoriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warStandardAccessoriesStockOutId != null" >
+        war_standard_accessories_stock_out_id = #{record.warStandardAccessoriesStockOutId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update war_standard_accessories_stock_out_subsidiary
+    set id = #{record.id,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=INTEGER},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      war_standard_accessories_id = #{record.warStandardAccessoriesId,jdbcType=VARCHAR},
+      war_standard_accessories_stock_out_id = #{record.warStandardAccessoriesStockOutId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiary" >
+    update war_standard_accessories_stock_out_subsidiary
+    <set >
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="warStandardAccessoriesId != null" >
+        war_standard_accessories_id = #{warStandardAccessoriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="warStandardAccessoriesStockOutId != null" >
+        war_standard_accessories_stock_out_id = #{warStandardAccessoriesStockOutId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiary" >
+    update war_standard_accessories_stock_out_subsidiary
+    set sequence = #{sequence,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      war_standard_accessories_id = #{warStandardAccessoriesId,jdbcType=VARCHAR},
+      war_standard_accessories_stock_out_id = #{warStandardAccessoriesStockOutId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+    <!-- 自定义 -->
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+  	 insert into war_standard_accessories_stock_out_subsidiary (id, sequence, quantity, remark, war_standard_accessories_id, war_standard_accessories_stock_out_id) values 
+	   
+  	<foreach collection="list" item="item" index="index" separator=",">
+  		(
+			#{item.id},
+			#{item.sequence},
+			#{item.quantity},
+			#{item.remark},
+			#{item.warStandardAccessoriesId},
+			#{item.warStandardAccessoriesStockOutId}
+		)
+  	</foreach>
+  </insert>
+  
+  
+  <!-- 页面的数据展开 -->
+  <select id="findAllWarStandardAccessoriesStockOutSubsidiaryListByWarStandardAccessoriesStockOutId" parameterType="string" resultType="cn.chiucheung.pojo.warehouse.standardaccessoriesstockout.WarStandardAccessoriesStockOutSubsidiaryCustom">
+  	SELECT
+		ws.id id,
+		ws.sequence sequence,
+		wa.accessoriesCode accessoriesCode,
+		wa.accessoriesName accessoriesName,
+		wa.unit unit,
+		ws.war_standard_accessories_id warStandardAccessoriesId,
+		SUBSTRING(CONCAT(IFNULL(CONCAT(",",wa.specifications),''),IFNULL(CONCAT(",",wa.height),''),IFNULL(CONCAT(",",wa.width),''),IFNULL(CONCAT(",",wa.depth),''),IFNULL(CONCAT(",",wa.color),'')),2) accessoriesModel,
+		ws.quantity quantity,
+		wa.warehouseInventory warehouseInventory,
+		wa.warehousePositions warehousePositions,
+		ws.remark remark
+	FROM
+		war_standard_accessories_stock_out_subsidiary ws,
+		(
+			SELECT 
+				a.id id,
+				a.accessories_code accessoriesCode,
+				a.accessories_name accessoriesName,
+				d1.dictionarie_name unit,
+				a.product product,
+				d2.dictionarie_name classification,
+				d3.dictionarie_name materialProperties,
+				d4.dictionarie_name height,
+				d5.dictionarie_name width,
+				d6.dictionarie_name depth,
+				d7.dictionarie_name color,
+				d8.dictionarie_name specifications,
+				a.lowest_warehousing_quantity lowestWarehousingQuantity,
+				a.once_produce_quantity onceProduceQuantity,
+				a.min_produce_quantity minProduceQuantity,
+				a.each_number eachNumber,
+				d9.dictionarie_name warehouseInventory,
+				d10.dictionarie_name warehousePositions,
+				a.drawing_number drawingNumber,
+				a.remark remark,
+				f.id fileId
+			FROM 
+				war_standard_accessories a
+			LEFT JOIN war_standard_accessories_file f ON a.id = f.war_standard_accessories_id
+			LEFT JOIN war_base_data d1 ON a.unit = d1.dictionarie_code AND d1.keyword = '单位'
+			LEFT JOIN war_base_data d2 ON a.classification = d2.dictionarie_code AND d2.keyword = '分类'
+			LEFT JOIN war_base_data d3 ON a.material_properties = d3.dictionarie_code AND d3.keyword = '物料属性'
+			LEFT JOIN war_base_data d4 ON a.height = d4.dictionarie_code AND d4.keyword = '高度'
+			LEFT JOIN war_base_data d5 ON a.width = d5.dictionarie_code AND d5.keyword = '宽度'
+			LEFT JOIN war_base_data d6 ON a.depth = d6.dictionarie_code AND d6.keyword = '深度'
+			LEFT JOIN war_base_data d7 ON a.color = d7.dictionarie_code AND d7.keyword = '颜色'
+			LEFT JOIN war_base_data d8 ON a.specifications = d8.dictionarie_code AND d8.keyword = '规格型号'
+			LEFT JOIN war_base_data d9 ON a.warehouse_inventory = d9.dictionarie_code AND d9.keyword = '仓存'
+			LEFT JOIN war_base_data d10 ON a.warehouse_positions = d10.dictionarie_code AND d10.keyword = '仓位'
+		) wa
+	WHERE
+		ws.war_standard_accessories_stock_out_id = #{warStandardAccessoriesStockOutId}
+	AND
+		ws.war_standard_accessories_id = wa.id
+	ORDER BY ws.sequence
+  </select>
+  
+  <!-- 根据物料id查询所有未完成审核的入库单的物料数量总和 -->
+  <select id="calculateDifferencesQuantityForInventoryAndAllNotAuditCompletedByWarStandardAccessoriesId" parameterType="string" resultType="java.lang.Integer">
+  	SELECT
+		CONVERT(wi.existing_quantity,SIGNED)-IFNULL(w.quantity,0)
+	FROM
+		war_standard_accessories_inventory wi
+	LEFT JOIN
+		(
+			SELECT
+				SUM(ws.quantity) quantity,
+				ws.war_standard_accessories_id
+			FROM
+				war_standard_accessories_stock_out wo,
+				war_standard_accessories_stock_out_subsidiary ws,
+				act_hi_procinst p
+			WHERE
+				ws.war_standard_accessories_stock_out_id = wo.id
+			<if test="warStandardAccessoriesStockOutId != null and warStandardAccessoriesStockOutId != ''">
+				AND wo.id != #{warStandardAccessoriesStockOutId}
+			</if>
+			AND
+				wo.process_instance_id = p.PROC_INST_ID_
+			AND
+				p.END_TIME_ IS NULL
+			GROUP BY ws.war_standard_accessories_id
+		) w ON wi.war_standard_accessories_id = w.war_standard_accessories_id
+	WHERE
+		wi.war_standard_accessories_id = #{warStandardAccessoriesId}
+  </select>
+</mapper>

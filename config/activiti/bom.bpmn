@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="bom" name="Bom" isExecutable="true">
+    <startEvent id="startevent1" name="Start" activiti:initiator="loginName"></startEvent>
+    <userTask id="proReceive" name="生产接收" activiti:candidateUsers="pro05"></userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow3" sourceRef="proReceive" targetRef="endevent1"></sequenceFlow>
+    <userTask id="engReviewer" name="工程审核" activiti:candidateUsers="eng01,eng02,eng04,eng05,eng10,eng11,eng16,eng27,eng22,eng23"></userTask>
+    <sequenceFlow id="flow5" sourceRef="engReviewer" targetRef="proReceive"></sequenceFlow>
+    <userTask id="startAudit" name="发起审核" activiti:assignee="${loginName}"></userTask>
+    <sequenceFlow id="flow6" sourceRef="startevent1" targetRef="startAudit"></sequenceFlow>
+    <sequenceFlow id="flow7" sourceRef="startAudit" targetRef="engReviewer"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_bom">
+    <bpmndi:BPMNPlane bpmnElement="bom" id="BPMNPlane_bom">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="580.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="proReceive" id="BPMNShape_proReceive">
+        <omgdc:Bounds height="55.0" width="105.0" x="545.0" y="390.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="580.0" y="521.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="engReviewer" id="BPMNShape_engReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="545.0" y="271.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startAudit" id="BPMNShape_startAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="545.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="597.0" y="445.0"></omgdi:waypoint>
+        <omgdi:waypoint x="597.0" y="521.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="597.0" y="326.0"></omgdi:waypoint>
+        <omgdi:waypoint x="597.0" y="390.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="597.0" y="95.0"></omgdi:waypoint>
+        <omgdi:waypoint x="597.0" y="150.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="597.0" y="205.0"></omgdi:waypoint>
+        <omgdi:waypoint x="597.0" y="271.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

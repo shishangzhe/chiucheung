@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.sales.workcard.SalWorkCardKztMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.sales.workcard.SalWorkCardKzt" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="VARCHAR" />
+    <result column="bedplate_material" property="bedplateMaterial" jdbcType="VARCHAR" />
+    <result column="bedplate_material_color" property="bedplateMaterialColor" jdbcType="VARCHAR" />
+    <result column="other_bedplate_material" property="otherBedplateMaterial" jdbcType="VARCHAR" />
+    <result column="bedplate_color" property="bedplateColor" jdbcType="VARCHAR" />
+    <result column="internal_parts_color" property="internalPartsColor" jdbcType="VARCHAR" />
+    <result column="internal_parts_color_content" property="internalPartsColorContent" jdbcType="VARCHAR" />
+    <result column="keybord_iron" property="keybordIron" jdbcType="VARCHAR" />
+    <result column="keybord_zs" property="keybordZs" jdbcType="VARCHAR" />
+    <result column="bottom_ark_bottom_board" property="bottomArkBottomBoard" jdbcType="VARCHAR" />
+    <result column="babb_remark" property="babbRemark" jdbcType="VARCHAR" />
+    <result column="bottom_ark_layer_board" property="bottomArkLayerBoard" jdbcType="VARCHAR" />
+    <result column="balb_quantity" property="balbQuantity" jdbcType="VARCHAR" />
+    <result column="balb_remark" property="balbRemark" jdbcType="VARCHAR" />
+    <result column="ab_quantity" property="abQuantity" jdbcType="VARCHAR" />
+    <result column="ab_remark" property="abRemark" jdbcType="VARCHAR" />
+    <result column="keyboard_basin" property="keyboardBasin" jdbcType="VARCHAR" />
+    <result column="kb_quantity" property="kbQuantity" jdbcType="VARCHAR" />
+    <result column="kb_remark" property="kbRemark" jdbcType="VARCHAR" />
+    <result column="joe_code" property="joeCode" jdbcType="VARCHAR" />
+    <result column="jc_quantity" property="jcQuantity" jdbcType="VARCHAR" />
+    <result column="jc_remark" property="jcRemark" jdbcType="VARCHAR" />
+    <result column="power_brand" property="powerBrand" jdbcType="VARCHAR" />
+    <result column="power_digits" property="powerDigits" jdbcType="VARCHAR" />
+    <result column="power_shell_color" property="powerShellColor" jdbcType="VARCHAR" />
+    <result column="power_socket_way" property="powerSocketWay" jdbcType="VARCHAR" />
+    <result column="power_cord" property="powerCord" jdbcType="VARCHAR" />
+    <result column="power_wiring" property="powerWiring" jdbcType="VARCHAR" />
+    <result column="power_wiring_length" property="powerWiringLength" jdbcType="VARCHAR" />
+    <result column="power_plug" property="powerPlug" jdbcType="VARCHAR" />
+    <result column="p_quantity" property="pQuantity" jdbcType="VARCHAR" />
+    <result column="other_power" property="otherPower" jdbcType="VARCHAR" />
+    <result column="op_quantity" property="opQuantity" jdbcType="VARCHAR" />
+    <result column="op_remark" property="opRemark" jdbcType="VARCHAR" />
+    <result column="s_quantity" property="sQuantity" jdbcType="VARCHAR" />
+    <result column="s_remark" property="sRemark" jdbcType="VARCHAR" />
+    <result column="lcd_stents" property="lcdStents" jdbcType="VARCHAR" />
+    <result column="lcd_stents_color" property="lcdStentsColor" jdbcType="VARCHAR" />
+    <result column="ls_quantity" property="lsQuantity" jdbcType="VARCHAR" />
+    <result column="sal_work_card_subsidiary_id" property="salWorkCardSubsidiaryId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.chiucheung.po.sales.workcard.SalWorkCardKztWithBLOBs" extends="BaseResultMap" >
+    <result column="all_one_remark" property="allOneRemark" jdbcType="LONGVARCHAR" />
+    <result column="side_panel_color" property="sidePanelColor" jdbcType="LONGVARCHAR" />
+    <result column="other_iron_color" property="otherIronColor" jdbcType="LONGVARCHAR" />
+    <result column="other_each_config" property="otherEachConfig" jdbcType="LONGVARCHAR" />
+    <result column="p_remark" property="pRemark" jdbcType="LONGVARCHAR" />
+    <result column="ls_remark" property="lsRemark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sequence, bedplate_material, bedplate_material_color, other_bedplate_material, 
+    bedplate_color, internal_parts_color, internal_parts_color_content, keybord_iron, 
+    keybord_zs, bottom_ark_bottom_board, babb_remark, bottom_ark_layer_board, balb_quantity, 
+    balb_remark, ab_quantity, ab_remark, keyboard_basin, kb_quantity, kb_remark, joe_code, 
+    jc_quantity, jc_remark, power_brand, power_digits, power_shell_color, power_socket_way, 
+    power_cord, power_wiring, power_wiring_length, power_plug, p_quantity, other_power, 
+    op_quantity, op_remark, s_quantity, s_remark, lcd_stents, lcd_stents_color, ls_quantity, 
+    sal_work_card_subsidiary_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    all_one_remark, side_panel_color, other_iron_color, other_each_config, p_remark, 
+    ls_remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sal_work_card_kzt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sal_work_card_kzt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sal_work_card_kzt
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sal_work_card_kzt
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztExample" >
+    delete from sal_work_card_kzt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztWithBLOBs" >
+    insert into sal_work_card_kzt (id, sequence, bedplate_material, 
+      bedplate_material_color, other_bedplate_material, 
+      bedplate_color, internal_parts_color, internal_parts_color_content, 
+      keybord_iron, keybord_zs, bottom_ark_bottom_board, 
+      babb_remark, bottom_ark_layer_board, balb_quantity, 
+      balb_remark, ab_quantity, ab_remark, 
+      keyboard_basin, kb_quantity, kb_remark, 
+      joe_code, jc_quantity, jc_remark, 
+      power_brand, power_digits, power_shell_color, 
+      power_socket_way, power_cord, power_wiring, 
+      power_wiring_length, power_plug, p_quantity, 
+      other_power, op_quantity, op_remark, 
+      s_quantity, s_remark, lcd_stents, 
+      lcd_stents_color, ls_quantity, sal_work_card_subsidiary_id, 
+      all_one_remark, side_panel_color, other_iron_color, 
+      other_each_config, p_remark, ls_remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sequence,jdbcType=VARCHAR}, #{bedplateMaterial,jdbcType=VARCHAR}, 
+      #{bedplateMaterialColor,jdbcType=VARCHAR}, #{otherBedplateMaterial,jdbcType=VARCHAR}, 
+      #{bedplateColor,jdbcType=VARCHAR}, #{internalPartsColor,jdbcType=VARCHAR}, #{internalPartsColorContent,jdbcType=VARCHAR}, 
+      #{keybordIron,jdbcType=VARCHAR}, #{keybordZs,jdbcType=VARCHAR}, #{bottomArkBottomBoard,jdbcType=VARCHAR}, 
+      #{babbRemark,jdbcType=VARCHAR}, #{bottomArkLayerBoard,jdbcType=VARCHAR}, #{balbQuantity,jdbcType=VARCHAR}, 
+      #{balbRemark,jdbcType=VARCHAR}, #{abQuantity,jdbcType=VARCHAR}, #{abRemark,jdbcType=VARCHAR}, 
+      #{keyboardBasin,jdbcType=VARCHAR}, #{kbQuantity,jdbcType=VARCHAR}, #{kbRemark,jdbcType=VARCHAR}, 
+      #{joeCode,jdbcType=VARCHAR}, #{jcQuantity,jdbcType=VARCHAR}, #{jcRemark,jdbcType=VARCHAR}, 
+      #{powerBrand,jdbcType=VARCHAR}, #{powerDigits,jdbcType=VARCHAR}, #{powerShellColor,jdbcType=VARCHAR}, 
+      #{powerSocketWay,jdbcType=VARCHAR}, #{powerCord,jdbcType=VARCHAR}, #{powerWiring,jdbcType=VARCHAR}, 
+      #{powerWiringLength,jdbcType=VARCHAR}, #{powerPlug,jdbcType=VARCHAR}, #{pQuantity,jdbcType=VARCHAR}, 
+      #{otherPower,jdbcType=VARCHAR}, #{opQuantity,jdbcType=VARCHAR}, #{opRemark,jdbcType=VARCHAR}, 
+      #{sQuantity,jdbcType=VARCHAR}, #{sRemark,jdbcType=VARCHAR}, #{lcdStents,jdbcType=VARCHAR}, 
+      #{lcdStentsColor,jdbcType=VARCHAR}, #{lsQuantity,jdbcType=VARCHAR}, #{salWorkCardSubsidiaryId,jdbcType=VARCHAR}, 
+      #{allOneRemark,jdbcType=LONGVARCHAR}, #{sidePanelColor,jdbcType=LONGVARCHAR}, #{otherIronColor,jdbcType=LONGVARCHAR}, 
+      #{otherEachConfig,jdbcType=LONGVARCHAR}, #{pRemark,jdbcType=LONGVARCHAR}, #{lsRemark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztWithBLOBs" >
+    insert into sal_work_card_kzt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="bedplateMaterial != null" >
+        bedplate_material,
+      </if>
+      <if test="bedplateMaterialColor != null" >
+        bedplate_material_color,
+      </if>
+      <if test="otherBedplateMaterial != null" >
+        other_bedplate_material,
+      </if>
+      <if test="bedplateColor != null" >
+        bedplate_color,
+      </if>
+      <if test="internalPartsColor != null" >
+        internal_parts_color,
+      </if>
+      <if test="internalPartsColorContent != null" >
+        internal_parts_color_content,
+      </if>
+      <if test="keybordIron != null" >
+        keybord_iron,
+      </if>
+      <if test="keybordZs != null" >
+        keybord_zs,
+      </if>
+      <if test="bottomArkBottomBoard != null" >
+        bottom_ark_bottom_board,
+      </if>
+      <if test="babbRemark != null" >
+        babb_remark,
+      </if>
+      <if test="bottomArkLayerBoard != null" >
+        bottom_ark_layer_board,
+      </if>
+      <if test="balbQuantity != null" >
+        balb_quantity,
+      </if>
+      <if test="balbRemark != null" >
+        balb_remark,
+      </if>
+      <if test="abQuantity != null" >
+        ab_quantity,
+      </if>
+      <if test="abRemark != null" >
+        ab_remark,
+      </if>
+      <if test="keyboardBasin != null" >
+        keyboard_basin,
+      </if>
+      <if test="kbQuantity != null" >
+        kb_quantity,
+      </if>
+      <if test="kbRemark != null" >
+        kb_remark,
+      </if>
+      <if test="joeCode != null" >
+        joe_code,
+      </if>
+      <if test="jcQuantity != null" >
+        jc_quantity,
+      </if>
+      <if test="jcRemark != null" >
+        jc_remark,
+      </if>
+      <if test="powerBrand != null" >
+        power_brand,
+      </if>
+      <if test="powerDigits != null" >
+        power_digits,
+      </if>
+      <if test="powerShellColor != null" >
+        power_shell_color,
+      </if>
+      <if test="powerSocketWay != null" >
+        power_socket_way,
+      </if>
+      <if test="powerCord != null" >
+        power_cord,
+      </if>
+      <if test="powerWiring != null" >
+        power_wiring,
+      </if>
+      <if test="powerWiringLength != null" >
+        power_wiring_length,
+      </if>
+      <if test="powerPlug != null" >
+        power_plug,
+      </if>
+      <if test="pQuantity != null" >
+        p_quantity,
+      </if>
+      <if test="otherPower != null" >
+        other_power,
+      </if>
+      <if test="opQuantity != null" >
+        op_quantity,
+      </if>
+      <if test="opRemark != null" >
+        op_remark,
+      </if>
+      <if test="sQuantity != null" >
+        s_quantity,
+      </if>
+      <if test="sRemark != null" >
+        s_remark,
+      </if>
+      <if test="lcdStents != null" >
+        lcd_stents,
+      </if>
+      <if test="lcdStentsColor != null" >
+        lcd_stents_color,
+      </if>
+      <if test="lsQuantity != null" >
+        ls_quantity,
+      </if>
+      <if test="salWorkCardSubsidiaryId != null" >
+        sal_work_card_subsidiary_id,
+      </if>
+      <if test="allOneRemark != null" >
+        all_one_remark,
+      </if>
+      <if test="sidePanelColor != null" >
+        side_panel_color,
+      </if>
+      <if test="otherIronColor != null" >
+        other_iron_color,
+      </if>
+      <if test="otherEachConfig != null" >
+        other_each_config,
+      </if>
+      <if test="pRemark != null" >
+        p_remark,
+      </if>
+      <if test="lsRemark != null" >
+        ls_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="bedplateMaterial != null" >
+        #{bedplateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="bedplateMaterialColor != null" >
+        #{bedplateMaterialColor,jdbcType=VARCHAR},
+      </if>
+      <if test="otherBedplateMaterial != null" >
+        #{otherBedplateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="bedplateColor != null" >
+        #{bedplateColor,jdbcType=VARCHAR},
+      </if>
+      <if test="internalPartsColor != null" >
+        #{internalPartsColor,jdbcType=VARCHAR},
+      </if>
+      <if test="internalPartsColorContent != null" >
+        #{internalPartsColorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="keybordIron != null" >
+        #{keybordIron,jdbcType=VARCHAR},
+      </if>
+      <if test="keybordZs != null" >
+        #{keybordZs,jdbcType=VARCHAR},
+      </if>
+      <if test="bottomArkBottomBoard != null" >
+        #{bottomArkBottomBoard,jdbcType=VARCHAR},
+      </if>
+      <if test="babbRemark != null" >
+        #{babbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="bottomArkLayerBoard != null" >
+        #{bottomArkLayerBoard,jdbcType=VARCHAR},
+      </if>
+      <if test="balbQuantity != null" >
+        #{balbQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="balbRemark != null" >
+        #{balbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="abQuantity != null" >
+        #{abQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="abRemark != null" >
+        #{abRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="keyboardBasin != null" >
+        #{keyboardBasin,jdbcType=VARCHAR},
+      </if>
+      <if test="kbQuantity != null" >
+        #{kbQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="kbRemark != null" >
+        #{kbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="joeCode != null" >
+        #{joeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jcQuantity != null" >
+        #{jcQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="jcRemark != null" >
+        #{jcRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="powerBrand != null" >
+        #{powerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDigits != null" >
+        #{powerDigits,jdbcType=VARCHAR},
+      </if>
+      <if test="powerShellColor != null" >
+        #{powerShellColor,jdbcType=VARCHAR},
+      </if>
+      <if test="powerSocketWay != null" >
+        #{powerSocketWay,jdbcType=VARCHAR},
+      </if>
+      <if test="powerCord != null" >
+        #{powerCord,jdbcType=VARCHAR},
+      </if>
+      <if test="powerWiring != null" >
+        #{powerWiring,jdbcType=VARCHAR},
+      </if>
+      <if test="powerWiringLength != null" >
+        #{powerWiringLength,jdbcType=VARCHAR},
+      </if>
+      <if test="powerPlug != null" >
+        #{powerPlug,jdbcType=VARCHAR},
+      </if>
+      <if test="pQuantity != null" >
+        #{pQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="otherPower != null" >
+        #{otherPower,jdbcType=VARCHAR},
+      </if>
+      <if test="opQuantity != null" >
+        #{opQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="opRemark != null" >
+        #{opRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sQuantity != null" >
+        #{sQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="sRemark != null" >
+        #{sRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="lcdStents != null" >
+        #{lcdStents,jdbcType=VARCHAR},
+      </if>
+      <if test="lcdStentsColor != null" >
+        #{lcdStentsColor,jdbcType=VARCHAR},
+      </if>
+      <if test="lsQuantity != null" >
+        #{lsQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="salWorkCardSubsidiaryId != null" >
+        #{salWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="allOneRemark != null" >
+        #{allOneRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sidePanelColor != null" >
+        #{sidePanelColor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherIronColor != null" >
+        #{otherIronColor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherEachConfig != null" >
+        #{otherEachConfig,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pRemark != null" >
+        #{pRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lsRemark != null" >
+        #{lsRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztExample" resultType="java.lang.Integer" >
+    select count(*) from sal_work_card_kzt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sal_work_card_kzt
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        sequence = #{record.sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bedplateMaterial != null" >
+        bedplate_material = #{record.bedplateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bedplateMaterialColor != null" >
+        bedplate_material_color = #{record.bedplateMaterialColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherBedplateMaterial != null" >
+        other_bedplate_material = #{record.otherBedplateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bedplateColor != null" >
+        bedplate_color = #{record.bedplateColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internalPartsColor != null" >
+        internal_parts_color = #{record.internalPartsColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internalPartsColorContent != null" >
+        internal_parts_color_content = #{record.internalPartsColorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keybordIron != null" >
+        keybord_iron = #{record.keybordIron,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keybordZs != null" >
+        keybord_zs = #{record.keybordZs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bottomArkBottomBoard != null" >
+        bottom_ark_bottom_board = #{record.bottomArkBottomBoard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.babbRemark != null" >
+        babb_remark = #{record.babbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bottomArkLayerBoard != null" >
+        bottom_ark_layer_board = #{record.bottomArkLayerBoard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balbQuantity != null" >
+        balb_quantity = #{record.balbQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balbRemark != null" >
+        balb_remark = #{record.balbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abQuantity != null" >
+        ab_quantity = #{record.abQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abRemark != null" >
+        ab_remark = #{record.abRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyboardBasin != null" >
+        keyboard_basin = #{record.keyboardBasin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kbQuantity != null" >
+        kb_quantity = #{record.kbQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kbRemark != null" >
+        kb_remark = #{record.kbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joeCode != null" >
+        joe_code = #{record.joeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jcQuantity != null" >
+        jc_quantity = #{record.jcQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jcRemark != null" >
+        jc_remark = #{record.jcRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerBrand != null" >
+        power_brand = #{record.powerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerDigits != null" >
+        power_digits = #{record.powerDigits,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerShellColor != null" >
+        power_shell_color = #{record.powerShellColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerSocketWay != null" >
+        power_socket_way = #{record.powerSocketWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerCord != null" >
+        power_cord = #{record.powerCord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerWiring != null" >
+        power_wiring = #{record.powerWiring,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerWiringLength != null" >
+        power_wiring_length = #{record.powerWiringLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerPlug != null" >
+        power_plug = #{record.powerPlug,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pQuantity != null" >
+        p_quantity = #{record.pQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherPower != null" >
+        other_power = #{record.otherPower,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opQuantity != null" >
+        op_quantity = #{record.opQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opRemark != null" >
+        op_remark = #{record.opRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sQuantity != null" >
+        s_quantity = #{record.sQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sRemark != null" >
+        s_remark = #{record.sRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lcdStents != null" >
+        lcd_stents = #{record.lcdStents,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lcdStentsColor != null" >
+        lcd_stents_color = #{record.lcdStentsColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lsQuantity != null" >
+        ls_quantity = #{record.lsQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salWorkCardSubsidiaryId != null" >
+        sal_work_card_subsidiary_id = #{record.salWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allOneRemark != null" >
+        all_one_remark = #{record.allOneRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sidePanelColor != null" >
+        side_panel_color = #{record.sidePanelColor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.otherIronColor != null" >
+        other_iron_color = #{record.otherIronColor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.otherEachConfig != null" >
+        other_each_config = #{record.otherEachConfig,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.pRemark != null" >
+        p_remark = #{record.pRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.lsRemark != null" >
+        ls_remark = #{record.lsRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sal_work_card_kzt
+    set id = #{record.id,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=VARCHAR},
+      bedplate_material = #{record.bedplateMaterial,jdbcType=VARCHAR},
+      bedplate_material_color = #{record.bedplateMaterialColor,jdbcType=VARCHAR},
+      other_bedplate_material = #{record.otherBedplateMaterial,jdbcType=VARCHAR},
+      bedplate_color = #{record.bedplateColor,jdbcType=VARCHAR},
+      internal_parts_color = #{record.internalPartsColor,jdbcType=VARCHAR},
+      internal_parts_color_content = #{record.internalPartsColorContent,jdbcType=VARCHAR},
+      keybord_iron = #{record.keybordIron,jdbcType=VARCHAR},
+      keybord_zs = #{record.keybordZs,jdbcType=VARCHAR},
+      bottom_ark_bottom_board = #{record.bottomArkBottomBoard,jdbcType=VARCHAR},
+      babb_remark = #{record.babbRemark,jdbcType=VARCHAR},
+      bottom_ark_layer_board = #{record.bottomArkLayerBoard,jdbcType=VARCHAR},
+      balb_quantity = #{record.balbQuantity,jdbcType=VARCHAR},
+      balb_remark = #{record.balbRemark,jdbcType=VARCHAR},
+      ab_quantity = #{record.abQuantity,jdbcType=VARCHAR},
+      ab_remark = #{record.abRemark,jdbcType=VARCHAR},
+      keyboard_basin = #{record.keyboardBasin,jdbcType=VARCHAR},
+      kb_quantity = #{record.kbQuantity,jdbcType=VARCHAR},
+      kb_remark = #{record.kbRemark,jdbcType=VARCHAR},
+      joe_code = #{record.joeCode,jdbcType=VARCHAR},
+      jc_quantity = #{record.jcQuantity,jdbcType=VARCHAR},
+      jc_remark = #{record.jcRemark,jdbcType=VARCHAR},
+      power_brand = #{record.powerBrand,jdbcType=VARCHAR},
+      power_digits = #{record.powerDigits,jdbcType=VARCHAR},
+      power_shell_color = #{record.powerShellColor,jdbcType=VARCHAR},
+      power_socket_way = #{record.powerSocketWay,jdbcType=VARCHAR},
+      power_cord = #{record.powerCord,jdbcType=VARCHAR},
+      power_wiring = #{record.powerWiring,jdbcType=VARCHAR},
+      power_wiring_length = #{record.powerWiringLength,jdbcType=VARCHAR},
+      power_plug = #{record.powerPlug,jdbcType=VARCHAR},
+      p_quantity = #{record.pQuantity,jdbcType=VARCHAR},
+      other_power = #{record.otherPower,jdbcType=VARCHAR},
+      op_quantity = #{record.opQuantity,jdbcType=VARCHAR},
+      op_remark = #{record.opRemark,jdbcType=VARCHAR},
+      s_quantity = #{record.sQuantity,jdbcType=VARCHAR},
+      s_remark = #{record.sRemark,jdbcType=VARCHAR},
+      lcd_stents = #{record.lcdStents,jdbcType=VARCHAR},
+      lcd_stents_color = #{record.lcdStentsColor,jdbcType=VARCHAR},
+      ls_quantity = #{record.lsQuantity,jdbcType=VARCHAR},
+      sal_work_card_subsidiary_id = #{record.salWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      all_one_remark = #{record.allOneRemark,jdbcType=LONGVARCHAR},
+      side_panel_color = #{record.sidePanelColor,jdbcType=LONGVARCHAR},
+      other_iron_color = #{record.otherIronColor,jdbcType=LONGVARCHAR},
+      other_each_config = #{record.otherEachConfig,jdbcType=LONGVARCHAR},
+      p_remark = #{record.pRemark,jdbcType=LONGVARCHAR},
+      ls_remark = #{record.lsRemark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sal_work_card_kzt
+    set id = #{record.id,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=VARCHAR},
+      bedplate_material = #{record.bedplateMaterial,jdbcType=VARCHAR},
+      bedplate_material_color = #{record.bedplateMaterialColor,jdbcType=VARCHAR},
+      other_bedplate_material = #{record.otherBedplateMaterial,jdbcType=VARCHAR},
+      bedplate_color = #{record.bedplateColor,jdbcType=VARCHAR},
+      internal_parts_color = #{record.internalPartsColor,jdbcType=VARCHAR},
+      internal_parts_color_content = #{record.internalPartsColorContent,jdbcType=VARCHAR},
+      keybord_iron = #{record.keybordIron,jdbcType=VARCHAR},
+      keybord_zs = #{record.keybordZs,jdbcType=VARCHAR},
+      bottom_ark_bottom_board = #{record.bottomArkBottomBoard,jdbcType=VARCHAR},
+      babb_remark = #{record.babbRemark,jdbcType=VARCHAR},
+      bottom_ark_layer_board = #{record.bottomArkLayerBoard,jdbcType=VARCHAR},
+      balb_quantity = #{record.balbQuantity,jdbcType=VARCHAR},
+      balb_remark = #{record.balbRemark,jdbcType=VARCHAR},
+      ab_quantity = #{record.abQuantity,jdbcType=VARCHAR},
+      ab_remark = #{record.abRemark,jdbcType=VARCHAR},
+      keyboard_basin = #{record.keyboardBasin,jdbcType=VARCHAR},
+      kb_quantity = #{record.kbQuantity,jdbcType=VARCHAR},
+      kb_remark = #{record.kbRemark,jdbcType=VARCHAR},
+      joe_code = #{record.joeCode,jdbcType=VARCHAR},
+      jc_quantity = #{record.jcQuantity,jdbcType=VARCHAR},
+      jc_remark = #{record.jcRemark,jdbcType=VARCHAR},
+      power_brand = #{record.powerBrand,jdbcType=VARCHAR},
+      power_digits = #{record.powerDigits,jdbcType=VARCHAR},
+      power_shell_color = #{record.powerShellColor,jdbcType=VARCHAR},
+      power_socket_way = #{record.powerSocketWay,jdbcType=VARCHAR},
+      power_cord = #{record.powerCord,jdbcType=VARCHAR},
+      power_wiring = #{record.powerWiring,jdbcType=VARCHAR},
+      power_wiring_length = #{record.powerWiringLength,jdbcType=VARCHAR},
+      power_plug = #{record.powerPlug,jdbcType=VARCHAR},
+      p_quantity = #{record.pQuantity,jdbcType=VARCHAR},
+      other_power = #{record.otherPower,jdbcType=VARCHAR},
+      op_quantity = #{record.opQuantity,jdbcType=VARCHAR},
+      op_remark = #{record.opRemark,jdbcType=VARCHAR},
+      s_quantity = #{record.sQuantity,jdbcType=VARCHAR},
+      s_remark = #{record.sRemark,jdbcType=VARCHAR},
+      lcd_stents = #{record.lcdStents,jdbcType=VARCHAR},
+      lcd_stents_color = #{record.lcdStentsColor,jdbcType=VARCHAR},
+      ls_quantity = #{record.lsQuantity,jdbcType=VARCHAR},
+      sal_work_card_subsidiary_id = #{record.salWorkCardSubsidiaryId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztWithBLOBs" >
+    update sal_work_card_kzt
+    <set >
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="bedplateMaterial != null" >
+        bedplate_material = #{bedplateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="bedplateMaterialColor != null" >
+        bedplate_material_color = #{bedplateMaterialColor,jdbcType=VARCHAR},
+      </if>
+      <if test="otherBedplateMaterial != null" >
+        other_bedplate_material = #{otherBedplateMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="bedplateColor != null" >
+        bedplate_color = #{bedplateColor,jdbcType=VARCHAR},
+      </if>
+      <if test="internalPartsColor != null" >
+        internal_parts_color = #{internalPartsColor,jdbcType=VARCHAR},
+      </if>
+      <if test="internalPartsColorContent != null" >
+        internal_parts_color_content = #{internalPartsColorContent,jdbcType=VARCHAR},
+      </if>
+      <if test="keybordIron != null" >
+        keybord_iron = #{keybordIron,jdbcType=VARCHAR},
+      </if>
+      <if test="keybordZs != null" >
+        keybord_zs = #{keybordZs,jdbcType=VARCHAR},
+      </if>
+      <if test="bottomArkBottomBoard != null" >
+        bottom_ark_bottom_board = #{bottomArkBottomBoard,jdbcType=VARCHAR},
+      </if>
+      <if test="babbRemark != null" >
+        babb_remark = #{babbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="bottomArkLayerBoard != null" >
+        bottom_ark_layer_board = #{bottomArkLayerBoard,jdbcType=VARCHAR},
+      </if>
+      <if test="balbQuantity != null" >
+        balb_quantity = #{balbQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="balbRemark != null" >
+        balb_remark = #{balbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="abQuantity != null" >
+        ab_quantity = #{abQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="abRemark != null" >
+        ab_remark = #{abRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="keyboardBasin != null" >
+        keyboard_basin = #{keyboardBasin,jdbcType=VARCHAR},
+      </if>
+      <if test="kbQuantity != null" >
+        kb_quantity = #{kbQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="kbRemark != null" >
+        kb_remark = #{kbRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="joeCode != null" >
+        joe_code = #{joeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jcQuantity != null" >
+        jc_quantity = #{jcQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="jcRemark != null" >
+        jc_remark = #{jcRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="powerBrand != null" >
+        power_brand = #{powerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDigits != null" >
+        power_digits = #{powerDigits,jdbcType=VARCHAR},
+      </if>
+      <if test="powerShellColor != null" >
+        power_shell_color = #{powerShellColor,jdbcType=VARCHAR},
+      </if>
+      <if test="powerSocketWay != null" >
+        power_socket_way = #{powerSocketWay,jdbcType=VARCHAR},
+      </if>
+      <if test="powerCord != null" >
+        power_cord = #{powerCord,jdbcType=VARCHAR},
+      </if>
+      <if test="powerWiring != null" >
+        power_wiring = #{powerWiring,jdbcType=VARCHAR},
+      </if>
+      <if test="powerWiringLength != null" >
+        power_wiring_length = #{powerWiringLength,jdbcType=VARCHAR},
+      </if>
+      <if test="powerPlug != null" >
+        power_plug = #{powerPlug,jdbcType=VARCHAR},
+      </if>
+      <if test="pQuantity != null" >
+        p_quantity = #{pQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="otherPower != null" >
+        other_power = #{otherPower,jdbcType=VARCHAR},
+      </if>
+      <if test="opQuantity != null" >
+        op_quantity = #{opQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="opRemark != null" >
+        op_remark = #{opRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sQuantity != null" >
+        s_quantity = #{sQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="sRemark != null" >
+        s_remark = #{sRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="lcdStents != null" >
+        lcd_stents = #{lcdStents,jdbcType=VARCHAR},
+      </if>
+      <if test="lcdStentsColor != null" >
+        lcd_stents_color = #{lcdStentsColor,jdbcType=VARCHAR},
+      </if>
+      <if test="lsQuantity != null" >
+        ls_quantity = #{lsQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="salWorkCardSubsidiaryId != null" >
+        sal_work_card_subsidiary_id = #{salWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="allOneRemark != null" >
+        all_one_remark = #{allOneRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sidePanelColor != null" >
+        side_panel_color = #{sidePanelColor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherIronColor != null" >
+        other_iron_color = #{otherIronColor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherEachConfig != null" >
+        other_each_config = #{otherEachConfig,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pRemark != null" >
+        p_remark = #{pRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lsRemark != null" >
+        ls_remark = #{lsRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKztWithBLOBs" >
+    update sal_work_card_kzt
+    set sequence = #{sequence,jdbcType=VARCHAR},
+      bedplate_material = #{bedplateMaterial,jdbcType=VARCHAR},
+      bedplate_material_color = #{bedplateMaterialColor,jdbcType=VARCHAR},
+      other_bedplate_material = #{otherBedplateMaterial,jdbcType=VARCHAR},
+      bedplate_color = #{bedplateColor,jdbcType=VARCHAR},
+      internal_parts_color = #{internalPartsColor,jdbcType=VARCHAR},
+      internal_parts_color_content = #{internalPartsColorContent,jdbcType=VARCHAR},
+      keybord_iron = #{keybordIron,jdbcType=VARCHAR},
+      keybord_zs = #{keybordZs,jdbcType=VARCHAR},
+      bottom_ark_bottom_board = #{bottomArkBottomBoard,jdbcType=VARCHAR},
+      babb_remark = #{babbRemark,jdbcType=VARCHAR},
+      bottom_ark_layer_board = #{bottomArkLayerBoard,jdbcType=VARCHAR},
+      balb_quantity = #{balbQuantity,jdbcType=VARCHAR},
+      balb_remark = #{balbRemark,jdbcType=VARCHAR},
+      ab_quantity = #{abQuantity,jdbcType=VARCHAR},
+      ab_remark = #{abRemark,jdbcType=VARCHAR},
+      keyboard_basin = #{keyboardBasin,jdbcType=VARCHAR},
+      kb_quantity = #{kbQuantity,jdbcType=VARCHAR},
+      kb_remark = #{kbRemark,jdbcType=VARCHAR},
+      joe_code = #{joeCode,jdbcType=VARCHAR},
+      jc_quantity = #{jcQuantity,jdbcType=VARCHAR},
+      jc_remark = #{jcRemark,jdbcType=VARCHAR},
+      power_brand = #{powerBrand,jdbcType=VARCHAR},
+      power_digits = #{powerDigits,jdbcType=VARCHAR},
+      power_shell_color = #{powerShellColor,jdbcType=VARCHAR},
+      power_socket_way = #{powerSocketWay,jdbcType=VARCHAR},
+      power_cord = #{powerCord,jdbcType=VARCHAR},
+      power_wiring = #{powerWiring,jdbcType=VARCHAR},
+      power_wiring_length = #{powerWiringLength,jdbcType=VARCHAR},
+      power_plug = #{powerPlug,jdbcType=VARCHAR},
+      p_quantity = #{pQuantity,jdbcType=VARCHAR},
+      other_power = #{otherPower,jdbcType=VARCHAR},
+      op_quantity = #{opQuantity,jdbcType=VARCHAR},
+      op_remark = #{opRemark,jdbcType=VARCHAR},
+      s_quantity = #{sQuantity,jdbcType=VARCHAR},
+      s_remark = #{sRemark,jdbcType=VARCHAR},
+      lcd_stents = #{lcdStents,jdbcType=VARCHAR},
+      lcd_stents_color = #{lcdStentsColor,jdbcType=VARCHAR},
+      ls_quantity = #{lsQuantity,jdbcType=VARCHAR},
+      sal_work_card_subsidiary_id = #{salWorkCardSubsidiaryId,jdbcType=VARCHAR},
+      all_one_remark = #{allOneRemark,jdbcType=LONGVARCHAR},
+      side_panel_color = #{sidePanelColor,jdbcType=LONGVARCHAR},
+      other_iron_color = #{otherIronColor,jdbcType=LONGVARCHAR},
+      other_each_config = #{otherEachConfig,jdbcType=LONGVARCHAR},
+      p_remark = #{pRemark,jdbcType=LONGVARCHAR},
+      ls_remark = #{lsRemark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardKzt" >
+    update sal_work_card_kzt
+    set sequence = #{sequence,jdbcType=VARCHAR},
+      bedplate_material = #{bedplateMaterial,jdbcType=VARCHAR},
+      bedplate_material_color = #{bedplateMaterialColor,jdbcType=VARCHAR},
+      other_bedplate_material = #{otherBedplateMaterial,jdbcType=VARCHAR},
+      bedplate_color = #{bedplateColor,jdbcType=VARCHAR},
+      internal_parts_color = #{internalPartsColor,jdbcType=VARCHAR},
+      internal_parts_color_content = #{internalPartsColorContent,jdbcType=VARCHAR},
+      keybord_iron = #{keybordIron,jdbcType=VARCHAR},
+      keybord_zs = #{keybordZs,jdbcType=VARCHAR},
+      bottom_ark_bottom_board = #{bottomArkBottomBoard,jdbcType=VARCHAR},
+      babb_remark = #{babbRemark,jdbcType=VARCHAR},
+      bottom_ark_layer_board = #{bottomArkLayerBoard,jdbcType=VARCHAR},
+      balb_quantity = #{balbQuantity,jdbcType=VARCHAR},
+      balb_remark = #{balbRemark,jdbcType=VARCHAR},
+      ab_quantity = #{abQuantity,jdbcType=VARCHAR},
+      ab_remark = #{abRemark,jdbcType=VARCHAR},
+      keyboard_basin = #{keyboardBasin,jdbcType=VARCHAR},
+      kb_quantity = #{kbQuantity,jdbcType=VARCHAR},
+      kb_remark = #{kbRemark,jdbcType=VARCHAR},
+      joe_code = #{joeCode,jdbcType=VARCHAR},
+      jc_quantity = #{jcQuantity,jdbcType=VARCHAR},
+      jc_remark = #{jcRemark,jdbcType=VARCHAR},
+      power_brand = #{powerBrand,jdbcType=VARCHAR},
+      power_digits = #{powerDigits,jdbcType=VARCHAR},
+      power_shell_color = #{powerShellColor,jdbcType=VARCHAR},
+      power_socket_way = #{powerSocketWay,jdbcType=VARCHAR},
+      power_cord = #{powerCord,jdbcType=VARCHAR},
+      power_wiring = #{powerWiring,jdbcType=VARCHAR},
+      power_wiring_length = #{powerWiringLength,jdbcType=VARCHAR},
+      power_plug = #{powerPlug,jdbcType=VARCHAR},
+      p_quantity = #{pQuantity,jdbcType=VARCHAR},
+      other_power = #{otherPower,jdbcType=VARCHAR},
+      op_quantity = #{opQuantity,jdbcType=VARCHAR},
+      op_remark = #{opRemark,jdbcType=VARCHAR},
+      s_quantity = #{sQuantity,jdbcType=VARCHAR},
+      s_remark = #{sRemark,jdbcType=VARCHAR},
+      lcd_stents = #{lcdStents,jdbcType=VARCHAR},
+      lcd_stents_color = #{lcdStentsColor,jdbcType=VARCHAR},
+      ls_quantity = #{lsQuantity,jdbcType=VARCHAR},
+      sal_work_card_subsidiary_id = #{salWorkCardSubsidiaryId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,1099 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.engineering.workhours.EngWorkHoursMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.engineering.workhours.EngWorkHours" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="work_hours_date" property="workHoursDate" jdbcType="DATE" />
+    <result column="work_card_no" property="workCardNo" jdbcType="VARCHAR" />
+    <result column="work_card_item" property="workCardItem" jdbcType="VARCHAR" />
+    <result column="work_hours" property="workHours" jdbcType="REAL" />
+    <result column="work_shift_id" property="workShiftId" jdbcType="VARCHAR" />
+    <result column="work_content" property="workContent" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.chiucheung.po.engineering.workhours.EngWorkHours" extends="BaseResultMap" >
+    <result column="work_content_custom" property="workContentCustom" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, work_hours_date, work_card_no, work_card_item, work_hours, work_shift_id, work_content, 
+    user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    work_content_custom
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHoursExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from eng_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHoursExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from eng_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from eng_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from eng_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHoursExample" >
+    delete from eng_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHours" >
+    insert into eng_work_hours (id, work_hours_date, work_card_no, 
+      work_card_item, work_hours, work_shift_id, 
+      work_content, user_id, work_content_custom
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workHoursDate,jdbcType=DATE}, #{workCardNo,jdbcType=VARCHAR}, 
+      #{workCardItem,jdbcType=VARCHAR}, #{workHours,jdbcType=REAL}, #{workShiftId,jdbcType=VARCHAR}, 
+      #{workContent,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{workContentCustom,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHours" >
+    insert into eng_work_hours
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workHoursDate != null" >
+        work_hours_date,
+      </if>
+      <if test="workCardNo != null" >
+        work_card_no,
+      </if>
+      <if test="workCardItem != null" >
+        work_card_item,
+      </if>
+      <if test="workHours != null" >
+        work_hours,
+      </if>
+      <if test="workShiftId != null" >
+        work_shift_id,
+      </if>
+      <if test="workContent != null" >
+        work_content,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="workContentCustom != null" >
+        work_content_custom,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workHoursDate != null" >
+        #{workHoursDate,jdbcType=DATE},
+      </if>
+      <if test="workCardNo != null" >
+        #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="workCardItem != null" >
+        #{workCardItem,jdbcType=VARCHAR},
+      </if>
+      <if test="workHours != null" >
+        #{workHours,jdbcType=REAL},
+      </if>
+      <if test="workShiftId != null" >
+        #{workShiftId,jdbcType=VARCHAR},
+      </if>
+      <if test="workContent != null" >
+        #{workContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="workContentCustom != null" >
+        #{workContentCustom,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHoursExample" resultType="java.lang.Integer" >
+    select count(*) from eng_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update eng_work_hours
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workHoursDate != null" >
+        work_hours_date = #{record.workHoursDate,jdbcType=DATE},
+      </if>
+      <if test="record.workCardNo != null" >
+        work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCardItem != null" >
+        work_card_item = #{record.workCardItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workHours != null" >
+        work_hours = #{record.workHours,jdbcType=REAL},
+      </if>
+      <if test="record.workShiftId != null" >
+        work_shift_id = #{record.workShiftId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workContent != null" >
+        work_content = #{record.workContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workContentCustom != null" >
+        work_content_custom = #{record.workContentCustom,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update eng_work_hours
+    set id = #{record.id,jdbcType=VARCHAR},
+      work_hours_date = #{record.workHoursDate,jdbcType=DATE},
+      work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      work_card_item = #{record.workCardItem,jdbcType=VARCHAR},
+      work_hours = #{record.workHours,jdbcType=REAL},
+      work_shift_id = #{record.workShiftId,jdbcType=VARCHAR},
+      work_content = #{record.workContent,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      work_content_custom = #{record.workContentCustom,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update eng_work_hours
+    set id = #{record.id,jdbcType=VARCHAR},
+      work_hours_date = #{record.workHoursDate,jdbcType=DATE},
+      work_card_no = #{record.workCardNo,jdbcType=VARCHAR},
+      work_card_item = #{record.workCardItem,jdbcType=VARCHAR},
+      work_hours = #{record.workHours,jdbcType=REAL},
+      work_shift_id = #{record.workShiftId,jdbcType=VARCHAR},
+      work_content = #{record.workContent,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHours" >
+    update eng_work_hours
+    <set >
+      <if test="workHoursDate != null" >
+        work_hours_date = #{workHoursDate,jdbcType=DATE},
+      </if>
+      <if test="workCardNo != null" >
+        work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="workCardItem != null" >
+        work_card_item = #{workCardItem,jdbcType=VARCHAR},
+      </if>
+      <if test="workHours != null" >
+        work_hours = #{workHours,jdbcType=REAL},
+      </if>
+      <if test="workShiftId != null" >
+        work_shift_id = #{workShiftId,jdbcType=VARCHAR},
+      </if>
+      <if test="workContent != null" >
+        work_content = #{workContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="workContentCustom != null" >
+        work_content_custom = #{workContentCustom,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHours" >
+    update eng_work_hours
+    set work_hours_date = #{workHoursDate,jdbcType=DATE},
+      work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      work_card_item = #{workCardItem,jdbcType=VARCHAR},
+      work_hours = #{workHours,jdbcType=REAL},
+      work_shift_id = #{workShiftId,jdbcType=VARCHAR},
+      work_content = #{workContent,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      work_content_custom = #{workContentCustom,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHours" >
+    update eng_work_hours
+    set work_hours_date = #{workHoursDate,jdbcType=DATE},
+      work_card_no = #{workCardNo,jdbcType=VARCHAR},
+      work_card_item = #{workCardItem,jdbcType=VARCHAR},
+      work_hours = #{workHours,jdbcType=REAL},
+      work_shift_id = #{workShiftId,jdbcType=VARCHAR},
+      work_content = #{workContent,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 根据查询条件查找工时，需要根据数据字典显示 -->
+  <select id="findAllWorkHoursList" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="cn.chiucheung.po.engineering.workhours.EngWorkHours">
+  	SELECT
+  		h.id id, 
+	  	h.work_hours_date workHoursDate, 
+	  	h.work_card_no workCardNo, 
+	  	h.work_card_item workCardItem, 
+	  	h.work_hours workHours, 
+	  	d1.dictionarie_name workShiftId, 
+	  	h.work_content workContent, 
+	  	h.work_content_custom workContentCustom,
+    	u.username userId
+  	FROM
+  		eng_work_hours h,
+		sys_user u,
+		(SELECT dictionarie_code,dictionarie_name FROM sys_dictionarie WHERE keyword = '班次') d1
+	WHERE
+		h.user_id = u.id
+	AND
+		h.work_shift_id = d1.dictionarie_code
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND h.work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND h.work_hours_date &lt;= #{endWorkHoursDate}
+    </if>
+    <if test="username != null and username != ''">
+		 AND u.username LIKE '%${username}%'
+	</if>
+	<if test="workCardNo != null and workCardNo != ''">
+		 AND h.work_card_no LIKE '%${workCardNo}%'
+	</if>
+	<if test="workCardItem != null and workCardItem != ''">
+		 AND h.work_card_item LIKE '%${workCardItem}%'
+	</if>
+	<if test="workContent != null and workContent != ''">
+		 AND h.work_content LIKE '%${workContent}%'
+	</if>
+	<if test="workShiftId != null and workShiftId != ''">
+		 AND h.work_shift_id LIKE '%${workShiftId}%'
+	</if>
+	<if test="userId != null and userId != ''">
+		 AND u.id = #{userId}
+	</if>
+	<if test="groupsId != null and groupsId != ''">
+		 AND u.groups_id = #{groupsId}
+	</if>
+	<if test="departmentId != null and departmentId != ''">
+		 AND u.department_id = #{departmentId}
+	</if>
+	<if test="sort != null and sort != ''">
+		<if test="sort == 'workCardNo'">
+ 			ORDER BY RIGHT(workCardNo,2) ${order},LEFT(workCardNo,6) ${order}
+ 		</if>
+ 		<if test="sort != 'workCardNo'">
+ 			ORDER BY #{sort} ${order}
+ 		</if>
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER by workHoursDate desc
+	</if>
+	<if test="page != 0 and rows != 0">
+		LIMIT #{startPage},#{rows}
+	</if>
+   </select>
+   
+    <!-- 根据查询条件查找总记录数 -->
+  <select id="findAllWorkHoursTotal" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="string">
+  	SELECT
+  		COUNT(*)
+  	FROM
+  		eng_work_hours h,
+  		sys_user u
+  	WHERE
+  		h.user_id = u.id
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND h.work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND h.work_hours_date &lt;= #{endWorkHoursDate}
+    </if>
+    <if test="username != null and username != ''">
+		 AND u.username LIKE '%${username}%'
+	</if>
+	<if test="workCardNo != null and workCardNo != ''">
+		 AND h.work_card_no LIKE '%${workCardNo}%'
+	</if>
+	<if test="workCardItem != null and workCardItem != ''">
+		 AND h.work_card_item LIKE '%${workCardItem}%'
+	</if>
+	<if test="workContent != null and workContent != ''">
+		 AND h.work_content LIKE '%${workContent}%'
+	</if>
+	<if test="workShiftId != null and workShiftId != ''">
+		 AND h.work_shift_id LIKE '%${workShiftId}%'
+	</if>
+	<if test="userId != null and userId != ''">
+		 AND u.id = #{userId}
+	</if>
+	<if test="groupsId != null and groupsId != ''">
+		 AND u.groups_id = #{groupsId}
+	</if>
+	<if test="departmentId != null and departmentId != ''">
+		 AND u.department_id = #{departmentId}
+	</if>
+   </select>
+   
+     <!-- 根据查询条件查找总记录数 -->
+  <select id="findAllWorkHoursSum" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="string">
+  	SELECT
+  		SUM(work_hours)
+  	FROM eng_work_hours h
+  	LEFT JOIN sys_user u ON h.user_id = u.id
+	<where> 
+		<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+	      	AND h.work_hours_date &gt;= #{startWorkHoursDate}
+	    </if>
+	    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+	      	AND h.work_hours_date &lt;= #{endWorkHoursDate}
+	    </if>
+	    <if test="username != null and username != ''">
+			 AND u.username LIKE '%${username}%'
+		</if>
+		<if test="workCardNo != null and workCardNo != ''">
+			 AND h.work_card_no LIKE '%${workCardNo}%'
+		</if>
+		<if test="workCardItem != null and workCardItem != ''">
+			 AND h.work_card_item LIKE '%${workCardItem}%'
+		</if>
+		<if test="workContent != null and workContent != ''">
+			 AND h.work_content LIKE '%${workContent}%'
+		</if>
+		<if test="workShiftId != null and workShiftId != ''">
+			 AND h.work_shift_id LIKE '%${workShiftId}%'
+		</if>
+		<if test="userId != null and userId != ''">
+			 AND u.id = #{userId}
+		</if>
+		<if test="groupsId != null and groupsId != ''">
+			 AND u.groups_id = #{groupsId}
+		</if>
+		<if test="departmentId != null and departmentId != ''">
+			 AND u.department_id = #{departmentId}
+		</if>
+	</where>
+   </select>
+   
+   <!-- 根据id查找工时，需要将userId赋值username -->
+   <select id="findEngWorkHoursById" parameterType="string" resultType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursCustom">
+	SELECT
+  		h.id id, 
+	  	h.work_hours_date workHoursDate, 
+	  	h.work_card_no workCardNo, 
+	  	h.work_card_item workCardItem, 
+	  	h.work_hours workHours, 
+	  	h.work_shift_id workShiftId, 
+	  	h.work_content workContent, 
+	  	h.work_content_custom workContentCustom,
+    	u.username username,
+    	u.id userId
+    FROM eng_work_hours h, sys_user u
+    WHERE h.user_id = u.id AND h.id = #{id}
+   </select>
+   
+   <!-- 查询剩余时间 -->
+   <select id="checkRemainingTime" parameterType="cn.chiucheung.po.engineering.workhours.EngWorkHours" resultType="string">
+   	SELECT SUM(work_hours) 
+   	FROM eng_work_hours 
+   	WHERE 
+   		user_id = #{userId} 
+   	AND 
+   		work_hours_date = #{workHoursDate} 
+   	<if test="id != null and id != ''">
+   		AND id != #{id}
+	</if>
+   </select>
+   
+   <!-- 施工成绩表 -->
+   <select id="exportResultsExcel1" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="cn.chiucheung.pojo.engineering.workhours.EngExportResultsExcelCustom">
+   	SELECT 
+		u.username,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if>
+			AND 
+				((work_card_no != '其他' AND work_content != '验货、跟单' AND work_content != '出差(有单号)') OR (work_content = '标准产品资料'))
+		),0) workHours1,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if>
+			AND 
+				work_card_no != '其他' 
+			AND 
+				work_content = '验货、跟单'
+		),0) workHours2,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if>
+		    AND 
+		    	(work_content = '出差(有单号)' OR work_content = '出差(无单号)')
+		 ),0) workHours3,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND 
+				work_content = '整理资料'
+		),0) workHours4,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+		    AND 
+		    	(work_card_no != '其他' OR (work_card_no = '其他' AND (work_content = '整理资料' OR work_content = '出差(无单号)' OR work_content = '标准产品资料')))
+		),0) workHours5,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+		    AND 
+		    	work_card_no = '其他' 
+		    AND 
+		    	(work_content = '自定义......' OR work_content = '临时事物')
+		),0) workHours6,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+		    AND 
+		    	work_card_no = '其他' 
+		    AND 
+		    	work_content = '待工学习'
+		),0) workHours7,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+		    AND 
+		    	work_card_no = '其他' 
+		    AND 
+		    	work_content = '休假'
+		),0) workHours8,
+		IFNULL((
+			SELECT 
+				SUM(work_hours) 
+			FROM 
+				eng_work_hours 
+			WHERE 
+				user_id = h.user_id 
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+		    AND 
+		    	work_card_no = '其他' 
+		    AND 
+		    	(work_content = '自定义......' OR work_content = '临时事物' OR work_content = '待工学习' OR work_content = '休假')
+		),0) workHours9
+	FROM 
+		eng_work_hours h,
+		sys_user u
+	WHERE
+		h.user_id = u.id
+		<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+	      	AND work_hours_date &gt;= #{startWorkHoursDate}
+	    </if>
+	    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+	      	AND work_hours_date &lt;= #{endWorkHoursDate}
+	    </if> 
+	GROUP BY u.username
+	ORDER BY u.groups_id
+   </select>
+   
+   
+   <!-- 工时分布表 --><!-- 查询速度太慢，弃用，改用代码实现 -->
+   <select id="exportResultsExcel2" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="cn.chiucheung.pojo.engineering.workhours.EngExportResultsExcelCustom">
+   	SELECT
+		u.username,
+		IFNULL((
+			SELECT 
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				(work_card_no LIKE 'CJ%' OR work_card_no LIKE 'BJ%')
+			AND
+				work_content != '验货、跟单'
+			AND
+				work_content != '出差(有单号)'
+			),0) workHours1,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				work_card_no LIKE 'HJ%'
+			AND
+				work_content != '验货、跟单'
+			AND
+				work_content != '出差(有单号)'
+			),0) workHours2,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				(work_card_no LIKE 'Q%' OR work_card_no LIKE 'HK%')
+			AND
+				work_content != '验货、跟单'
+			AND
+				work_content != '出差(有单号)'
+			),0) workHours3,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				work_card_no LIKE 'RD%'
+			AND
+				work_content != '验货、跟单'
+			AND
+				work_content != '出差(有单号)'
+			),0) workHours4,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id 
+			AND 
+				(work_card_no LIKE 'FG%' OR work_card_no LIKE 'SG%' OR work_card_no LIKE 'I%')
+			AND
+				work_content != '验货、跟单'
+			AND
+				work_content != '出差(有单号)'
+			),0) workHours5,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				work_content = '标准产品资料'
+			),0) workHours6,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				(work_content = '出差(无单号)'
+			OR 
+				work_content = '出差(有单号)')
+			),0) workHours7,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				work_content = '整理资料'
+			),0) workHours8,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				work_content = '待工学习'
+			),0) workHours9,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				work_content = '验货、跟单'
+			),0) workHours10,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				(work_content = '自定义......' OR work_content = '临时事物')
+			),0) workHours11,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if>
+		    AND
+				user_id = h.user_id
+			AND
+				work_content != '休假'
+			),0) workHours12,
+		IFNULL((
+			SELECT
+				SUM(work_hours)
+			FROM
+				eng_work_hours
+			WHERE 1=1
+			<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+		      	AND work_hours_date &gt;= #{startWorkHoursDate}
+		    </if>
+		    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+		      	AND work_hours_date &lt;= #{endWorkHoursDate}
+		    </if> 
+			AND
+				user_id = h.user_id
+			AND
+				work_content = '休假'
+			),0) workHours13
+	FROM
+		eng_work_hours h,
+		sys_user u
+	WHERE 1=1
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	AND 
+		h.user_id = u.id
+	GROUP BY h.user_id
+	ORDER BY u.groups_id
+   </select>
+   
+   <!-- 导出工咭工时统计表 -->
+   <select id="exportResultsExcel3" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="cn.chiucheung.pojo.engineering.workhours.EngExportResultsExcelCustom">
+   	SELECT 
+		work_card_no username,
+		SUM(work_hours) workHours1
+	FROM
+		eng_work_hours
+	WHERE 1=1
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	AND
+		work_card_no != '其他'
+	GROUP BY work_card_no
+   </select>
+   
+   <!-- 导出实做工咭工时分析 -->
+   <select id="exportResultsExcel4" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="cn.chiucheung.pojo.engineering.workhours.EngExportResultsExcelCustom">
+   	SELECT
+		"CJ，BJ咭" username,
+		COUNT(DISTINCT work_card_no) workHours1,
+		SUM(work_hours) workHours2,
+		COUNT(DISTINCT user_id) workHours3
+	FROM
+		eng_work_hours
+	WHERE 1=1
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	AND
+		(work_card_no LIKE 'CJ%' OR work_card_no LIKE 'BJ%')
+		
+	UNION ALL 
+		
+	SELECT
+		"HJ咭" username,
+		COUNT(DISTINCT work_card_no) workHours1,
+		SUM(work_hours) workHours2,
+		COUNT(DISTINCT user_id) workHours3
+	FROM
+		eng_work_hours
+	WHERE 1=1
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	AND
+		(work_card_no LIKE 'HJ%')
+		
+	UNION ALL
+		
+	SELECT
+		"Q/HK号" username,
+		COUNT(DISTINCT work_card_no) workHours1,
+		SUM(work_hours) workHours2,
+		COUNT(DISTINCT user_id) workHours3
+	FROM
+		eng_work_hours
+	WHERE 1=1
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	AND
+		(work_card_no LIKE 'HK%' OR work_card_no LIKE 'Q%')
+		
+	UNION ALL
+	
+	SELECT
+		"RD咭" username,
+		COUNT(DISTINCT work_card_no) workHours1,
+		SUM(work_hours) workHours2,
+		COUNT(DISTINCT user_id) workHours3
+	FROM
+		eng_work_hours
+	WHERE 1=1
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	AND
+		(work_card_no LIKE 'RD%')
+		
+	UNION ALL
+		
+	SELECT
+		"FG、SG、I咭" username,
+		COUNT(DISTINCT work_card_no) workHours1,
+		SUM(work_hours) workHours2,
+		COUNT(DISTINCT user_id) workHours3
+	FROM
+		eng_work_hours
+	WHERE 1=1
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	AND
+		(work_card_no LIKE 'FG%' OR work_card_no LIKE 'SG%' OR work_card_no LIKE 'I%')
+   </select>
+   
+   <!-- 导出月工咭产值结算表 -->
+   <select id="exportResultsExcel5" parameterType="cn.chiucheung.pojo.engineering.workhours.EngWorkHoursVo" resultType="cn.chiucheung.pojo.engineering.workhours.EngExportResultsExcelCustom">
+   	SELECT
+		h.work_card_no workCardNo,
+		u.username,
+		u.groups_id groupsId,
+		MIN(h.work_hours_date) startTime,
+		MAX(h.work_hours_date) endTime,
+		SUM(h.work_hours) sumTimes
+	FROM
+		eng_work_hours h,
+		sys_user u
+	WHERE
+		h.user_id = u.id
+	<if test="startWorkHoursDate != null and startWorkHoursDate != ''" >
+      	AND h.work_hours_date &gt;= #{startWorkHoursDate}
+    </if>
+    <if test="endWorkHoursDate != null and endWorkHoursDate != ''" >
+      	AND h.work_hours_date &lt;= #{endWorkHoursDate}
+    </if> 
+	GROUP BY h.work_card_no, h.user_id
+	ORDER BY RIGHT(workCardNo,2) ,LEFT(workCardNo,6), CONVERT(username USING gbk)
+   </select>
+   
+   <!-- 查找各个组的技术主任 -->
+   <select id="selectEngReviewer" resultType="cn.chiucheung.po.system.user.SysUser">
+   	SELECT
+		u.groups_id groupsId,
+		u.username
+	FROM
+		sys_user u,
+		sys_role r,
+		sys_user_role ur
+	WHERE
+		u.department_id = '5'
+	AND
+		r.role_name = '工程技术主任'
+	AND
+		u.id = ur.user_id
+	AND
+		r.id = role_id
+   </select>
+</mapper>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHoursMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHours" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="each_number" property="eachNumber" jdbcType="INTEGER" />
+    <result column="pro_product_technology_accessories_work_hours_id" property="proProductTechnologyAccessoriesWorkHoursId" jdbcType="VARCHAR" />
+    <result column="pro_product_technology_work_hours_id" property="proProductTechnologyWorkHoursId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, number, each_number, pro_product_technology_accessories_work_hours_id, pro_product_technology_work_hours_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHoursExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_product_technology_accessories_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_product_technology_accessories_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pro_product_technology_accessories_work_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHoursExample" >
+    delete from pro_product_technology_accessories_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHours" >
+    insert into pro_product_technology_accessories_work_hours (id, number, each_number, 
+      pro_product_technology_accessories_work_hours_id, pro_product_technology_work_hours_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{eachNumber,jdbcType=INTEGER}, 
+      #{proProductTechnologyAccessoriesWorkHoursId,jdbcType=VARCHAR}, #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHours" >
+    insert into pro_product_technology_accessories_work_hours
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="eachNumber != null" >
+        each_number,
+      </if>
+      <if test="proProductTechnologyAccessoriesWorkHoursId != null" >
+        pro_product_technology_accessories_work_hours_id,
+      </if>
+      <if test="proProductTechnologyWorkHoursId != null" >
+        pro_product_technology_work_hours_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="eachNumber != null" >
+        #{eachNumber,jdbcType=INTEGER},
+      </if>
+      <if test="proProductTechnologyAccessoriesWorkHoursId != null" >
+        #{proProductTechnologyAccessoriesWorkHoursId,jdbcType=VARCHAR},
+      </if>
+      <if test="proProductTechnologyWorkHoursId != null" >
+        #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHoursExample" resultType="java.lang.Integer" >
+    select count(*) from pro_product_technology_accessories_work_hours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_product_technology_accessories_work_hours
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.eachNumber != null" >
+        each_number = #{record.eachNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.proProductTechnologyAccessoriesWorkHoursId != null" >
+        pro_product_technology_accessories_work_hours_id = #{record.proProductTechnologyAccessoriesWorkHoursId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proProductTechnologyWorkHoursId != null" >
+        pro_product_technology_work_hours_id = #{record.proProductTechnologyWorkHoursId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_product_technology_accessories_work_hours
+    set id = #{record.id,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      each_number = #{record.eachNumber,jdbcType=INTEGER},
+      pro_product_technology_accessories_work_hours_id = #{record.proProductTechnologyAccessoriesWorkHoursId,jdbcType=VARCHAR},
+      pro_product_technology_work_hours_id = #{record.proProductTechnologyWorkHoursId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHours" >
+    update pro_product_technology_accessories_work_hours
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="eachNumber != null" >
+        each_number = #{eachNumber,jdbcType=INTEGER},
+      </if>
+      <if test="proProductTechnologyAccessoriesWorkHoursId != null" >
+        pro_product_technology_accessories_work_hours_id = #{proProductTechnologyAccessoriesWorkHoursId,jdbcType=VARCHAR},
+      </if>
+      <if test="proProductTechnologyWorkHoursId != null" >
+        pro_product_technology_work_hours_id = #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHours" >
+    update pro_product_technology_accessories_work_hours
+    set number = #{number,jdbcType=INTEGER},
+      each_number = #{eachNumber,jdbcType=INTEGER},
+      pro_product_technology_accessories_work_hours_id = #{proProductTechnologyAccessoriesWorkHoursId,jdbcType=VARCHAR},
+      pro_product_technology_work_hours_id = #{proProductTechnologyWorkHoursId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into pro_product_technology_accessories_work_hours (id, number, each_number, pro_product_technology_work_hours_id, pro_product_technology_accessories_work_hours_id) values 
+    
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.number},
+			#{item.eachNumber},
+			#{item.proProductTechnologyWorkHoursId},
+			#{item.proProductTechnologyAccessoriesWorkHoursId}
+		)
+	</foreach>
+  </insert>
+  
+  
+   <!-- 根据产品工艺工时id查询配件，用于页面修改 -->
+   <select id="findAllProProductTechnologyAccessoriesWorkHoursListByProProductTechnologyWorkHoursId" parameterType="string" resultType="cn.chiucheung.pojo.production.producttechnologyworkhours.ProProductTechnologyAccessoriesWorkHoursCustom">
+   	
+   SELECT 
+		a.id id,
+		a.material_code accessoriesCode,
+		d9.dictionarie_name accessoriesType,
+		a.material_name accessoriesName,
+		d1.dictionarie_name unit,
+		a.applicable_product product,
+		d2.dictionarie_name classification,
+		d3.dictionarie_name materialProperties,
+		d4.dictionarie_name height,
+		d5.dictionarie_name width,
+		d6.dictionarie_name depth,
+		d7.dictionarie_name color,
+		d8.dictionarie_name specifications,
+		f.id fileId,
+		a.each_number eachNumber,
+		a.pro_product_technology_work_hours_id proProductTechnologyWorkHoursId,
+		a.total_time totalTime,
+		a.total_artificial_time totalArtificialTime
+	FROM 
+		(
+			SELECT
+				a.id,
+				a.material_code,
+				a.material_type,
+				a.material_name,
+				a.use_unit,
+				a.applicable_product,
+				a.classification,
+				a.material_properties,
+				a.height,
+				a.width,
+				a.depth,
+				a.color,
+				a.specifications,
+				ta.each_number,
+				ta.number,
+				t.id pro_product_technology_work_hours_id,
+				t.total_time,
+				t.total_artificial_time
+			FROM
+				war_material a,
+				pro_product_technology_accessories_work_hours ta,
+				pro_product_technology_work_hours t
+			WHERE
+				ta.pro_product_technology_accessories_work_hours_id = t.id
+			AND
+				t.war_material_id = a.id
+			AND
+				ta.pro_product_technology_work_hours_id = #{id}
+			
+			
+		) a
+	LEFT JOIN war_material_file f ON a.id = f.war_material_id
+	LEFT JOIN war_base_data d1 ON a.use_unit = d1.dictionarie_code AND d1.keyword = '单位'
+	LEFT JOIN war_base_data d2 ON a.classification = d2.dictionarie_code AND d2.keyword = '分类'
+	LEFT JOIN war_base_data d3 ON a.material_properties = d3.dictionarie_code AND d3.keyword = '物料属性'
+	LEFT JOIN war_base_data d4 ON a.height = d4.dictionarie_code AND d4.keyword = '高度'
+	LEFT JOIN war_base_data d5 ON a.width = d5.dictionarie_code AND d5.keyword = '宽度'
+	LEFT JOIN war_base_data d6 ON a.depth = d6.dictionarie_code AND d6.keyword = '深度'
+	LEFT JOIN war_base_data d7 ON a.color = d7.dictionarie_code AND d7.keyword = '颜色'
+	LEFT JOIN war_base_data d8 ON a.specifications = d8.dictionarie_code AND d8.keyword = '规格型号'
+	LEFT JOIN war_base_data d9 ON a.material_type = d9.dictionarie_code AND d9.keyword = '类型'
+	ORDER BY number
+   </select>
+</mapper>

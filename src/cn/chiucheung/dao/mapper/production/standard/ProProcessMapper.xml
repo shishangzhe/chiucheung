@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.production.standard.ProProcessMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.production.standard.ProProcess" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="process_number" property="processNumber" jdbcType="INTEGER" />
+    <result column="parent_process_number" property="parentProcessNumber" jdbcType="INTEGER" />
+    <result column="process_name" property="processName" jdbcType="VARCHAR" />
+    <result column="process_category" property="processCategory" jdbcType="VARCHAR" />
+    <result column="machine_group_number" property="machineGroupNumber" jdbcType="INTEGER" />
+    <result column="per_machine_group_people_number" property="perMachineGroupPeopleNumber" jdbcType="INTEGER" />
+    <result column="calculation_formula" property="calculationFormula" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, process_number, parent_process_number, process_name, process_category, machine_group_number, 
+    per_machine_group_people_number, calculation_formula
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.production.standard.ProProcessExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_process
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_process
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pro_process
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.production.standard.ProProcessExample" >
+    delete from pro_process
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.production.standard.ProProcess" >
+    insert into pro_process (id, process_number, parent_process_number, 
+      process_name, process_category, machine_group_number, 
+      per_machine_group_people_number, calculation_formula
+      )
+    values (#{id,jdbcType=VARCHAR}, #{processNumber,jdbcType=INTEGER}, #{parentProcessNumber,jdbcType=INTEGER}, 
+      #{processName,jdbcType=VARCHAR}, #{processCategory,jdbcType=VARCHAR}, #{machineGroupNumber,jdbcType=INTEGER}, 
+      #{perMachineGroupPeopleNumber,jdbcType=INTEGER}, #{calculationFormula,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.production.standard.ProProcess" >
+    insert into pro_process
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="processNumber != null" >
+        process_number,
+      </if>
+      <if test="parentProcessNumber != null" >
+        parent_process_number,
+      </if>
+      <if test="processName != null" >
+        process_name,
+      </if>
+      <if test="processCategory != null" >
+        process_category,
+      </if>
+      <if test="machineGroupNumber != null" >
+        machine_group_number,
+      </if>
+      <if test="perMachineGroupPeopleNumber != null" >
+        per_machine_group_people_number,
+      </if>
+      <if test="calculationFormula != null" >
+        calculation_formula,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="processNumber != null" >
+        #{processNumber,jdbcType=INTEGER},
+      </if>
+      <if test="parentProcessNumber != null" >
+        #{parentProcessNumber,jdbcType=INTEGER},
+      </if>
+      <if test="processName != null" >
+        #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="processCategory != null" >
+        #{processCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="machineGroupNumber != null" >
+        #{machineGroupNumber,jdbcType=INTEGER},
+      </if>
+      <if test="perMachineGroupPeopleNumber != null" >
+        #{perMachineGroupPeopleNumber,jdbcType=INTEGER},
+      </if>
+      <if test="calculationFormula != null" >
+        #{calculationFormula,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.production.standard.ProProcessExample" resultType="java.lang.Integer" >
+    select count(*) from pro_process
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_process
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processNumber != null" >
+        process_number = #{record.processNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentProcessNumber != null" >
+        parent_process_number = #{record.parentProcessNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.processName != null" >
+        process_name = #{record.processName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processCategory != null" >
+        process_category = #{record.processCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineGroupNumber != null" >
+        machine_group_number = #{record.machineGroupNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.perMachineGroupPeopleNumber != null" >
+        per_machine_group_people_number = #{record.perMachineGroupPeopleNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.calculationFormula != null" >
+        calculation_formula = #{record.calculationFormula,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_process
+    set id = #{record.id,jdbcType=VARCHAR},
+      process_number = #{record.processNumber,jdbcType=INTEGER},
+      parent_process_number = #{record.parentProcessNumber,jdbcType=INTEGER},
+      process_name = #{record.processName,jdbcType=VARCHAR},
+      process_category = #{record.processCategory,jdbcType=VARCHAR},
+      machine_group_number = #{record.machineGroupNumber,jdbcType=INTEGER},
+      per_machine_group_people_number = #{record.perMachineGroupPeopleNumber,jdbcType=INTEGER},
+      calculation_formula = #{record.calculationFormula,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.production.standard.ProProcess" >
+    update pro_process
+    <set >
+      <if test="processNumber != null" >
+        process_number = #{processNumber,jdbcType=INTEGER},
+      </if>
+      <if test="parentProcessNumber != null" >
+        parent_process_number = #{parentProcessNumber,jdbcType=INTEGER},
+      </if>
+      <if test="processName != null" >
+        process_name = #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="processCategory != null" >
+        process_category = #{processCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="machineGroupNumber != null" >
+        machine_group_number = #{machineGroupNumber,jdbcType=INTEGER},
+      </if>
+      <if test="perMachineGroupPeopleNumber != null" >
+        per_machine_group_people_number = #{perMachineGroupPeopleNumber,jdbcType=INTEGER},
+      </if>
+      <if test="calculationFormula != null" >
+        calculation_formula = #{calculationFormula,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.production.standard.ProProcess" >
+    update pro_process
+    set process_number = #{processNumber,jdbcType=INTEGER},
+      parent_process_number = #{parentProcessNumber,jdbcType=INTEGER},
+      process_name = #{processName,jdbcType=VARCHAR},
+      process_category = #{processCategory,jdbcType=VARCHAR},
+      machine_group_number = #{machineGroupNumber,jdbcType=INTEGER},
+      per_machine_group_people_number = #{perMachineGroupPeopleNumber,jdbcType=INTEGER},
+      calculation_formula = #{calculationFormula,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+    
+   
+  
+    <!-- 自定义 -->
+  <!-- 查询工序 -->
+  <select id="findAllProProcessList" parameterType="cn.chiucheung.pojo.production.standard.ProProcessQueryVo" resultType="cn.chiucheung.po.production.standard.ProProcess">
+  	SELECT 
+	  	id,
+	  	process_number processNumber,
+	  	parent_process_number parentProcessNumber,
+	  	process_name processName,
+	  	process_category processCategory,
+	  	machine_group_number machineGroupNumber,
+	  	per_machine_group_people_number perMachineGroupPeopleNumber,
+	  	calculation_formula calculationFormula
+  	FROM pro_process
+  	<where>
+  		<if test="processNumber != null and processNumber != ''" >
+	      AND process_number = #{processNumber}
+	    </if>
+	    <if test="parentProcessNumber != null and parentProcessNumber != ''" >
+	      AND parent_process_number = #{parentProcessNumber}
+	    </if>
+  		<if test="processName != null and processName != ''" >
+	      AND process_name LIKE '%${processName}%'
+	    </if>
+	    <if test="processCategory != null and processCategory != ''" >
+	      AND process_category LIKE '%${processCategory}%'
+	    </if>
+	  	<if test="notInId != null and notInId.size>0">
+	  		AND id NOT IN
+	  		<foreach collection="notInId" item="id" open="(" separator="," close=")">
+	  			#{id}
+	  		</foreach>
+	  	</if>
+  	</where>
+  	<if test="sort != null and sort != ''">
+		ORDER BY #{sort} ${order}
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY processNumber
+	</if>
+  </select>
+  
+  
+  <!-- 查询不重复的keyword -->
+  <select id="findAllProcessByDistinct" resultType="cn.chiucheung.po.production.standard.ProProcess">
+  	SELECT id id, process_name processName FROM pro_process GROUP BY process_name
+  </select>
+  
+  
+  <!-- 查询工序 -->
+  <select id="findAllProProcessTechnologyCustomList" parameterType="cn.chiucheung.pojo.production.standard.ProProcessQueryVo" resultType="cn.chiucheung.pojo.production.standard.ProProcessTechnologyCustom">
+  	SELECT 
+	  	id,
+	  	process_number processNumber,
+	  	parent_process_number parentProcessNumber,
+	  	process_name processName,
+	  	process_category processCategory,
+	  	machine_group_number machineGroupNumber,
+	  	per_machine_group_people_number perMachineGroupPeopleNumber,
+	  	calculation_formula calculationFormula,
+	  	CONCAT_WS("-",process_name,process_category) process,
+	  	'closed' state
+  	FROM pro_process
+  	<where>
+  		<if test="processNumber != null and processNumber != ''" >
+	      AND process_number = #{processNumber}
+	    </if>
+	    <if test="parentProcessNumber != null and parentProcessNumber != ''" >
+	      AND parent_process_number = #{parentProcessNumber}
+	    </if>
+  		<if test="processName != null and processName != ''" >
+	      AND process_name LIKE '%${processName}%'
+	    </if>
+	    <if test="processCategory != null and processCategory != ''" >
+	      AND process_category LIKE '%${processCategory}%'
+	    </if>
+	  	<if test="notInId != null and notInId.size>0">
+	  		AND id NOT IN
+	  		<foreach collection="notInId" item="id" open="(" separator="," close=")">
+	  			#{id}
+	  		</foreach>
+	  	</if>
+  	</where>
+  	<if test="sort != null and sort != ''">
+		ORDER BY #{sort} ${order}
+	</if>
+	<if test="sort == null or sort == ''">
+		ORDER BY processNumber
+	</if>
+  </select>
+  
+  <!-- 为combotreegrid加载数据 -->
+  <select id="findAllProProcessListForCombotreegrid" resultType="cn.chiucheung.pojo.production.standard.ProProcessTreegridCustom">
+  	SELECT
+		id id,
+		process_number processNumber,
+		parent_process_number parentProcessNumber,
+		process_name processName,
+		process_category processCategory,
+		machine_group_number machineGroupNumber,
+    	per_machine_group_people_number perMachineGroupPeopleNumber,
+    	calculation_formula calculationFormula,
+		IF(LENGTH(TRIM(calculation_formula))=0,'closed','') state
+	FROM
+		pro_process
+	ORDER BY process_number
+  </select>
+</mapper>

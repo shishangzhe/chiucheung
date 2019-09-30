@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="standardAccessoriesStockOut" name="标准配件出库" isExecutable="true">
+    <startEvent id="startevent1" name="Start" activiti:initiator="loginName"></startEvent>
+    <userTask id="createStockOut" name="创建出库单" activiti:assignee="${loginName}"></userTask>
+    <userTask id="stockOut" name="出库" activiti:candidateUsers="war05,war06,war07,war08,war09,war10"></userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="createStockOut"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="createStockOut" targetRef="stockOut"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="stockOut" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_standardAccessoriesStockOut">
+    <bpmndi:BPMNPlane bpmnElement="standardAccessoriesStockOut" id="BPMNPlane_standardAccessoriesStockOut">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="520.0" y="80.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="createStockOut" id="BPMNShape_createStockOut">
+        <omgdc:Bounds height="61.0" width="111.0" x="482.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="stockOut" id="BPMNShape_stockOut">
+        <omgdc:Bounds height="61.0" width="111.0" x="482.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="520.0" y="420.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="537.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="537.0" y="170.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="537.0" y="231.0"></omgdi:waypoint>
+        <omgdi:waypoint x="537.0" y="290.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="537.0" y="351.0"></omgdi:waypoint>
+        <omgdi:waypoint x="537.0" y="420.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

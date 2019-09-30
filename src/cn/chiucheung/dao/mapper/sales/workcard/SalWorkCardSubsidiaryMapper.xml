@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chiucheung.dao.mapper.sales.workcard.SalWorkCardSubsidiaryMapper" >
+  <resultMap id="BaseResultMap" type="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiary" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_model" property="productModel" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="expected_delivery_date" property="expectedDeliveryDate" jdbcType="DATE" />
+    <result column="eng_release_data_date" property="engReleaseDataDate" jdbcType="DATE" />
+    <result column="pro_period" property="proPeriod" jdbcType="VARCHAR" />
+    <result column="confirmation" property="confirmation" jdbcType="VARCHAR" />
+    <result column="sal_reviewer_subsidiary_id" property="salReviewerSubsidiaryId" jdbcType="VARCHAR" />
+    <result column="sal_work_card_id" property="salWorkCardId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sequence, product_code, product_name, product_model, quantity, unit, expected_delivery_date, 
+    eng_release_data_date, pro_period, confirmation, sal_reviewer_subsidiary_id, sal_work_card_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sal_work_card_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sal_work_card_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sal_work_card_subsidiary
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiaryExample" >
+    delete from sal_work_card_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiary" >
+    insert into sal_work_card_subsidiary (id, sequence, product_code, 
+      product_name, product_model, quantity, 
+      unit, expected_delivery_date, eng_release_data_date, 
+      pro_period, confirmation, sal_reviewer_subsidiary_id, 
+      sal_work_card_id)
+    values (#{id,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{productCode,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productModel,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{unit,jdbcType=VARCHAR}, #{expectedDeliveryDate,jdbcType=DATE}, #{engReleaseDataDate,jdbcType=DATE}, 
+      #{proPeriod,jdbcType=VARCHAR}, #{confirmation,jdbcType=VARCHAR}, #{salReviewerSubsidiaryId,jdbcType=VARCHAR}, 
+      #{salWorkCardId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiary" >
+    insert into sal_work_card_subsidiary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="productCode != null" >
+        product_code,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productModel != null" >
+        product_model,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="expectedDeliveryDate != null" >
+        expected_delivery_date,
+      </if>
+      <if test="engReleaseDataDate != null" >
+        eng_release_data_date,
+      </if>
+      <if test="proPeriod != null" >
+        pro_period,
+      </if>
+      <if test="confirmation != null" >
+        confirmation,
+      </if>
+      <if test="salReviewerSubsidiaryId != null" >
+        sal_reviewer_subsidiary_id,
+      </if>
+      <if test="salWorkCardId != null" >
+        sal_work_card_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productModel != null" >
+        #{productModel,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedDeliveryDate != null" >
+        #{expectedDeliveryDate,jdbcType=DATE},
+      </if>
+      <if test="engReleaseDataDate != null" >
+        #{engReleaseDataDate,jdbcType=DATE},
+      </if>
+      <if test="proPeriod != null" >
+        #{proPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmation != null" >
+        #{confirmation,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewerSubsidiaryId != null" >
+        #{salReviewerSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="salWorkCardId != null" >
+        #{salWorkCardId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiaryExample" resultType="java.lang.Integer" >
+    select count(*) from sal_work_card_subsidiary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sal_work_card_subsidiary
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.productCode != null" >
+        product_code = #{record.productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productModel != null" >
+        product_model = #{record.productModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectedDeliveryDate != null" >
+        expected_delivery_date = #{record.expectedDeliveryDate,jdbcType=DATE},
+      </if>
+      <if test="record.engReleaseDataDate != null" >
+        eng_release_data_date = #{record.engReleaseDataDate,jdbcType=DATE},
+      </if>
+      <if test="record.proPeriod != null" >
+        pro_period = #{record.proPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmation != null" >
+        confirmation = #{record.confirmation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salReviewerSubsidiaryId != null" >
+        sal_reviewer_subsidiary_id = #{record.salReviewerSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salWorkCardId != null" >
+        sal_work_card_id = #{record.salWorkCardId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sal_work_card_subsidiary
+    set id = #{record.id,jdbcType=VARCHAR},
+      sequence = #{record.sequence,jdbcType=INTEGER},
+      product_code = #{record.productCode,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_model = #{record.productModel,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      expected_delivery_date = #{record.expectedDeliveryDate,jdbcType=DATE},
+      eng_release_data_date = #{record.engReleaseDataDate,jdbcType=DATE},
+      pro_period = #{record.proPeriod,jdbcType=VARCHAR},
+      confirmation = #{record.confirmation,jdbcType=VARCHAR},
+      sal_reviewer_subsidiary_id = #{record.salReviewerSubsidiaryId,jdbcType=VARCHAR},
+      sal_work_card_id = #{record.salWorkCardId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiary" >
+    update sal_work_card_subsidiary
+    <set >
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productModel != null" >
+        product_model = #{productModel,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedDeliveryDate != null" >
+        expected_delivery_date = #{expectedDeliveryDate,jdbcType=DATE},
+      </if>
+      <if test="engReleaseDataDate != null" >
+        eng_release_data_date = #{engReleaseDataDate,jdbcType=DATE},
+      </if>
+      <if test="proPeriod != null" >
+        pro_period = #{proPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmation != null" >
+        confirmation = #{confirmation,jdbcType=VARCHAR},
+      </if>
+      <if test="salReviewerSubsidiaryId != null" >
+        sal_reviewer_subsidiary_id = #{salReviewerSubsidiaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="salWorkCardId != null" >
+        sal_work_card_id = #{salWorkCardId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiary" >
+    update sal_work_card_subsidiary
+    set sequence = #{sequence,jdbcType=INTEGER},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_model = #{productModel,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      expected_delivery_date = #{expectedDeliveryDate,jdbcType=DATE},
+      eng_release_data_date = #{engReleaseDataDate,jdbcType=DATE},
+      pro_period = #{proPeriod,jdbcType=VARCHAR},
+      confirmation = #{confirmation,jdbcType=VARCHAR},
+      sal_reviewer_subsidiary_id = #{salReviewerSubsidiaryId,jdbcType=VARCHAR},
+      sal_work_card_id = #{salWorkCardId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    
+  
+  
+  
+  
+  
+  
+  
+  <!-- 自定义 -->
+  <!-- 根据salWorkCardSubsidiary的id查找salWorkCardSubsidiary -->
+  <select id="findSalWorkCardSubsidiaryById" parameterType="string" resultType="cn.chiucheung.pojo.sales.workcard.SalWorkCardConfirmation">
+  	SELECT 
+  		c.work_card_no workCardNo,
+		s.sequence sequence,
+		s.product_name productName,
+		s.product_model productModel,
+		s.quantity quantity,
+		s.unit unit
+  	FROM 
+  		sal_work_card_subsidiary s, sal_work_card c 
+  	WHERE 
+  		s.id = #{id} 
+  	AND 
+  		s.sal_work_card_id = c.id
+  </select>
+  
+  <!-- 批量插入 -->
+  <insert id="insertList" parameterType="java.util.List" >
+    insert into sal_work_card_subsidiary (id, sequence, product_code, product_name, product_model, quantity, unit, expected_delivery_date, 
+    eng_release_data_date, pro_period, confirmation, sal_reviewer_subsidiary_id, sal_work_card_id) values 
+    
+    <foreach collection="list" item="item" index="index" separator=",">
+		(
+			#{item.id},
+			#{item.sequence},
+			#{item.productCode},
+			#{item.productName},
+			#{item.productModel},
+			#{item.quantity},
+			#{item.unit},
+			#{item.expectedDeliveryDate},
+			#{item.engReleaseDataDate},
+			#{item.proPeriod},
+			#{item.confirmation},
+			#{item.salReviewerSubsidiaryId},
+			#{item.salWorkCardId}
+		)
+	</foreach>
+  </insert>
+  
+  <!-- 根据工咭的id查找所有的工咭项次，用于页面的数据展开 -->
+  <select id="findAllSalWorkCardSubsidiaryListBySalWorkCardId" parameterType="string" resultType="cn.chiucheung.pojo.sales.workcard.SalWorkCardSubsidiaryCustom">
+  	SELECT 
+  	id id,
+  	sequence sequence,
+  	product_code productCode,
+  	product_name productName,
+  	product_model productModel,
+  	quantity,
+  	unit,
+  	expected_delivery_date expectedDeliveryDate,
+  	eng_release_data_date engReleaseDataDate,
+  	pro_period proPeriod,
+  	confirmation confirmation
+  	FROM sal_work_card_subsidiary 
+  	WHERE 
+  		sal_work_card_id = #{id} 
+  	ORDER BY 
+  		sequence
+  </select>
+  
+  <!-- 查找所有的工咭号 -->
+  <select id="findAllWorkCardNo" parameterType="cn.chiucheung.pojo.engineering.datadistribution.WorkCardNoCustom" resultType="cn.chiucheung.pojo.engineering.datadistribution.WorkCardNoCustom">
+  	SELECT 
+		DISTINCT wc.work_card_no workCardNo
+	FROM 
+		sal_work_card wc,
+		act_hi_procinst hp 
+	WHERE
+			wc.process_instance_id = hp.PROC_INST_ID_
+		AND
+			(hp.END_TIME_ IS NOT NULL OR wc.re_audit_state = TRUE)
+	<if test="workCardNo != null and workCardNo != ''">
+		AND work_card_no LIKE CONCAT(CONCAT('%', #{workCardNo}), '%')
+	</if>
+	ORDER BY RIGHT(workCardNo,2) DESC,LEFT(workCardNo,6) DESC
+  </select>
+  
+  <!-- 根据工咭号查找所有的工咭子项 -->
+  <select id="findAllWorkCardSubsidiary" parameterType="string" resultType="cn.chiucheung.pojo.engineering.datadistribution.WorkCardSubsidiaryCustom">
+  	SELECT 
+  		wcs.id id,
+  		wcs.sequence sequence,
+  		wcs.product_name productName, 
+  		wcs.product_model productModel,
+  		wcs.quantity quantity,
+  		wcs.unit unit
+  	FROM 
+  		sal_work_card wc, 
+  		sal_work_card_subsidiary wcs 
+  	WHERE 
+  		wc.work_card_no = #{workCardNo} 
+  	AND 
+  		wcs.sal_work_card_id = wc.id
+  	ORDER BY sequence
+  </select>
+  
+  <!-- 根据工咭id，查询工咭项次和bom表之间关联的项次 -->
+  <select id="findRelationBomBySalWorkCardId" parameterType="string" resultType="cn.chiucheung.po.sales.workcard.SalWorkCardSubsidiary">
+  	SELECT
+		wcs.id id,
+	  	wcs.sequence sequence,
+	  	wcs.product_code productCode,
+	  	wcs.product_name productName,
+	  	wcs.product_model productModel,
+	  	wcs.quantity,
+	  	wcs.unit,
+	  	wcs.expected_delivery_date expectedDeliveryDate,
+	  	wcs.eng_release_data_date engReleaseDataDate,
+	  	wcs.pro_period proPeriod,
+	  	wcs.confirmation confirmation
+	FROM
+		sal_work_card_subsidiary wcs,
+		eng_bom b
+	WHERE
+		wcs.sal_work_card_id = #{id}
+	AND
+		b.sal_work_card_subsidiary_id = wcs.id
+	GROUP BY wcs.id
+  </select>
+</mapper>

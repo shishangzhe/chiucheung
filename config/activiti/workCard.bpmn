@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="workCard" name="工咭" isExecutable="true">
+    <startEvent id="startevent1" name="Start" activiti:initiator="loginName"></startEvent>
+    <userTask id="startAudit" name="发起审核" activiti:assignee="${loginName}"></userTask>
+    <userTask id="saleReviewer" name="销售审核" activiti:candidateUsers="sal01,sal02,sal05,sal06,sal(cd)02,sal(sy)02,sal(nj)02"></userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="startAudit"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="startAudit" targetRef="saleReviewer"></sequenceFlow>
+    <userTask id="notifyEng" name="通知工程" activiti:candidateUsers="eng34"></userTask>
+    <sequenceFlow id="flow3" sourceRef="saleReviewer" targetRef="notifyEng"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="notifyEng" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_workCard">
+    <bpmndi:BPMNPlane bpmnElement="workCard" id="BPMNPlane_workCard">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="530.0" y="100.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startAudit" id="BPMNShape_startAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="saleReviewer" id="BPMNShape_saleReviewer">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="530.0" y="510.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="notifyEng" id="BPMNShape_notifyEng">
+        <omgdc:Bounds height="55.0" width="105.0" x="495.0" y="410.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="547.0" y="135.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="190.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="547.0" y="245.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="300.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="547.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="410.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="547.0" y="465.0"></omgdi:waypoint>
+        <omgdi:waypoint x="547.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
