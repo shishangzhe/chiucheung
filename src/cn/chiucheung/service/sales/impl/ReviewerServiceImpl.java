@@ -427,10 +427,10 @@ public class ReviewerServiceImpl implements ReviewerService{
 			          
 			        //获取流程发布Id信息   
 			        String definitionId = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult().getProcessDefinitionId();  
-			          
+			          //获取流程定义实体对象
 			        ProcessDefinitionEntity processDefinitionEntity = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)  
 			                .getDeployedProcessDefinition(definitionId);  
-			          
+			          //获取流程执行实体对象
 			        ExecutionEntity execution = (ExecutionEntity) runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
 			          
 			        //当前流程节点Id信息   
@@ -480,10 +480,11 @@ public class ReviewerServiceImpl implements ReviewerService{
 			}else{//交期评审
 				processDefinitionKey = ResourcesUtil.getValue("activiti", "ReviewerProcessDefinitionKey");
 			}
-			
+
+			//获取当前流程的指定id和name的节点候选人
 			loginNames = ActivitiUtils.getCandidateUsers(repositoryService, processDefinitionKey);
 		}
-		
+		//将获取到的节点候选人跟数据库中的用户对比查询,不存在就清除节点候选人中的相关数据
 		if (loginNames.size() > 0){
 	        SysUserQueryVo userQueryVo = new SysUserQueryVo();
 	        userQueryVo.setInLoginNames(loginNames);

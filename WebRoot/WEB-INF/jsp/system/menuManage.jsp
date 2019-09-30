@@ -1,222 +1,87 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.chiucheung.cn" prefix="p" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title>菜单管理页面</title>
     <jsp:include page="/common.jsp"></jsp:include>
 </head>
 
-<body>
-<div style="margin:20px 0;"></div>
-
-<!--菜单栏-->
-<div data-options="region:'north',title:''" style="height:25px; padding:5px">
-    <p:isPrivilege mid="bhb" pid="bh">
-        <a class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="openEdit()">修改</a>
-    </p:isPrivilege>
-    <p:isPrivilege mid="bha" pid="bh">
-        <a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="append()">新增</a>
-    </p:isPrivilege>
-    <p:isPrivilege mid="bhc" pid="bh">
-        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="remove()">删除</a>
-    </p:isPrivilege>
-    <a class="easyui-linkbutton" data-options="iconCls:'icon-reload'" onclick="update()">刷新</a>
-</div>
-<div style="float:left;">
-    <form id="query">
-        <input id="info" type="search" class="easyui-searchbox" name="name" data-options="prompt:'Please Input Value',searcher:searchInfo" style="width:200px"></input>
-    </form>
-</div>
-
-<!-- menu区 -->
-<div id="mm" class="easyui-menu" style="width:120px">
-    <p:isPrivilege mid="bha" pid="bh">
-        <div data-options="iconCls:'icon-add'" onclick="append()">新增</div>
-    </p:isPrivilege>
-    <p:isPrivilege mid="bhb" pid="bh">
-        <div data-options="iconCls:'icon-edit'" onclick="openEdit()">修改</div>
-    </p:isPrivilege>
-    <p:isPrivilege mid="bhc" pid="bh">
-        <div data-options="iconCls:'icon-cancel'" onclick="remove()">删除</div>
-    </p:isPrivilege>
-    <div data-options="iconCls:'icon-reload'" onclick="update()">刷新</div>
-</div>
-
-<!--表格显示-->
-<table id="myTable" title="Folder Browser" class="easyui-treegrid"
-       style="width:100%">
-</table>
-
-<div id="userDialog" class="easyui-dialog" closed="true" style="width:620px;top:150;"
-     data-options="iconCls:'icon-save',resizable:true,modal:true">
-    <form enctype="multipart/form-data" id="userForm" method="post">
-        <input type="hidden" id="flag">
-        <table class="tableStyle"
-               style="width: 100%;height:96%; font-size: 14px" height="100px">
-            <tr class="tableStyle" height="40px">
-                <td width="15%" class="tableStyle">父类ID：</td>
-                <td>
-                    <input id="pid" name="pid" style="width: 150px" onclick="getInfo()">
-                </td>
-
-                <td width="15%" class="tableStyle">mid：</td>
-                <td><input id="mid" name="mid" class="easyui-textbox"
-                           style="width: 150px" required="true" missingMessage="该项为必填!">
-                </td>
-            </tr>
-
-            <tr class="tableStyle" height="40px">
-                <td width="15%" class="tableStyle">名称：</td>
-                <td><input id="name" name="name" class="easyui-textbox"
-                           style="width: 150px" required="true" missingMessage="该项为必填!">
-                </td>
-
-                <td width="15%" class="tableStyle">点击路径：</td>
-                <td><input id="clickurl" name="clickurl" class="easyui-textbox"
-                           style="width: 150px">
-                </td>
-
-            </tr>
-
-            <tr class="tableStyle" height="40px">
-                <td width="15%" class="tableStyle" height="40px">是否是父类：</td>
-                <td><input id="isparent" class="easyui-combobox"
-                           name="isparent" style="width:200px;"></td>
-
-                <td width="15%" class="tableStyle">是否是菜单：</td>
-                <td><input id="ismenu" class="easyui-combobox"
-                           name="ismenu" style="width:200px;"></td>
-            </tr>
-
-            <tr class="tableStyle" height="40px">
-                <td width="15%" class="tableStyle">请选择图标：</td>
-                <td><input multiple="true" type="file" accept="image/*" id="iconImg" name="iconImg" style="width:300px;"></td>
-                <td><input id="icon" name="icon" style="width:200px;" hidden : true></td>
-            </tr>
-
-        </table>
-        <br>
-        <center>
-            <a id="confirm" class="easyui-linkbutton" align='center'
-               style="width: 80" onclick="comitInfo()">确定</a>
-            <a id="cancel" class="easyui-linkbutton" align='center'
-               style="width: 80"onclick="closeDialog('userDialog');">取消</a>
-        </center>
-
-    </form>
-</div>
-<div id="imgDiv" hidden : true>
-    <img style="height: 100px;width: 150px" id="previewImg">
-</div>
-
-
-</body>
-
-
 <script type="text/javascript">
 
     $(function() {
-        $("#myTable").treegrid(
-            {
-                url : "${pageContext.request.contextPath }/system/menu/getAllMenuInfo.action",
-                title:"菜单管理",
-                method : "post",
-                rownumbers : false,//设置为true.则显示带有行号的列
-                fitColumns : true,//设置为true,则会自动扩大或缩小列的尺寸以适应网络的宽度并且防止水平滚动
-                idField : 'mid',//关键字段标识树节点
-                treeField : 'name',//树节点字段
-                animate : false,//是否显示动画效果
-                striped : false,//隔行变色
-                pagination : true,//底部分页控件
-                pageList : [ 5, 10, 15, 20 ],//选择一页显示多少数据
-                pageSize : 10,//默认每页显示的条数
-                singleSelect:false,
-                ctrlSelect:true,
-                columns : [ [
-                    {field : 'mid',title : 'mID',width : 100,halign : 'center',align : "center",hidden : true},
-                    {field : 'pid',title : '父类ID',width : 100,halign : 'center',align : "center",hidden : true},
-                    {field : 'name',title : '名称',width : 300,halign : 'center',align : "left",sortable : true,editor : "text"},
-                    {field : 'isparent',title : '是否是父类',width : 100,halign : 'center',align : "center",
-                        formatter : function(value, row) {
-                            if (value) {
-                                return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/ok.png'>";
-                            } else {
-                                return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/no.png'>";
-                            }
+        $("#myTable").treegrid({
+            url : "${pageContext.request.contextPath }/system/menu/getAllMenuInfo.action",
+            title:"菜单管理",
+            method : "post",
+            rownumbers : false,//设置为true.则显示带有行号的列
+            fitColumns : true,//设置为true,则会自动扩大或缩小列的尺寸以适应网络的宽度并且防止水平滚动
+            idField : 'mid',//关键字段标识树节点
+            treeField : 'name',//树节点字段
+            animate : false,//是否显示动画效果
+            striped : false,//隔行变色
+            pagination : true,//底部分页控件
+            pageList : [ 5, 10, 15, 20 ],//选择一页显示多少数据
+            pageSize : 10,//默认每页显示的条数
+            singleSelect:false,
+            ctrlSelect:true,
+            columns : [ [
+                {field : 'mid',title : 'mID',width : 100,halign : 'center',align : "center",hidden : true},
+                {field : 'pid',title : '父类ID',width : 100,halign : 'center',align : "center",hidden : true},
+                {field : 'name',title : '名称',width : 300,halign : 'center',align : "left",sortable : true,editor : "text"},
+                {field : 'isparent',title : '是否是父类',width : 100,halign : 'center',align : "center",
+                    formatter : function(value, row) {
+                        if (value) {
+                            return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/ok.png'>";
+                        } else {
+                            return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/no.png'>";
                         }
-                    },
-                    {field : 'ismenu',title : '是否是菜单',width : 100,halign : 'center',align : "center",
-                        formatter : function(value, row) {
-                            if (value) {
-                                return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/ok.png'>";
-                            } else {
-                                return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/no.png'>";
-                            }
-                        }
-                    },
-                    {field : 'icon',title : '图标',width : 300,halign : 'center',align : "center",
-                        formatter:function(value,row){
-                            if(value != "" && value != null){
-                                return "<button style='font-size:16px;font-family:Arial' onclick=\"getImg('"+value+"')\">图标详情</button>";
-
-                            }else{
-                                return "<font color='#FF0000'>无图标</font>";
-                            }
-                        }
-                    },
-                ] ],
-
-                onContextMenu : function(e, row) {
-                    //屏蔽浏览器的菜单
-                    e.preventDefault();
-                    //获取当前选择对象
-                    var id = $('#myTable').treegrid('getSelected');
-                    //当选择对象不为空时再获取当前选择对象的id值
-                    if (id != null){
-                        //获取当前点击对象的选中项
-                        $(this).treegrid('select',id.mid);
-                    }
-                    //点击出现菜单页面后所在的位置
-                    if ($("#mm > div").size() > 1) {
-                        $('#mm').menu('show', {
-                            left : e.pageX,
-                            top : e.pageY
-                        });
                     }
                 },
-            });
+                {field : 'ismenu',title : '是否是菜单',width : 100,halign : 'center',align : "center",
+                    formatter : function(value, row) {
+                        if (value) {
+                            return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/ok.png'>";
+                        } else {
+                            return "<img src='${pageContext.request.contextPath }/jquery-easyui-1.5.5.4/themes/icons/no.png'>";
+                        }
+                    }
+                },
+                {field : 'icon',title : '图标',width : 300,halign : 'center',align : "center",
+                    formatter:function(value,row){
+                        if(value != "" && value != null){
+                            return "<button style='font-size:16px;font-family:Arial' onclick=\"getImg('"+value+"')\">图标详情</button>";
 
-        //渲染"是否是父类"项的数据显示内容
-        $('#isparent').combobox({
-            valueField : 'id',
-            textField : 'text',
-            editable : false,
-            data : [ {
-                id : true,
-                text : '是',
-            }, {
-                id : false,
-                text : '否',
-            } ]
+                        }else{
+                            return "<font color='#FF0000'>无图标</font>";
+                        }
+                    }
+                },
+            ] ],
+
+            onContextMenu : function(e, row) {
+                //屏蔽浏览器的菜单
+                e.preventDefault();
+                //获取当前选择对象
+                var id = $('#myTable').treegrid('getSelected');
+                //当选择对象不为空时再获取当前选择对象的id值
+                if (id != null){
+                    //获取当前点击对象的选中项
+                    $(this).treegrid('select',id.mid);
+                }
+                //点击出现菜单页面后所在的位置
+                if ($("#mm > div").size() > 1) {
+                    $('#mm').menu('show', {
+                        left : e.pageX,
+                        top : e.pageY
+                    });
+                }
+            },
         });
-        //渲染"是否是菜单"项的数据显示内容
-        $('#ismenu').combobox({
-            valueField:'id',
-            textField : 'text',
-            editable : false,
-            data : [ {
-                id : true,
-                text : '是',
-            }, {
-                id : false,
-                text : '否',
-            } ]
-        })
 
         //将后台获取到的菜单信息加载到select下拉框中
         $('#pid').combotreegrid({
-            width:'100%',
+            width:'140px',
             panelWidth:500,
             url:'${pageContext.request.contextPath }/system/menu/getMenuInfo.action',
             idField : 'mid',//关键字段标识树节点
@@ -250,6 +115,31 @@
         $('#userForm').form('clear');
         $("#userForm").get(0).reset();
         $("#flag").val("add");
+
+        //渲染"是否是父类"项的数据显示内容
+        $('#isparent').combobox({
+            valueField : 'id',
+            textField : 'text',
+            data : [ {
+                id : true,
+                text : '是'
+            }, {
+                id : false,
+                text : '否'
+            } ]
+        });
+        //渲染"是否是菜单"项的数据显示内容
+        $('#ismenu').combobox({
+            valueField:'id',
+            textField : 'text',
+            data : [ {
+                id : true,
+                text : '是'
+            }, {
+                id : false,
+                text : '否'
+            } ]
+        })
     };
 
     //开启修改页面开始操作修改方法
@@ -285,6 +175,31 @@
             });
 
         }
+
+        //渲染"是否是父类"项的数据显示内容
+        $('#isparent').combobox({
+            valueField : 'id',
+            textField : 'text',
+            data : [ {
+                id : true,
+                text : '是'
+            }, {
+                id : false,
+                text : '否'
+            } ]
+        });
+        //渲染"是否是菜单"项的数据显示内容
+        $('#ismenu').combobox({
+            valueField:'id',
+            textField : 'text',
+            data : [ {
+                id : true,
+                text : '是'
+            }, {
+                id : false,
+                text : '否'
+            } ]
+        })
     };
 
     //提交新增(修改)的数据的方法
@@ -410,5 +325,104 @@
 
 </script>
 
+<body>
+<div style="margin:20px 0;"></div>
+
+<!--菜单栏-->
+<div data-options="region:'north',title:''" style="height:25px; padding:5px">
+    <p:isPrivilege mid="bhb" pid="bh">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="openEdit()">修改</a>
+    </p:isPrivilege>
+    <p:isPrivilege mid="bha" pid="bh">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="append()">新增</a>
+    </p:isPrivilege>
+    <p:isPrivilege mid="bhc" pid="bh">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="remove()">删除</a>
+    </p:isPrivilege>
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-reload'" onclick="update()">刷新</a>
+</div>
+<!--输入搜索框-->
+<div style="float:left;">
+    <form id="query">
+        <input id="info" type="search" class="easyui-searchbox" name="name" data-options="prompt:'Please Input Value',searcher:searchInfo" style="width:200px"></input>
+    </form>
+</div>
+
+<!-- menu区 -->
+<div id="mm" class="easyui-menu" style="width:120px">
+    <p:isPrivilege mid="bha" pid="bh">
+        <div data-options="iconCls:'icon-add'" onclick="append()">新增</div>
+    </p:isPrivilege>
+    <p:isPrivilege mid="bhb" pid="bh">
+        <div data-options="iconCls:'icon-edit'" onclick="openEdit()">修改</div>
+    </p:isPrivilege>
+    <p:isPrivilege mid="bhc" pid="bh">
+        <div data-options="iconCls:'icon-cancel'" onclick="remove()">删除</div>
+    </p:isPrivilege>
+    <div data-options="iconCls:'icon-reload'" onclick="update()">刷新</div>
+</div>
+
+<!--表格显示-->
+<table id="myTable" title="Folder Browser" class="easyui-treegrid"
+       style="width:100%">
+</table>
+
+<!--增改菜单的dialog-->
+<div id="userDialog" class="easyui-dialog" closed="true" style="width:620px;top:150px;"
+     data-options="iconCls:'icon-save',resizable:true,modal:true">
+    <form enctype="multipart/form-data" id="userForm" method="post">
+        <input type="hidden" id="flag">
+        <table class="tableStyle"
+               style="width: 100%;height:96%; font-size: 14px" height="100px">
+            <tr class="tableStyle" height="40px">
+                <td width="15%" class="tableStyle">父类ID：</td>
+                <td>
+                    <input id="pid" name="pid" style="width: 100px">
+                </td>
+
+                <td width="15%" class="tableStyle">mid：</td>
+                <td><input id="mid" name="mid" class="easyui-textbox" style="width: 150px" required="true" missingMessage="该项为必填!"></td>
+            </tr>
+
+            <tr class="tableStyle" height="40px">
+                <td width="15%" class="tableStyle">名称：</td>
+                <td><input id="name" name="name" class="easyui-textbox" style="width: 150px" required="true" missingMessage="该项为必填!"></td>
+
+                <td width="15%" class="tableStyle">点击路径：</td>
+                <td><input id="clickurl" name="clickurl" class="easyui-textbox" style="width: 150px">
+                </td>
+            </tr>
+
+            <tr class="tableStyle" height="40px">
+                <td width="15%" class="tableStyle" height="40px">是否是父类：</td>
+                <td><input id="isparent" class="easyui-combobox" name="isparent" style="width:80px;"></td>
+
+                <td width="15%" class="tableStyle">是否是菜单：</td>
+                <td><input id="ismenu" class="easyui-combobox" name="ismenu" style="width:80px;"></td>
+            </tr>
+
+            <tr class="tableStyle" height="40px">
+                <td width="15%" class="tableStyle">请选择图标：</td>
+                <td><input multiple="true" type="file" accept="image/*" id="iconImg" name="iconImg" style="width:300px;"></td>
+                <td><input id="icon" name="icon" style="width:200px;" hidden : true></td>
+            </tr>
+
+        </table>
+        <br>
+        <center>
+            <a id="confirm" class="easyui-linkbutton" align='center'
+               style="width: 80px" onclick="comitInfo()">确定</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a id="cancel" class="easyui-linkbutton" align='center'
+               style="width: 80px" onclick="closeDialog('userDialog');">取消</a>
+        </center>
+
+    </form>
+</div>
+<!--图片显示div-->
+<div id="imgDiv" hidden : true>
+    <img style="height: 100px;width: 150px" id="previewImg">
+</div>
+</body>
 
 </html>

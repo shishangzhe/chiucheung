@@ -1052,7 +1052,7 @@
 	}
 	
 	
-	
+	//开启审核dialog并确认审核
 	function queryAuditor(){
   		var selected = $("#dg").datagrid("getSelected");
   		console.log(selected);
